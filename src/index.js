@@ -1,12 +1,14 @@
-import {StrictMode} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './App'
+import App from './containers/App/App'
+import { $el } from './constants/api'
 
-const rootElement = document.getElementById('root')
+import styles from './styles/index.css'
+
 ReactDOM.render(
-  <StrictMode>
+  <React.StrictMode>
     <App />
-  </StrictMode>,
-  rootElement,
+  </React.StrictMode>,
+  $el,
 )
