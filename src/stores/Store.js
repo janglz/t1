@@ -4,7 +4,7 @@ import organizationsData from '../db/organizations.json'
 
 export const AppContext = createContext(null)
 
-export function Store () {
+export function useStore () {
   const [users, setUsers] = useState(usersData)
   const [organizations, setOrganizations] = useState(organizationsData)
   const [favorites, setFavorites] = useState(null)
@@ -15,7 +15,7 @@ export function Store () {
     page: page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
     setPage,
     users: users,
-    setUsers,
+    setUsers: setUsers,
     organizations: organizations,
     setOrganizations,
     favorites: favorites,

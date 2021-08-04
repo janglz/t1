@@ -13,7 +13,6 @@ export function Favorites () {
       {/* <li className={S.favorites-content__item}>repo 1</li>
       <li className={S.favorites-content__item}>repo 2</li>
       <li className={S.favorites-content__item}>repo 3</li> */}
-
     </ul>
   </aside>
   )

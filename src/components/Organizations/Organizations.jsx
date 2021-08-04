@@ -5,8 +5,7 @@ import { AppContext } from '../../stores/Store'
 export function Organizations () {
   const { organizations, setOrganizations } = useContext(AppContext)
   // console.log(organizations)
-
-  return !!organizations && organizations.map(org => (
+  const mapped = organizations.map(org => (
     <li class="main-navbar-content__item" key={org.id}>
     <div class="main-content__item-img"><img src="../styles/img/user-image.jpeg" /></div>
     <div class="main-cotent__item-value">
@@ -19,4 +18,6 @@ export function Organizations () {
   </li>
     )
   )
+  // return null
+  return !!mapped && mapped
 }

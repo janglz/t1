@@ -1,14 +1,15 @@
 import S from './SearchPanel.module.css'
-import favoritesIcon from '../../styles/img/favorites.svg'
+import filterIcon from '../../styles/img/filter.svg'
 import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { Organizations } from  '../Organizations/Organizations'
-import {Users} from  '../Users/Users'
+import { Users } from  '../Users/Users'
 
 
 
 export function SearchPanel () {
   const { page } = useContext(AppContext)
+  console.log(page)
 
   return (
     <aside className={S.menu}>
@@ -17,10 +18,10 @@ export function SearchPanel () {
           <object type="image/svg+xml" data="../styles/img/search.svg" id="search" className={S.searchIcon}></object>
         </span>
         <form className={S.form} action="#" method="GET">
-          <input type="search" id="search" placeholder="Найти..." autofocus />
+          <input type="search" id="search" placeholder="Найти..." autoFocus />
         </form>
         <span className={S.filter}>
-          <object type="image/svg+xml" data="../styles/img/filter.svg" id="filter" className={S.filterIcon}></object>
+          <object type="image/svg+xml" data={filterIcon} id="filter" className={S.filterIcon}></object>
         </span>
       </div>
       <nav className={S.navbar}>
