@@ -13,6 +13,10 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 10px;
+  cursor: pointer;
+}
+.contentItem:hover{
+  background-color: #a7aac075;
 }
 
 .itemImg img {

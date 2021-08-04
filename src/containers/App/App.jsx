@@ -10,23 +10,19 @@ import S from './App.module.css'
 
 function App() {
   const store = useStore()
-  console.log(store)
   
   return (
     <AppContext.Provider value={store}>
-      <>
-        <div className={S.wrapper}>
-          <Header />
-        </div>
-        <div className={S.wrapper}>
-          <main className={S.main}>
-            <Favorites />
-            <SearchPanel />
-            <Card />
-          </main>
-        </div>
-      </>
-
+      <div className={S.wrapper}>
+        <Header />
+      </div>
+      <div className={S.wrapper}>
+        <main className={S.main}>
+          <Favorites />
+          <SearchPanel />
+          <Card />
+        </main>
+      </div>
     </AppContext.Provider>
   )
 }

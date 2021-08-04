@@ -4,7 +4,6 @@ import favoritesIcon from '../../styles/img/favorites.svg'
 
 
 export function Favorites () {
-  console.log('favorites')
   return (
     <aside className={S.favorites}>
     <span>

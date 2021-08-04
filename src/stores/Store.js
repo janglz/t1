@@ -9,6 +9,7 @@ export function useStore () {
   const [organizations, setOrganizations] = useState(organizationsData)
   const [favorites, setFavorites] = useState(null)
   const [page, setPage] = useState('initial')
+  const [card, setCard] = useState({})
   
   return {
     page: page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
@@ -19,5 +20,6 @@ export function useStore () {
     setOrganizations,
     favorites: favorites,
     setFavorites,
+    card, setCard,
   }
 }

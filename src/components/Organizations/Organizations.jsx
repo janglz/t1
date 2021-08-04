@@ -4,10 +4,10 @@ import { AppContext } from '../../stores/Store'
 import favorites from '../../styles/img/favorites.svg'
 
 export function Organizations() {
-  const { organizations } = useContext(AppContext)
+  const { organizations, setCard } = useContext(AppContext)
 
   return organizations.length > 0 && organizations.map(org => (
-    <li className={S.contentItem} key={org.id}>
+    <li className={S.contentItem} key={org.id} onClick={() => setCard(org)}>
       <div className={S.itemImg}><img src={org['avatar_url']} /></div>
       <div className={S.value}>
         <h4 className="main-cotent__item-title">{org.login}</h4>
