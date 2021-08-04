@@ -9,11 +9,10 @@ export function useStore () {
   const [organizations, setOrganizations] = useState(organizationsData)
   const [favorites, setFavorites] = useState(null)
   const [page, setPage] = useState('initial')
-  console.log('store created')
   
   return {
     page: page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
-    setPage,
+    setPage: setPage,
     users: users,
     setUsers: setUsers,
     organizations: organizations,
