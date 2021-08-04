@@ -1,0 +1,64 @@
+.content__item-img img {
+    border-radius: 100px;
+    width: 64px;
+    height: 64px;
+  }
+  
+  .content__item-value {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .content__item-value h4, p {
+    margin: 0;
+  }
+  
+  .section {
+    display: flex;
+    flex-grow: 1;
+    padding: 25px;
+    border: 1px solid rgb(243, 243, 243);
+    background-color: rgb(243, 243, 243);
+    border-radius: 3px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .image img {
+    max-width: 128px;
+    max-height: 128px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .content h1{
+    margin: 0;
+  }
+  
+  .btn button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .btn button > .icon {
+    width: 32px;
+    height: 32px;
+  }
