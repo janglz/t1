@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - frontend
+  pull_request:
+    branches:
+      - frontend
 
 jobs:
   build:
