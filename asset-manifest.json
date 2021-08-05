@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/todo-courses/static/css/main.e084cb27.chunk.css",
+    "main.css": "/todo-courses/static/css/main.ecdd40ad.chunk.css",
     "main.js": "/todo-courses/static/js/main.62ed91f6.chunk.js",
     "main.js.map": "/todo-courses/static/js/main.62ed91f6.chunk.js.map",
     "runtime-main.js": "/todo-courses/static/js/runtime-main.36dbbc04.js",
@@ -8,7 +8,7 @@
     "static/js/2.a0f5644f.chunk.js": "/todo-courses/static/js/2.a0f5644f.chunk.js",
     "static/js/2.a0f5644f.chunk.js.map": "/todo-courses/static/js/2.a0f5644f.chunk.js.map",
     "index.html": "/todo-courses/index.html",
-    "static/css/main.e084cb27.chunk.css.map": "/todo-courses/static/css/main.e084cb27.chunk.css.map",
+    "static/css/main.ecdd40ad.chunk.css.map": "/todo-courses/static/css/main.ecdd40ad.chunk.css.map",
     "static/js/2.a0f5644f.chunk.js.LICENSE.txt": "/todo-courses/static/js/2.a0f5644f.chunk.js.LICENSE.txt",
     "static/media/favorites.a8921924.svg": "/todo-courses/static/media/favorites.a8921924.svg",
     "static/media/filter.e1d29bd3.svg": "/todo-courses/static/media/filter.e1d29bd3.svg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.36dbbc04.js",
     "static/js/2.a0f5644f.chunk.js",
-    "static/css/main.e084cb27.chunk.css",
+    "static/css/main.ecdd40ad.chunk.css",
     "static/js/main.62ed91f6.chunk.js"
   ]
 }
