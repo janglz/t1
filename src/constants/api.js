@@ -1,1 +1,0 @@
-export const $el = document.getElementById('root')
