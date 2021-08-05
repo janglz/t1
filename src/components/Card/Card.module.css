@@ -16,7 +16,7 @@
   
   .section {
     display: flex;
-    flex-grow: 1;
+    flex: 1 1 auto;
     padding: 25px;
     border: 1px solid rgb(243, 243, 243);
     background-color: rgb(243, 243, 243);
@@ -25,14 +25,14 @@
   }
   
   .container {
-    width: 100%;
-    margin: 0 auto;
+    /* width: 100%; */
+    /* margin: 0 auto; */
   }
   
   .content {
     display: flex;
     justify-content: space-between;
-    flex-wrap: nowrap;
+    /* flex-wrap: wrap; */
   }
   
   .image img {
@@ -42,9 +42,11 @@
   
   .content__inner {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex-wrap: wrap;
     width: 100%;
     padding: 5px;
+    /* border: 1px solid red; */
   }
   .content__title {
     /* не работает с флексом...((
@@ -54,7 +56,11 @@
   }
 
   .content__description {
-
+    /* flex: 400px 400px auto; */
+    /* flex-wrap: wrap; */
+    width: 100%;
+    white-space: wrap;
+    /* border: 1px solid blue; */
   }
   
   .content h1{

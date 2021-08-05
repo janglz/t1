@@ -36,7 +36,7 @@ img {
 }
 .main {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   flex-basis: auto auto 50%;
   justify-content: flex-start;
   width: 100%;
