@@ -14,7 +14,7 @@ export function Organizations() {
         <p className="main-cotent__item-text">Организация</p>
       </div>
       <span className={S.icon}>
-        <object type="image/svg+xml" data={favorites} id="favorites" className="icon"></object>
+        <img src={favorites} id="favorites" className="icon"></img>
       </span>
     </li>
   ))

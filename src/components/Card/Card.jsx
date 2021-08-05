@@ -21,10 +21,12 @@ export function Card() {
           <div className={S.content__inner}>
             <h1 className={S.content__title}>{card.login}</h1>
             <p className={S.content__description}>{card.description}</p>
+            <p className={S.content__description}>Состоит в организации:</p>
+            <p className={S.content__description}>{card['organizations_url']}</p>
           </div>
           <div className={S.btn}>
             <button>
-              <object type="image/svg+xml" data={favoritesIcon} id="favorites" className={S.icon}></object>
+              <img src={favoritesIcon} id="favorites" className={S.icon}></img>
             </button>
           </div>
         </div>

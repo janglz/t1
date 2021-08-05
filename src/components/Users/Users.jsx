@@ -14,7 +14,7 @@ export function Users () {
         <p className="main-cotent__item-text">Пользователь</p>
       </div>
       <span className={S.icon}>
-        <object type="image/svg+xml" data={favorites} id="favorites" className={S['favorites-icon']}></object>
+        <img src={favorites} id="favorites" className={S['favorites-icon']}></img>
       </span>
     </li>
   ))

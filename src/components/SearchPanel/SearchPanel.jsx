@@ -26,13 +26,13 @@ export function SearchPanel () {
     <aside className={S.menu}>
       <div className={S.search}>
         <span className={S.searchIcon}>
-          <object type="image/svg+xml" data={searchIcon} id="search" className={S.searchIcon}></object>
+          <img src={searchIcon} id="search" className={S.searchIcon}></img>
         </span>
         <form className={S.form} action="#" method="GET">
           <input type="search" id="search" placeholder="Найти..." autoFocus />
         </form>
         <span className={S.filter}>
-          <object type="image/svg+xml" data={filterIcon} id="filter" className={S.filterIcon}></object>
+          <img src={filterIcon} id="filter" className={S.filterIcon}></img>
         </span>
       </div>
       <nav className={S.navbar}>
