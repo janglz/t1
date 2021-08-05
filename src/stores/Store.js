@@ -12,14 +12,15 @@ export function useStore () {
   const [card, setCard] = useState({})
   
   return {
-    page: page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
-    setPage: setPage,
-    users: users,
-    setUsers: setUsers,
-    organizations: organizations,
+    page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
+    setPage,
+    users,
+    setUsers,
+    organizations,
     setOrganizations,
-    favorites: favorites,
+    favorites,
     setFavorites,
-    card, setCard,
+    card, 
+    setCard,
   }
 }
