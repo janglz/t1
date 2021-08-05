@@ -6,7 +6,6 @@ import { AppContext } from '../../stores/Store'
 export function Card() {
   const { card, page } = useContext(AppContext)
 
-  console.log(card)
   return (
     <section className={S.section}>
       <div className={S.container}>
