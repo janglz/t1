@@ -13,11 +13,6 @@ export function Card() {
   return (
     <section className={S.section}>
       <div className={S.container}>
-        {page === 'initial' ? (
-        <div className={S.content}>
-          <h1>Поиск по гитхабу</h1>
-        </div>
-        ) : (
         <div className={S.content}>
           <div className={S.image}>
             <img src={card['avatar_url']} />
@@ -36,7 +31,6 @@ export function Card() {
             </button>
           </div>
         </div>
-        )}
       </div>
     </section>
   )

@@ -26,15 +26,8 @@ export function Header () {
       <div className={S.container}>
         <div className={S['header-navbar']}>
           <a className={S['navbar-brand']} href="#">
-            <object type="image/svg+xml" data={logo} id="logo" className={S['brand-icon']}></object>
+            <img src={logo} id="logo" className={S['brand-icon']}></img>
           </a>
-          {/* <nav className={S.navbar}>
-            <ul className={S.content}>
-              <li onClick={() => handleSelectPage('initial')} className={S['navbar-content__item']}><a href="#">Главная</a></li>
-              <li onClick={() => handleSelectPage('users')} className={S['navbar-content__item']}><a href="#">Пользователи</a></li>
-              <li onClick={() => handleSelectPage('organizations')} className={S['navbar-content__item']}><a href="#">Организации</a></li>
-            </ul>
-          </nav> */}
         </div>
       </div>
     </header>
