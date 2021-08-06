@@ -71,10 +71,21 @@
     padding: 0;
     border: none;
     background-color: transparent;
+    
     cursor: pointer;
   }
   
   .btn button > .icon {
-    width: 32px;
-    height: 32px;
+    width: 62px;
+    height: 62px;
+  }
+
+  .btn button:hover {
+    /* width: 62px;
+    height: 62px; */
+    fill: red;
+    stroke: red;
+    /* background-color: aquamarine; */
+    color: red;
+    filter:drop-shadow(2px, 2px, 22px, 22px)
   }

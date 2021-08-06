@@ -1,5 +1,5 @@
 import S from './Card.module.css'
-import favoritesIcon from '../../styles/img/favorites.svg'
+import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
 import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 
@@ -26,7 +26,9 @@ export function Card() {
           </div>
           <div className={S.btn}>
             <button>
-              <img src={favoritesIcon} id="favorites" className={S.icon}></img>
+              <div className={S.icon}>
+              <FavoritesIcon />
+              </div>
             </button>
           </div>
         </div>

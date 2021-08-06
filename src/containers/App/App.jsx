@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { AppContext, useStore } from '../../stores/Store'
 import { Header } from '../../components/Header/Header'
-import { Favorites } from '../../components/Favorites/Favorites'
+import { Menu } from '../../components/Menu/Menu'
 import { SearchPanel } from '../../components/SearchPanel/SearchPanel'
 import { Card } from '../../components/Card/Card'
 
@@ -18,7 +18,7 @@ function App() {
       </div>
       <div className={S.wrapper}>
         <main className={S.main}>
-          <Favorites />
+          <Menu />
           <SearchPanel />
           <Card />
         </main>

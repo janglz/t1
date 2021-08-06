@@ -1,19 +1,21 @@
-import S from './Favorites.module.css'
-import favoritesIcon from '../../styles/img/favorites.svg'
+import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
+import S from './Users.module.css'
+import { useContext } from 'react'
+import { AppContext } from '../../stores/Store'
 
+export function Users () {
+  const { favorites, setCard } = useContext(AppContext)
 
-
-export function Favorites () {
-  return (
-    <aside className={S.favorites}>
-    <span>
-      <object type="image/svg+xml" data={favoritesIcon} id="favorites" className={S.icon}></object>
-      Избранное</span>
-    <ul className={S.content}>
-      {/* <li className={S.favorites-content__item}>repo 1</li>
-      <li className={S.favorites-content__item}>repo 2</li>
-      <li className={S.favorites-content__item}>repo 3</li> */}
-    </ul>
-  </aside>
-  )
+  return favorites.length > 0 && favorites.map(item => (
+    <li className={S.contentItem} key={item.id} onClick={() => setCard(item)}>
+      <div className={S.itemImg}><img src={item['avatar_url']} /></div>
+      <div className={S.value}>
+        <h4 className="main-cotent__item-title">{item.login}</h4>
+        <p className="main-cotent__item-text">{item.type}</p>
+      </div>
+      <span className={S.icon}>
+        <FavoritesIcon />
+      </span>
+    </li>
+  ))
 }
