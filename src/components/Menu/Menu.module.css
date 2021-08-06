@@ -22,7 +22,6 @@
 
 .list-item {
   list-style: none;
-  
 }
 
 .icon {
@@ -40,5 +39,11 @@
 
 .btn__transparent:hover {
   color: rgb(214, 178, 248);
+  cursor: pointer;
+}
+
+.selected {
+  /* background: royalblue; */
+  color: rgb(140, 126, 151);
   cursor: pointer;
 }

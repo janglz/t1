@@ -5,6 +5,10 @@ import { AppContext } from '../../stores/Store'
 
 export function Card() {
   const { card, page } = useContext(AppContext)
+  const favoritesPage = page === 'favorites';
+  const usersPage = page === 'users';
+  const organizationsPage = page === 'organizations';
+
 
   return (
     <section className={S.section}>
@@ -21,7 +25,7 @@ export function Card() {
           <div className={S.content__inner}>
             <h1 className={S.content__title}>{card.login}</h1>
             <p className={S.content__description}>{card.description}</p>
-            <p className={S.content__description}>Состоит в организации:</p>
+            <p className={S.content__description}>Состоит в организациях:</p>
             <p className={S.content__description}>{card['organizations_url']}</p>
           </div>
           <div className={S.btn}>

@@ -28,13 +28,13 @@ export function Header () {
           <a className={S['navbar-brand']} href="#">
             <object type="image/svg+xml" data={logo} id="logo" className={S['brand-icon']}></object>
           </a>
-          <nav className={S.navbar}>
+          {/* <nav className={S.navbar}>
             <ul className={S.content}>
               <li onClick={() => handleSelectPage('initial')} className={S['navbar-content__item']}><a href="#">Главная</a></li>
               <li onClick={() => handleSelectPage('users')} className={S['navbar-content__item']}><a href="#">Пользователи</a></li>
               <li onClick={() => handleSelectPage('organizations')} className={S['navbar-content__item']}><a href="#">Организации</a></li>
             </ul>
-          </nav>
+          </nav> */}
         </div>
       </div>
     </header>
