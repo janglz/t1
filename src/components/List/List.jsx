@@ -21,10 +21,10 @@ export function List() {
 
   return list?.length > 0 && list.map(el => (
     <li className={S.contentItem} key={el.id} onClick={() => setCard(el)}>
-      <div className={S.itemImg}><img src={el['avatar_url']} /></div>
+      <div className={S.itemImg}><img src={el.avatarUrl} /></div>
       <div className={S.value}>
         <h4 className="main-cotent__item-title">{el.login}</h4>
-        <p className="main-cotent__item-text">{el?.type}</p>
+        <p className="main-cotent__item-text">{el.type}</p>
       </div>
       <span className={S.icon}>
         {el.inFavorites && FavoritesIcon}

@@ -10,18 +10,19 @@ export function Card() {
   const organizationsPage = page === 'organizations';
 
 
+
   return (
     <section className={S.section}>
       <div className={S.container}>
         <div className={S.content}>
           <div className={S.image}>
-            <img src={card['avatar_url']} />
+            <img src={card.avatarUrl} />
           </div>
           <div className={S.content__inner}>
             <h1 className={S.content__title}>{card.login}</h1>
             <p className={S.content__description}>{card.description}</p>
-            <p className={S.content__description}>Состоит в организациях:</p>
-            <p className={S.content__description}>{card['organizations_url']}</p>
+            {usersPage && <p className={S.content__description}>Состоит в организациях:</p>}
+            {usersPage && <p className={S.content__description}>{card.orgaznizationsUrl}</p>}
           </div>
           <div className={S.btn}>
             <button>
