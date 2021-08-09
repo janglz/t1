@@ -89,3 +89,9 @@
     color: red;
     filter:drop-shadow(2px, 2px, 22px, 22px)
   }
+  .red {
+    fill: red;
+    stroke: red;
+    /* background-color: aquamarine; */
+    color: red;
+  }

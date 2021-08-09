@@ -4,5 +4,5 @@ export const noCard = {
   avatarUrl: '',
   inFavorites: false,
   orgaznizationsUrl: '',
-  type: null
+  type: ''
 }

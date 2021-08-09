@@ -6,12 +6,13 @@ import cn from 'classnames'
 import { getUsers } from '../../api/getUsers'
 import { getOrganizations } from '../../api/getOrganizations'
 import { noCard } from '../../api/noCard'
+// import { useLocalStorage } from '../../api/useLocalStorage'
 
 const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
 
 export function Menu () {
-  const { page, setPage, setUsers, setOrganizations, organizations, setCard } = useContext(AppContext)
+  const { users, page, setPage, setUsers, setOrganizations, organizations, setCard, favorites } = useContext(AppContext)
   
   /**
    * Думаю, тут вспоследствии можно добавить че-то типа useMemo или useLocalStorage, 
@@ -25,15 +26,16 @@ export function Menu () {
   }
 
   const handleSetOrgs = async () => {
-    // setCard(noCard)
     setPage('organizations')
-    setOrganizations(await fetchedOrgs)
+    const merged = Array.from(new Set([...organizations, ...await fetchedOrgs]))
+    setOrganizations(merged)
   }
 
   const handleSetUsers = async () => {
     // setCard(noCard)
     setPage('users')
-    setUsers(await fetchedUsers)
+    const merged = Array.from(new Set([...users, ...await fetchedUsers]))
+    setUsers(merged)
   }
 
   /**
@@ -48,7 +50,7 @@ export function Menu () {
           className={cn(S.btn__transparent, {selected: page === 'favorites'})} 
           onClick={()=>handleSetFavorites()}>
             Избранное
-            <FavoritesIcon className={S.icon} />
+            <FavoritesIcon className={{icon__active: S.icon}} />
           </button> 
         </li>
         <li className={S.list__item}>
