@@ -21,17 +21,19 @@ export function Menu () {
 
 
   const handleSetFavorites = () => {
-    setCard(noCard)
+    setCard(null)
     setPage('favorites')
   }
 
   const handleSetOrgs = async () => {
+    setCard(null)
     setPage('organizations')
     const merged = Array.from(new Set([...organizations, ...await fetchedOrgs]))
     setOrganizations(merged)
   }
 
   const handleSetUsers = async () => {
+    setCard(null)
     // setCard(noCard)
     setPage('users')
     const merged = Array.from(new Set([...users, ...await fetchedUsers]))
@@ -50,7 +52,7 @@ export function Menu () {
           className={cn(S.btn__transparent, {selected: page === 'favorites'})} 
           onClick={()=>handleSetFavorites()}>
             Избранное
-            <FavoritesIcon className={{icon__active: S.icon}} />
+            <FavoritesIcon className={S.icon} />
           </button> 
         </li>
         <li className={S.list__item}>

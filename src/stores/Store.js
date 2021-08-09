@@ -13,16 +13,18 @@ export function useStore () {
   const [users, setUsers] = useState([])
   const [organizations, setOrganizations] = useState([])
   const [favorites, setFavorites] = useState([])
-  const [page, setPage] = useState('initial')
-  const [card, setCard] = useState({
-    // login: 'Поиск',
-    // description: 'Описания нет...',
-    // avatarUrl: '',
-    // inFavorites: false,
-    // orgaznizationsUrl: '',
-    // type: null
-  })
-  
+  const [page, setPage] = useState(null)
+  const [card, setCard] = useState(null)
+    
+    // {
+    // // login: 'Поиск',
+    // // description: 'Описания нет...',
+    // // avatarUrl: '',
+    // // inFavorites: false,
+    // // orgaznizationsUrl: '',
+    // // type: null
+    // }
+    
   return {
     page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
     setPage,

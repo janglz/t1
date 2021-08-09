@@ -53,7 +53,7 @@ export function Card() {
     
   const styles = classNames.bind(S)
 
-  return (
+  return card && (
     <section className={S.section}>
       <div className={S.container}>
         <div className={S.content}>

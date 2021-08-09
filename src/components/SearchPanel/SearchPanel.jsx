@@ -8,7 +8,7 @@ import { List } from '../List/List'
 export function SearchPanel () {
   const { page } = useContext(AppContext)
 
-  return (
+  return page && (
     <aside className={S.menu}>
       {page === 'favorites' &&
       <div className={S.search}>

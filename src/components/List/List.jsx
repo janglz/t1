@@ -32,7 +32,7 @@ export function List() {
         <p className="main-cotent__item-text">{el.type}</p>
       </div>
       <span className={S.icon}>
-        {el.inFavorites && <FavoritesIcon />}
+        {el.inFavorites && <FavoritesIcon/>}
       </span>
     </li>
   ))
