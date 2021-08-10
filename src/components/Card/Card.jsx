@@ -59,7 +59,7 @@ export function Card() {
     setLocalFavorites(newFav) 
   }
     
-  const styles = classNames.bind(S)
+  const likeStyle = classNames(S.btn__div, card?.inFavorites ? S.red : S.black)
 
   return card && (
     <section className={S.section}>
@@ -74,7 +74,7 @@ export function Card() {
             {card.orgaznizationsUrl && <p className={S.content__description}>Состоит в организациях:</p>}
             {card.orgaznizationsUrl && <p className={S.content__description}>{card.orgaznizationsUrl}</p>}
           </div>
-          <div className={ styles(S.btn, card.inFavorites && S.red) }>
+          <div className={ likeStyle }>
             <button>
               <div className={S.icon} onClick={() => handleAddToFavorites()}>
               <FavoritesIcon />

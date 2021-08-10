@@ -26,13 +26,13 @@
   }
   
   .container {
-    /* width: 100%; */
-    /* margin: 0 auto; */
+    width: 100%;
   }
   
   .content {
     display: flex;
     justify-content: space-between;
+    /* justify-items: stretch; */
     flex-wrap: wrap;
   }
   
@@ -42,12 +42,9 @@
   }
   
   .content__inner {
-    display: inline-flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* width: 100%; */
     padding: 5px;
-    /* border: 1px solid red; */
   }
   .content__title {
     /* /* не работает с флексом...(( */
@@ -59,42 +56,71 @@
 
   .content__description {
 
-    /* flex: 400px 400px auto; */
-    /* flex-wrap: wrap; */
-    /* width: 100%; */
-    /* white-space: wrap; */
-    /* border: 1px solid blue; */
   }
   
   .content h1{
     margin: 0;
   }
+  .btn__div {
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
   
-  .btn button {
+  .btn__div button {
+    align-self: flex-start;
     padding: 0;
     border: none;
     background-color: transparent;
     
     cursor: pointer;
+    transition: all .35s ease;
   }
   
-  .btn button > .icon {
+  .btn__div button > .icon {
     width: 62px;
     height: 62px;
   }
 
-  .btn button:hover {
-    /* width: 62px;
-    height: 62px; */
-    fill: red;
-    stroke: red;
-    /* background-color: aquamarine; */
-    color: red;
-    filter:drop-shadow(2px, 2px, 22px, 22px)
+  .btn__div button:hover {
+    fill: blueviolet;
   }
-  .red {
-    fill: red;
-    stroke: red;
-    /* background-color: aquamarine; */
-    color: red;
+  
+  .red > button {
+    fill: blueviolet;
+    animation: like 0.7s both;  
+  }
+  .black > button {
+    animation: dislike 0.7s both;  
+  }
+
+  @keyframes like {
+    0% {
+      transform: scale(1);
+    }
+    25%{
+      transform: scale(0.9);
+    }
+    50%{
+       transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes dislike {
+    0% {
+      transform: scale(1);
+    }
+    25%{
+      transform: scale(0.9);
+    }
+    50%{
+       transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
   }

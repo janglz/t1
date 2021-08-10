@@ -42,7 +42,7 @@ img {
 .main {
   display: flex;
   /* flex-flow: row nowrap; */
-  flex-basis: auto auto 50%;
+  /* flex-basis: auto auto 50%; */
   /* align-items: center; */
   /* width: 100%; */
   /* border: 1px solid red; */
