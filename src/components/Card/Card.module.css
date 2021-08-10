@@ -18,10 +18,11 @@
     display: flex;
     flex: 1 1 auto;
     padding: 25px;
+    /* margin: auto; */
     border: 1px solid rgb(243, 243, 243);
     background-color: rgb(243, 243, 243);
     border-radius: 3px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 2px 23px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
   
   .container {
@@ -32,7 +33,7 @@
   .content {
     display: flex;
     justify-content: space-between;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
   }
   
   .image img {
@@ -41,25 +42,27 @@
   }
   
   .content__inner {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
+    /* width: 100%; */
     padding: 5px;
     /* border: 1px solid red; */
   }
   .content__title {
-    /* не работает с флексом...((
-    white-space: nowrap;
+    /* /* не работает с флексом...(( */
+
+    white-space: wrap;
     overflow-x: hidden;
-    text-overflow: ellipsis; */
+    text-overflow: ellipsis; 
   }
 
   .content__description {
+
     /* flex: 400px 400px auto; */
     /* flex-wrap: wrap; */
-    width: 100%;
-    white-space: wrap;
+    /* width: 100%; */
+    /* white-space: wrap; */
     /* border: 1px solid blue; */
   }
   

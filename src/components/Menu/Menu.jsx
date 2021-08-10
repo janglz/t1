@@ -28,15 +28,16 @@ export function Menu () {
   const handleSetOrgs = async () => {
     setCard(null)
     setPage('organizations')
-    const merged = Array.from(new Set([...organizations, ...await fetchedOrgs]))
+    const newOrgs = await fetchedOrgs
+    const merged = [...newOrgs.filter(el => !organizations.some(org => org.login === el.login )), ...organizations]
     setOrganizations(merged)
   }
 
   const handleSetUsers = async () => {
     setCard(null)
-    // setCard(noCard)
     setPage('users')
-    const merged = Array.from(new Set([...users, ...await fetchedUsers]))
+    const newUsers = await fetchedUsers
+    const merged = [...newUsers.filter(el => !users.some(user => user.login === el.login )), ...users]
     setUsers(merged)
   }
 

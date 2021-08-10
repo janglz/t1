@@ -16,10 +16,16 @@
   cursor: pointer;
   border-radius: 50px 5px 5px 50px;
 }
-.contentItem:hover h4, .contentItem:hover p{
+.contentItem:hover h4, .contentItem:hover p {
   color: #61597c;
   color: white;
 }
+
+.contentItem:hover .icon {
+  fill: white;
+
+}
+
 .contentItem:hover {
   background-color: #61597c1f;
   background-color: #26252b;
@@ -41,6 +47,7 @@
 }
 
 .icon {
+  margin: 15px;
   width: 30px;
   height: 30px;
   stroke-width: 100;
