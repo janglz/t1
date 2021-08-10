@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import { useLocalStorage } from '../../api/useLocalStorage'
 import classNames from 'classnames'
+import { classicNameResolver } from 'typescript'
 
 export function Card() {
   const { card, setCard, users, setUsers, organizations, setOrganizations, page, favorites, setFavorites } = useContext(AppContext)
@@ -12,6 +13,8 @@ export function Card() {
   const organizationsPage = page === 'organizations';
 
   const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites)
+  const [localUsers, setLocalUsers] = useLocalStorage('users', users)
+  const [localOrganizations, setLocalOrganizations] = useLocalStorage('organizations', organizations)
 
   /**
    * 
@@ -20,6 +23,8 @@ export function Card() {
    */
 
   const getNewFavorites = () => {
+    
+
     if (!favorites) return  [{...card}]
     return favorites.some(el => el.login === card.login) ?
       favorites.filter(el => el.login !== card.login) :
@@ -39,16 +44,19 @@ export function Card() {
     if (card.type === 'user') {
       const newUsers = getNewArr(users) || users
       setUsers(newUsers)
+      setLocalUsers(newUsers)
     }
     if (card.type === 'organization') {
       const newOrgs = getNewArr(organizations) || organizations
       setOrganizations(newOrgs)
+      setLocalOrganizations(newOrgs)
     }
     const newFav = getNewFavorites()
     //потом перенести подальше, чтобы не каждый рендер выполнялся map
     newFav.map(el => el.inFavorites = true) 
     //
-    setFavorites(newFav)    
+    setFavorites(newFav)   
+    setLocalFavorites(newFav) 
   }
     
   const styles = classNames.bind(S)

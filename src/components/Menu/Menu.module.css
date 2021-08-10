@@ -1,6 +1,6 @@
 .menu {
   display: inline-flex;
-  min-width: 200px;
+  min-width: 170px;
   flex-direction: column;
   margin-right: 15px;
   padding: 15px;
@@ -24,13 +24,13 @@
 .list__item {
   list-style: none;
   font-size: 18px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .icon {
   width: 20px;
   height: 20px;
-  margin-right: 5px;
+  margin-left: 15px;
 }
 
 .btn__transparent {
@@ -38,15 +38,27 @@
   font-size: 18px;
   border: none;
   background: transparent;
-  /* font-size: 16px; */
+  padding: 10px;
+  width: 170px;
+  margin: 5px;
 }
 
 .btn__transparent:hover {
-  color: rgb(136, 126, 148);
+  /* color: rgb(136, 126, 148); */
+  background-color: rgba(121, 118, 138, 0.185);
+  border-radius: 5px;
   cursor: pointer;
 }
 
-/* .list__item > .selected {
-  background: royalblue;
-  color: rgb(140, 126, 151);
-} */
+/* .list__item > */
+.selected {
+  background: #26252b;
+  /* padding: 10px; */
+  border-radius: 5px;
+  color: white;
+} 
+
+.btn__transparent.selected:hover{ 
+  color:rgb(243, 243, 243);
+  background: #26252bde;
+}

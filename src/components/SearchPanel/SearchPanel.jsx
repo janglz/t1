@@ -11,11 +11,6 @@ export function SearchPanel () {
   let list = [];
   const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
   const [searchQuery, setSearchQuery] = useState('')
-  const [searchResult, setSearchResult] = useState()
-
-  useEffect(()=>{
-    setSearchResult(list)
-  }, [list])
 
   const selectItems = (page) => {
     switch (page) {
@@ -24,7 +19,9 @@ export function SearchPanel () {
       case 'organizations':
         return organizations
       case 'favorites':
-        return favorites
+        return searchQuery && favorites ?
+        favorites.filter(el => el?.login?.includes(searchQuery) || el?.description?.includes(searchQuery)) :
+        favorites
       default: 
         return 
     }
@@ -33,8 +30,7 @@ export function SearchPanel () {
 
 
   const handleSearch = (query) => {
-    if (!query) return;
-    
+    setSearchQuery(query)
   }
 
   return page && (
@@ -45,7 +41,7 @@ export function SearchPanel () {
           <img src={searchIcon} id="search" className={S.searchIcon}></img>
         </span>
         <form className={S.form} action="#" method="GET" onSubmit={e => e.preventDefault()}>
-          <input type="search" id="search" placeholder="Найти..." value={searchQuery} onChange={e => handleSearch(e.target.value)} autoFocus />
+          <input type="search" id="search" placeholder="Найти..." value={searchQuery} onChange={e => handleSearch(e.target.value)} autoFocus autoComplete="off" />
         </form>
         <span className={S.filter}>
           <img src={filterIcon} id="filter" className={S.filterIcon}></img>
@@ -53,8 +49,8 @@ export function SearchPanel () {
       </div>}
       <nav className={S.navbar}>
         <ul className={S.content}>
-          {/* {selectPage()} */}
-          <List filtered={searchResult} />
+          {/* <Pagination /> */}
+          <List filtered={list} />
         </ul>
       </nav>
     </aside>
