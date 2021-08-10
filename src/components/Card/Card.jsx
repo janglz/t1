@@ -1,5 +1,5 @@
 import S from './Card.module.css'
-import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
+import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import { useLocalStorage } from '../../api/useLocalStorage'
@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { classicNameResolver } from 'typescript'
 
 export function Card() {
-  const { card, setCard, users, setUsers, organizations, setOrganizations, page, favorites, setFavorites } = useContext(AppContext)
+  const { card, setCard, users, setUsers, organizations, setOrganizations, page, favorites, setFavorites, mobile } = useContext(AppContext)
   const favoritesPage = page === 'favorites';
   const usersPage = page === 'users';
   const organizationsPage = page === 'organizations';
@@ -61,6 +61,11 @@ export function Card() {
     
   const likeStyle = classNames(S.btn__div, card?.inFavorites ? S.red : S.black)
 
+  /**
+   * 
+   * при добавлении карточки в стейт в моб версии она будет открываться, и на ней дополнительно рендерится кнопка с setCard(null)
+   */
+
   return card && (
     <section className={S.section}>
       <div className={S.container}>
@@ -69,6 +74,9 @@ export function Card() {
             <img src={card.avatarUrl} />
           </div>
           <div className={S.content__inner}>
+            {mobile && <button className={S.back} onClick={()=> setCard(null) }>	
+              &#129040;Вернуться
+            </button>}
             <h1 className={S.content__title}>{card.login}</h1>
             <p className={S.content__description}>{card.description}</p>
             {card.orgaznizationsUrl && <p className={S.content__description}>Состоит в организациях:</p>}

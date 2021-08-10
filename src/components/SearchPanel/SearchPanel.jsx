@@ -7,9 +7,9 @@ import { List } from '../List/List'
 import { useLocalStorage } from '../../api/useLocalStorage'
 
 export function SearchPanel () {
-  const { page, organizations, users, favorites, setCard } = useContext(AppContext)
+  const { page, organizations, users, favorites, mobile, card } = useContext(AppContext)
   let list = [];
-  const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
+  // const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
   const [searchQuery, setSearchQuery] = useState('')
 
   const selectItems = (page) => {
@@ -33,15 +33,23 @@ export function SearchPanel () {
     setSearchQuery(query)
   }
 
-  return page && (
+  return (!mobile || !card) && (
     <aside className={S.menu}>
       {page === 'favorites' &&
       <div className={S.search}>
         <span className={S.searchIcon}>
           <img src={searchIcon} id="search" className={S.searchIcon}></img>
         </span>
-        <form className={S.form} action="#" method="GET" onSubmit={e => e.preventDefault()}>
-          <input type="search" id="search" placeholder="Найти..." value={searchQuery} onChange={e => handleSearch(e.target.value)} autoFocus autoComplete="off" />
+        <form className={S.form} onSubmit={e => e.preventDefault()}>
+          <input 
+            type="search" 
+            id="search" 
+            placeholder="Найти..." 
+            value={searchQuery} 
+            onChange={e => handleSearch(e.target.value)} 
+            autoFocus 
+            autoComplete="off" 
+          />
         </form>
         <span className={S.filter}>
           <img src={filterIcon} id="filter" className={S.filterIcon}></img>

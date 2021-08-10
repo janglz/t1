@@ -42,6 +42,19 @@
     height: 32px;
     margin: 10px;
   }
+  .hamburger {
+    border: none;
+    background: transparent;
+  }
+  .hamburger__icon{
+    width: 60px;
+    height: 40px;
+    margin: 5px;
+  }
+  .hamburger__icon:hover {
+    cursor: pointer;
+    fill: white;
+  }
 
   .navbar {
     display: flex;

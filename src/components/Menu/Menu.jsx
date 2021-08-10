@@ -5,15 +5,26 @@ import { AppContext } from '../../stores/Store'
 import cn from 'classnames'
 import { getUsers } from '../../api/getUsers'
 import { getOrganizations } from '../../api/getOrganizations'
-import { noCard } from '../../api/noCard'
 import { useLocalStorage } from '../../api/useLocalStorage'
-// import { useLocalStorage } from '../../api/useLocalStorage'
 
 const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
 
 export function Menu () {
-  const { users, page, setPage, setUsers, setOrganizations, organizations, setCard, favorites, setFavorites } = useContext(AppContext)
+  const { 
+    users, 
+    page, 
+    setPage, 
+    setUsers, 
+    setOrganizations, 
+    organizations, 
+    setCard, 
+    favorites, 
+    setFavorites, 
+    mobile,
+    showMenu, 
+    setShowMenu,
+  } = useContext(AppContext)
   const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
   const [localUsers, setLocalUsers] = useLocalStorage('users', users)
   const [localOrganizations, setLocalOrganizations] = useLocalStorage('organizations', organizations)
@@ -42,9 +53,14 @@ export function Menu () {
     ])
   }, [])
 
+  useEffect(()=>{
+    setShowMenu(true)
+  },[mobile])
+
   const handleSetFavorites = () => {
     setCard(null)
     setPage('favorites')
+    if (mobile) setShowMenu(false)
   }
 
   /**
@@ -58,6 +74,7 @@ export function Menu () {
     const newOrgs = await fetchedOrgs
     const merged = [...newOrgs.filter(el => !organizations.some(org => org.login === el.login )), ...organizations]
     setOrganizations(merged)
+    if (mobile) setShowMenu(false)
   }
 
   const handleSetUsers = async () => {
@@ -66,15 +83,13 @@ export function Menu () {
     const newUsers = await fetchedUsers
     const merged = [...newUsers.filter(el => !users.some(user => user.login === el.login )), ...users]
     setUsers(merged)
+    if (mobile) setShowMenu(false)
   }
 
-  /**
-   * cn так и не перекрашивает элемент, почему?
-   */
-  const bindedStyle = cn.bind(S)
+  // const bindedStyle = cn.bind(S)
 
-  return (
-    <aside className={S.menu}>
+  return showMenu && (
+    <aside className={cn(S.menu, mobile && S.mobile)}>
       <ul className={S.content}>
         <li className={S.list__item}>
           <button 

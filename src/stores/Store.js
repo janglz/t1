@@ -3,6 +3,7 @@ import usersData from '../db/users.json'
 import organizationsData from '../db/organizations.json'
 import { getUsers } from '../api/getUsers';
 import { getOrganizations } from '../api/getOrganizations';
+import { useWindowSize } from '../api/useWindowSize';
 
 export const AppContext = createContext(null)
 
@@ -15,6 +16,8 @@ export function useStore () {
   const [favorites, setFavorites] = useState([])
   const [page, setPage] = useState(null)
   const [card, setCard] = useState(null)
+  const [showMenu, setShowMenu] = useState(true)
+  const [width, height] = useWindowSize()
     
     // {
     // // login: 'Поиск',
@@ -36,5 +39,8 @@ export function useStore () {
     setFavorites,
     card, 
     setCard,
+    mobile: width < 900,
+    showMenu,
+    setShowMenu,
   }
 }

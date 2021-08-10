@@ -1,4 +1,4 @@
-import { React } from 'react'
+import { React, useEffect } from 'react'
 import { AppContext, useStore } from '../../stores/Store'
 import { Header } from '../../components/Header/Header'
 import { Menu } from '../../components/Menu/Menu'
@@ -9,7 +9,7 @@ import S from './App.module.css'
 
 
 function App() {
-  const store = useStore()
+  const store = useStore();
   
   return (
     <AppContext.Provider value={store}>
