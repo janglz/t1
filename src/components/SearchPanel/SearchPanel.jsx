@@ -1,15 +1,14 @@
 import S from './SearchPanel.module.css'
 import filterIcon from '../../styles/img/filter.svg'
 import searchIcon from '../../styles/img/search.svg'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../List/List'
-import { useLocalStorage } from '../../api/useLocalStorage'
+import cn from 'classnames'
 
 export function SearchPanel () {
-  const { page, organizations, users, favorites, mobile, card } = useContext(AppContext)
+  const { page, organizations, users, favorites, mobile, card, showMenu } = useContext(AppContext)
   let list = [];
-  // const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
   const [searchQuery, setSearchQuery] = useState('')
 
   const selectItems = (page) => {
@@ -28,12 +27,14 @@ export function SearchPanel () {
   }
   list = selectItems(page)
 
-
   const handleSearch = (query) => {
     setSearchQuery(query)
   }
 
-  return (!mobile || !card) && (
+  // const whyrender = (!mobile && page) || (page && mobile && (!card && !showMenu))
+  const renderIf = ( !!page && !mobile|| (!card && mobile && page) ) 
+
+  return renderIf && (
     <aside className={S.menu}>
       {page === 'favorites' &&
       <div className={S.search}>

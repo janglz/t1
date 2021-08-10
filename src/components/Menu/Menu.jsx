@@ -54,7 +54,7 @@ export function Menu () {
   }, [])
 
   useEffect(()=>{
-    setShowMenu(true)
+    // setShowMenu(!mobile)
   },[mobile])
 
   const handleSetFavorites = () => {
@@ -89,6 +89,7 @@ export function Menu () {
   // const bindedStyle = cn.bind(S)
 
   return showMenu && (
+    <div className={mobile && S.overlay}>
     <aside className={cn(S.menu, mobile && S.mobile)}>
       <ul className={S.content}>
         <li className={S.list__item}>
@@ -115,5 +116,6 @@ export function Menu () {
         </li> 
       </ul>
     </aside>
+    </div>
   )
 }
