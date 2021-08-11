@@ -86,9 +86,9 @@ export function Menu (): JSX.Element | null {
     setCard(null)
     setPage('users')
     const newUsers = await fetchedUsers
-    const merged = users? 
+    const merged = users ? 
     [...newUsers.filter(el => !users?.some((user: Iitem) => user.login === el.login )), ...users]:
-    users
+    newUsers
     setUsers(merged)
     if (mobile) setShowMenu(false)
   }

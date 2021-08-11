@@ -5,15 +5,15 @@ import { IContext, Iitem } from '../interfaces/interfaces';
 
 export const AppContext = createContext({} as IContext)
 
-export function useStore () {
-  const [users, setUsers] = useState([])
-  const [organizations, setOrganizations] = useState([])
-  const [favorites, setFavorites] = useState([])
-  const [page, setPage] = useState(null)
-  const [card, setCard] = useState(null)
+export function useStore() {
+  const [users, setUsers] = useState<Iitem[] | null>(null)
+  const [organizations, setOrganizations] = useState<Iitem[] | null>(null)
+  const [favorites, setFavorites] = useState<Iitem[] | null>(null)
+  const [page, setPage] = useState<string | null>(null)
+  const [card, setCard] = useState<Iitem | null>(null)
   const [showMenu, setShowMenu] = useState(true)
-  const [width, height] = useWindowSize()
-    
+  const [width,] = useWindowSize()
+
   return {
     page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
     setPage,
