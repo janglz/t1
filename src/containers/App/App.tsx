@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { AppContext, useStore } from '../../stores/Store'
 import { Header } from '../../components/Header/Header'
 import { Menu } from '../../components/Menu/Menu'
@@ -6,10 +6,8 @@ import { SearchPanel } from '../../components/SearchPanel/SearchPanel'
 import { Card } from '../../components/Card/Card'
 
 import S from './App.module.css'
-import { IContext } from '../../interfaces/interfaces'
 
-function App() {
-  // const store = useContext(AppContext)
+function App(): JSX.Element {
   const store = useStore()
   
   return (

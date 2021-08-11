@@ -5,7 +5,7 @@ import searchIcon from '../../styles/img/search.svg'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../List/List'
-import { IContext, Iitem } from '../../interfaces/interfaces'
+import { Iitem } from '../../interfaces/interfaces'
 
 
 export function SearchPanel (): JSX.Element | null  {

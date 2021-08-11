@@ -69,32 +69,31 @@ export function Card(): JSX.Element | null {
 
   return card && (
     <div className={S.wrapper}>
-    <section className={S.section}>
-      <div className={S.container}>
-        <div className={S.content}>
-          <div className={S.image}>
-            <img src={card.avatarUrl} />
-          </div>
-          <div className={S.inner}>
-            {mobile && <button className={S.back} onClick={()=> setCard(null) }>	
-            &#8592;Вернуться
-            </button>}
-            <h1 className={S.title}>{card.login}</h1>
-            <p className={S.description}>{card.description}</p>
-            {card.orgaznizationsUrl && <p className={S.description}>Состоит в организациях:</p>}
-            {card.orgaznizationsUrl && <p className={S.description}>{card.orgaznizationsUrl}</p>}
-          </div>
-          <div className={ likeStyle }>
-            <button>
-              <div className={S.icon} onClick={() => handleAddToFavorites()}>
-              <FavoritesIcon />
-              </div>
-            </button>
+      <section className={S.section}>
+        <div className={S.container}>
+          <div className={S.content}>
+            <div className={S.image}>
+              <img src={card.avatarUrl} />
+            </div>
+            <div className={S.inner}>
+              {mobile && <button className={S.back} onClick={() => setCard(null)}>
+                &#8592;Вернуться
+              </button>}
+              <h1 className={S.title}>{card.login}</h1>
+              <p className={S.description}>{card.description}</p>
+              {card.orgaznizationsUrl && <p className={S.description}>Состоит в организациях:</p>}
+              {card.orgaznizationsUrl && <p className={S.description}>{card.orgaznizationsUrl}</p>}
+            </div>
+            <div className={likeStyle}>
+              <button>
+                <div className={S.icon} onClick={() => handleAddToFavorites()}>
+                  <FavoritesIcon />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    </div>
-    
+      </section>
+    </div>  
   )
 }
