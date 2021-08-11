@@ -6,10 +6,8 @@ import { AppContext } from '../../stores/Store'
 import { ReactComponent as HamburgerIcon } from '../../styles/img/menu.svg'
 import cn from 'classnames'
 
-export function Header () {
+export function Header ():JSX.Element {
   const { mobile, showMenu, setShowMenu } = useContext(AppContext)
-  
-
 
   return (
     <header className={S.header}>

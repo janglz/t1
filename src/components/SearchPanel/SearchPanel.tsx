@@ -5,13 +5,15 @@ import searchIcon from '../../styles/img/search.svg'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../List/List'
+import { IContext, Iitem } from '../../interfaces/interfaces'
 
-export function SearchPanel () {
-  const { page, organizations, users, favorites, mobile, card, showMenu } = useContext(AppContext)
-  let list = [];
+
+export function SearchPanel (): JSX.Element | null  {
+  const { page, organizations, users, favorites, mobile, card } = useContext(AppContext)
+  let list: Iitem[] | null = null;
   const [searchQuery, setSearchQuery] = useState('')
-
-  const selectItems = (page) => {
+  
+  const selectItems = (page: string | null): Iitem[] | null => {
     switch (page) {
       case 'users': 
         return users
@@ -19,22 +21,22 @@ export function SearchPanel () {
         return organizations
       case 'favorites':
         return searchQuery && favorites ?
-        favorites.filter(el => el?.login?.includes(searchQuery) || el?.description?.includes(searchQuery)) :
+        favorites.filter((el: Iitem) => el?.login?.includes(searchQuery) || el?.description?.includes(searchQuery)) :
         favorites
       default: 
-        return 
+        return null
     }
   }
   list = selectItems(page)
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: string) => {
     setSearchQuery(query)
   }
 
   // const whyrender = (!mobile && page) || (page && mobile && (!card && !showMenu))
   const renderIf = ( !!page && !mobile|| (!card && mobile && page) ) 
 
-  return renderIf && (
+  return renderIf ? (
     <aside className={S.menu}>
       {page === 'favorites' &&
       <div className={S.search}>
@@ -63,5 +65,5 @@ export function SearchPanel () {
         </ul>
       </nav>
     </aside>
-  )
+  ) : null
 }

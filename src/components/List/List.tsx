@@ -3,13 +3,17 @@ import S from './List.module.css'
 import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
+import { Iitem } from '../../interfaces/interfaces'
 
+/**
+ * todo
+ * Убрать проптайп ANY
+ */
 
-
-export function List({ filtered }) {
+export function List({ filtered }: { filtered: any | null }): JSX.Element | null {
   const { setCard } = useContext(AppContext)
 
-  return filtered?.length > 0 && filtered.map(el => (
+  return filtered && filtered.length > 0 ? filtered.map((el: Iitem) => (
     <li className={S.contentItem} key={el.login} onClick={() => setCard(el)}>
       <div className={S.itemImg}><img src={el.avatarUrl} /></div>
       <div className={S.value}>
@@ -20,5 +24,5 @@ export function List({ filtered }) {
         {el.inFavorites && <FavoritesIcon/>}
       </span>
     </li>
-  ))
+  )) : null
 }

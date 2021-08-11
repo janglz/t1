@@ -13,7 +13,7 @@ const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
 
 
-export function Menu () {
+export function Menu (): JSX.Element | null {
   const { 
     users, 
     page, 
@@ -28,9 +28,9 @@ export function Menu () {
     showMenu, 
     setShowMenu,
   } : IContext = useContext(AppContext)
-  const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
-  const [localUsers, setLocalUsers] = useLocalStorage('users', users)
-  const [localOrganizations, setLocalOrganizations] = useLocalStorage('organizations', organizations)
+  const [localFavorites, ] = useLocalStorage('favorites', favorites);
+  const [localUsers, ] = useLocalStorage('users', users)
+  const [localOrganizations, ] = useLocalStorage('organizations', organizations)
 
   /**
    * мерджим данные с localStorage
@@ -91,7 +91,7 @@ export function Menu () {
 
   // const bindedStyle = cn.bind(S)
 
-  return showMenu && (
+  return showMenu ? (
     <div className={mobile ? S.overlay : undefined}>
     <aside className={cn(S.menu, mobile && S.mobile)}>
       <ul className={S.content}>
@@ -120,5 +120,5 @@ export function Menu () {
       </ul>
     </aside>
     </div>
-  )
+  ) : null
 }

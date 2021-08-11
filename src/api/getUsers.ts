@@ -1,11 +1,12 @@
 import { fetchData } from "./fetchData";
+import { Iitem } from "../interfaces/interfaces";
 /**
  * @param {String} page  
  * @returns {Array of Objects} 
  */
-export async function getUsers (page=1) {
-  const response = await fetchData('users', page);
-  const users = response.map(el =>{
+export async function getUsers (page = 1): Promise<Iitem[]> {
+  const response: any[] = await fetchData('users', page);
+  const users: Iitem[] = response.map(el =>{
     return {
       login: el.login,
       description: el.description,
@@ -16,6 +17,5 @@ export async function getUsers (page=1) {
       // ": "https://api.github.com/users/mojombo/orgs"
     }
   })
-  // console.log(users)
   return users
 }

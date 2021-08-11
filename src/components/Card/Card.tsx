@@ -1,20 +1,21 @@
 import S from './Card.module.css'
 import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { useLocalStorage } from '../../api/useLocalStorage'
 import classNames from 'classnames'
 import React from 'react'
+import { IContext, Iitem } from '../../interfaces/interfaces'
 
-export function Card() {
-  const { card, setCard, users, setUsers, organizations, setOrganizations, page, favorites, setFavorites, mobile } = useContext(AppContext)
+export function Card(): JSX.Element | null {
+  const { card, setCard, users, setUsers, organizations, setOrganizations, favorites, setFavorites, mobile }: IContext = useContext(AppContext)
   // const favoritesPage = page === 'favorites';
   // const usersPage = page === 'users';
   // const organizationsPage = page === 'organizations';
 
-  const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites)
-  const [localUsers, setLocalUsers] = useLocalStorage('users', users)
-  const [localOrganizations, setLocalOrganizations] = useLocalStorage('organizations', organizations)
+  const [, setLocalFavorites] = useLocalStorage('favorites', favorites)
+  const [, setLocalUsers] = useLocalStorage('users', users)
+  const [, setLocalOrganizations] = useLocalStorage('organizations', organizations)
 
   /**
    * 
@@ -22,38 +23,37 @@ export function Card() {
    * 
    */
 
-  const getNewFavorites = () => {
-    
-
-    if (!favorites) return  [{...card}]
-    return favorites.some(el => el.login === card.login) ?
-      favorites.filter(el => el.login !== card.login) :
+  const getNewFavorites = (): (Iitem | null )[] => {
+    if (!favorites) return  card? [{...card}]: [null]
+    return favorites.some((el: Iitem) => el.login === card?.login) ?
+      favorites.filter((el: Iitem) => el.login !== card?.login) :
       [...favorites, card] 
   }
    
-  const getNewArr = (arr) => {
-    const changeElFavorites = el => el.login === card.login ? 
+  const getNewArr = (arr: Iitem[]) => {
+    const changeElFavorites = (el: Iitem) => el.login === card?.login ? 
       { ...el, inFavorites: !el.inFavorites} : 
       el;
     return arr.map(changeElFavorites)
   }
 
   const handleAddToFavorites = () => {
-    const newCard = {...card, inFavorites: !card.inFavorites};
+    const newCard = card ? {...card, inFavorites: !card?.inFavorites} : null;
     setCard(newCard)
-    if (card.type === 'user') {
+    if (card?.type === 'user') {
       const newUsers = getNewArr(users) || users
       setUsers(newUsers)
       setLocalUsers(newUsers)
     }
-    if (card.type === 'organization') {
+    if (card?.type === 'organization') {
       const newOrgs = getNewArr(organizations) || organizations
       setOrganizations(newOrgs)
       setLocalOrganizations(newOrgs)
     }
     const newFav = getNewFavorites()
     //потом перенести подальше, чтобы не каждый рендер выполнялся map
-    newFav.map(el => el.inFavorites = true) 
+    // if (newFav) 
+      newFav.map((el) => el !== null ? el.inFavorites = true : el) 
     //
     setFavorites(newFav)   
     setLocalFavorites(newFav) 
@@ -62,7 +62,6 @@ export function Card() {
   const likeStyle = classNames(S.btn__div, card?.inFavorites ? S.red : S.black)
 
   /**
-   * 
    * при добавлении карточки в стейт в моб версии она будет открываться, и на ней дополнительно рендерится кнопка с setCard(null)
    */
 

@@ -1,8 +1,12 @@
+import React from 'react';
 import { createContext, useState } from 'react';
 import { useWindowSize } from '../api/useWindowSize';
 import { IContext } from '../interfaces/interfaces';
 
 export const AppContext = createContext({} as IContext)
+// export const AppContext = React.createContext<Partial<IContext>>({
+
+// })
 
 export function useStore () {
   const [users, setUsers] = useState([])
