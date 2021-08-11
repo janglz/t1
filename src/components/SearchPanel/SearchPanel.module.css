@@ -59,7 +59,7 @@
   }
 
   .content {
-    max-height: 80vh;
+    max-height: 75vh;
     width: 250px;
     overflow-x: auto;
   }
