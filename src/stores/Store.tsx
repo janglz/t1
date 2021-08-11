@@ -6,7 +6,7 @@ import { IContext, Iitem } from '../interfaces/interfaces';
 export const AppContext = createContext({} as IContext)
 
 export function useStore() {
-  const [users, setUsers] = useState<Iitem[] | null>(null)
+  const [users, setUsers] = useState<Iitem[]|null>([])
   const [organizations, setOrganizations] = useState<Iitem[] | null>(null)
   const [favorites, setFavorites] = useState<Iitem[] | null>(null)
   const [page, setPage] = useState<string | null>(null)

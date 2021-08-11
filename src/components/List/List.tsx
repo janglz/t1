@@ -12,6 +12,7 @@ import { Iitem } from '../../interfaces/interfaces'
 
 export function List({ filtered }: { filtered: any | null }): JSX.Element | null {
   const { setCard } = useContext(AppContext)
+  // console.log('filtered',filtered)
 
   return filtered && filtered.length > 0 ? filtered.map((el: Iitem) => (
     <li className={S.contentItem} key={el.login} onClick={() => setCard(el)}>

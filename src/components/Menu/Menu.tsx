@@ -33,27 +33,15 @@ export function Menu (): JSX.Element | null {
   const [localOrganizations, ] = useLocalStorage('organizations', organizations)
 
   /**
-   * мерджим данные с localStorage
+   * забираем данные с localStorage
    */
   useEffect(()=> {
-    if (users) setUsers([
-      ...localUsers
-      .filter((el: Iitem)=> !users
-      ?.some((local: Iitem) => local.login === el.login )), 
-      ...users
-    ]);
-    if (organizations) setOrganizations([
-      ...localOrganizations
-      .filter((el: Iitem) => !organizations
-      ?.some((local: Iitem) => local.login === el.login )), 
-      ...organizations
-    ]);
-    if (favorites) setFavorites([
-      ...localFavorites
-      .filter((el: Iitem) => !favorites
-      ?.some((local: Iitem) => local.login === el.login )), 
-      ...favorites
-    ])
+    const newUsrs = localUsers || []
+    const newOrgs = localOrganizations || []
+    const newFavs = localFavorites || []
+    setUsers(newUsrs)
+    setOrganizations(newOrgs)
+    setFavorites(newFavs)
   }, [])
 
   useEffect(()=>{

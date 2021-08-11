@@ -13,16 +13,20 @@ export function SearchPanel (): JSX.Element | null  {
   let list: Iitem[] | null = null;
   const [searchQuery, setSearchQuery] = useState('')
   
-  const selectItems = (page: string | null): Iitem[] | null => {
+  const selectItems = (page: string | null): Iitem[]| null => {
     switch (page) {
       case 'users': 
         return users
       case 'organizations':
         return organizations
       case 'favorites':
-        return searchQuery && favorites ?
-        favorites.filter((el: Iitem) => el?.login?.includes(searchQuery) || el?.description?.includes(searchQuery)) :
+        if (favorites) return searchQuery ?
         favorites
+        .filter((el: Iitem) => 
+          el?.login?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          el?.description?.toLowerCase().includes(searchQuery.toLowerCase())) :
+        favorites
+        return favorites
       default: 
         return null
     }

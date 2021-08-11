@@ -9,9 +9,6 @@ import { IContext, Iitem } from '../../interfaces/interfaces'
 
 export function Card(): JSX.Element | null {
   const { card, setCard, users, setUsers, organizations, setOrganizations, favorites, setFavorites, mobile }: IContext = useContext(AppContext)
-  // const favoritesPage = page === 'favorites';
-  // const usersPage = page === 'users';
-  // const organizationsPage = page === 'organizations';
 
   const [, setLocalFavorites] = useLocalStorage('favorites', favorites)
   const [, setLocalUsers] = useLocalStorage('users', users)
@@ -42,8 +39,11 @@ export function Card(): JSX.Element | null {
   }
 
   const handleAddToFavorites = () => {
+    //в зависимости от типа данных производим с ними манипуляции
+    //и сохраняем результаты в localStorage
     const newCard = card ? {...card, inFavorites: !card?.inFavorites} : null;
     setCard(newCard)
+    
     if (card?.type === 'user') {
       const newUsers = getNewArr(users) || users
       setUsers(newUsers)
@@ -55,10 +55,8 @@ export function Card(): JSX.Element | null {
       setLocalOrganizations(newOrgs)
     }
     const newFav = getNewFavorites()
-    //потом перенести подальше, чтобы не каждый рендер выполнялся map
     if (newFav) 
       newFav.map((el) => el !== null ? el.inFavorites = true : el) 
-    //
     setFavorites(newFav)   
     setLocalFavorites(newFav) 
   }
