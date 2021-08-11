@@ -61,27 +61,28 @@ export function Card(): JSX.Element | null {
     setLocalFavorites(newFav) 
   }
     
-  const likeStyle = classNames(S.btn__div, card?.inFavorites ? S.red : S.black)
+  const likeStyle = classNames(S.btn__div, card?.inFavorites ? S.active : S.inactive)
 
   /**
    * при добавлении карточки в стейт в моб версии она будет открываться, и на ней дополнительно рендерится кнопка с setCard(null)
    */
 
   return card && (
+    <div className={S.wrapper}>
     <section className={S.section}>
       <div className={S.container}>
         <div className={S.content}>
           <div className={S.image}>
             <img src={card.avatarUrl} />
           </div>
-          <div className={S.content__inner}>
+          <div className={S.inner}>
             {mobile && <button className={S.back} onClick={()=> setCard(null) }>	
-              &#129040;Вернуться
+            &#8592;Вернуться
             </button>}
-            <h1 className={S.content__title}>{card.login}</h1>
-            <p className={S.content__description}>{card.description}</p>
-            {card.orgaznizationsUrl && <p className={S.content__description}>Состоит в организациях:</p>}
-            {card.orgaznizationsUrl && <p className={S.content__description}>{card.orgaznizationsUrl}</p>}
+            <h1 className={S.title}>{card.login}</h1>
+            <p className={S.description}>{card.description}</p>
+            {card.orgaznizationsUrl && <p className={S.description}>Состоит в организациях:</p>}
+            {card.orgaznizationsUrl && <p className={S.description}>{card.orgaznizationsUrl}</p>}
           </div>
           <div className={ likeStyle }>
             <button>
@@ -93,5 +94,7 @@ export function Card(): JSX.Element | null {
         </div>
       </div>
     </section>
+    </div>
+    
   )
 }

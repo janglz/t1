@@ -41,12 +41,15 @@ img {
 }
 .main {
   display: flex;
-  /* flex-flow: row nowrap; */
-  /* flex-basis: auto auto 50%; */
-  /* align-items: center; */
+  flex-flow: row nowrap;
+  flex-basis: auto auto 100%;
+  justify-content: stretch;
+  /* height: 80vh; */
+  /* align-items: flex-start; */
   /* width: 100%; */
   /* border: 1px solid red; */
   /* max-width: 1140px; */
-  /* margin: 0 auto; */
+  margin: 0 auto;
   padding: 25px;
+  max-height: 85vh;
 }
