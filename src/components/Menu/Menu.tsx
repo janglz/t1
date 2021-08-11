@@ -36,22 +36,22 @@ export function Menu (): JSX.Element | null {
    * мерджим данные с localStorage
    */
   useEffect(()=> {
-    setUsers([
+    if (users) setUsers([
       ...localUsers
       .filter((el: Iitem)=> !users
-      .some((local: Iitem) => local.login === el.login )), 
+      ?.some((local: Iitem) => local.login === el.login )), 
       ...users
     ]);
-    setOrganizations([
+    if (organizations) setOrganizations([
       ...localOrganizations
       .filter((el: Iitem) => !organizations
-      .some((local: Iitem) => local.login === el.login )), 
+      ?.some((local: Iitem) => local.login === el.login )), 
       ...organizations
     ]);
-    setFavorites([
+    if (favorites) setFavorites([
       ...localFavorites
       .filter((el: Iitem) => !favorites
-      .some((local: Iitem) => local.login === el.login )), 
+      ?.some((local: Iitem) => local.login === el.login )), 
       ...favorites
     ])
   }, [])
@@ -75,7 +75,9 @@ export function Menu (): JSX.Element | null {
     setCard(null)
     setPage('organizations')
     const newOrgs = await fetchedOrgs
-    const merged = [...newOrgs.filter(el => !organizations.some((org: Iitem) => org.login === el.login )), ...organizations]
+    const merged = organizations ? 
+    [...newOrgs.filter(el => !organizations?.some((org: Iitem) => org.login === el.login )), ...organizations]:
+    newOrgs
     setOrganizations(merged)
     if (mobile) setShowMenu(false)
   }
@@ -84,7 +86,9 @@ export function Menu (): JSX.Element | null {
     setCard(null)
     setPage('users')
     const newUsers = await fetchedUsers
-    const merged = [...newUsers.filter(el => !users.some((user: Iitem) => user.login === el.login )), ...users]
+    const merged = users? 
+    [...newUsers.filter(el => !users?.some((user: Iitem) => user.login === el.login )), ...users]:
+    users
     setUsers(merged)
     if (mobile) setShowMenu(false)
   }

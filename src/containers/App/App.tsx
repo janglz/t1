@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AppContext, useStore } from '../../stores/Store'
-import { Header } from '../../components/Header/Header.tsx'
+import { Header } from '../../components/Header/Header'
 import { Menu } from '../../components/Menu/Menu'
 import { SearchPanel } from '../../components/SearchPanel/SearchPanel'
 import { Card } from '../../components/Card/Card'
@@ -8,9 +8,9 @@ import { Card } from '../../components/Card/Card'
 import S from './App.module.css'
 import { IContext } from '../../interfaces/interfaces'
 
-
 function App() {
-  const store = useStore();
+  // const store = useContext(AppContext)
+  const store = useStore()
   
   return (
     <AppContext.Provider value={store}>

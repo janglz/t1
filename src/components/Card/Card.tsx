@@ -23,14 +23,18 @@ export function Card(): JSX.Element | null {
    * 
    */
 
-  const getNewFavorites = (): (Iitem | null )[] => {
-    if (!favorites) return  card? [{...card}]: [null]
-    return favorites.some((el: Iitem) => el.login === card?.login) ?
+  const getNewFavorites = () => {
+    if (!favorites) return  card? [{...card}] : favorites
+
+    if (card) return favorites && favorites.some((el: Iitem) => el.login === card?.login) ?
       favorites.filter((el: Iitem) => el.login !== card?.login) :
       [...favorites, card] 
+      
+    return null
   }
    
-  const getNewArr = (arr: Iitem[]) => {
+  const getNewArr = (arr: Iitem[]|null) => {
+    if (!arr) return
     const changeElFavorites = (el: Iitem) => el.login === card?.login ? 
       { ...el, inFavorites: !el.inFavorites} : 
       el;
@@ -52,7 +56,7 @@ export function Card(): JSX.Element | null {
     }
     const newFav = getNewFavorites()
     //потом перенести подальше, чтобы не каждый рендер выполнялся map
-    // if (newFav) 
+    if (newFav) 
       newFav.map((el) => el !== null ? el.inFavorites = true : el) 
     //
     setFavorites(newFav)   
