@@ -1,9 +1,9 @@
+import React from 'react'
 import S from './Header.module.css'
 import logo from '../../styles/img/logo.svg'
 import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { ReactComponent as HamburgerIcon } from '../../styles/img/menu.svg'
-import gitlogo from '../../styles/img/logo.svg'
 import cn from 'classnames'
 
 export function Header () {

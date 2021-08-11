@@ -1,10 +1,10 @@
+import React from 'react'
 import S from './SearchPanel.module.css'
 import filterIcon from '../../styles/img/filter.svg'
 import searchIcon from '../../styles/img/search.svg'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../List/List'
-import cn from 'classnames'
 
 export function SearchPanel () {
   const { page, organizations, users, favorites, mobile, card, showMenu } = useContext(AppContext)

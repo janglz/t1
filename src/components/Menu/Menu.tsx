@@ -1,14 +1,17 @@
+import React from 'react'
 import S from './Menu.module.css'
-import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
+import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import cn from 'classnames'
 import { getUsers } from '../../api/getUsers'
 import { getOrganizations } from '../../api/getOrganizations'
 import { useLocalStorage } from '../../api/useLocalStorage'
+import { IContext, Iitem } from '../../interfaces/interfaces';
 
 const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
+
 
 export function Menu () {
   const { 
@@ -24,7 +27,7 @@ export function Menu () {
     mobile,
     showMenu, 
     setShowMenu,
-  } = useContext(AppContext)
+  } : IContext = useContext(AppContext)
   const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites);
   const [localUsers, setLocalUsers] = useLocalStorage('users', users)
   const [localOrganizations, setLocalOrganizations] = useLocalStorage('organizations', organizations)
@@ -35,20 +38,20 @@ export function Menu () {
   useEffect(()=> {
     setUsers([
       ...localUsers
-      .filter(el => !users
-      .some(local => local.login === el.login )), 
+      .filter((el: Iitem)=> !users
+      .some((local: Iitem) => local.login === el.login )), 
       ...users
     ]);
     setOrganizations([
       ...localOrganizations
-      .filter(el => !organizations
-      .some(local => local.login === el.login )), 
+      .filter((el: Iitem) => !organizations
+      .some((local: Iitem) => local.login === el.login )), 
       ...organizations
     ]);
     setFavorites([
       ...localFavorites
-      .filter(el => !favorites
-      .some(local => local.login === el.login )), 
+      .filter((el: Iitem) => !favorites
+      .some((local: Iitem) => local.login === el.login )), 
       ...favorites
     ])
   }, [])
@@ -72,7 +75,7 @@ export function Menu () {
     setCard(null)
     setPage('organizations')
     const newOrgs = await fetchedOrgs
-    const merged = [...newOrgs.filter(el => !organizations.some(org => org.login === el.login )), ...organizations]
+    const merged = [...newOrgs.filter(el => !organizations.some((org: Iitem) => org.login === el.login )), ...organizations]
     setOrganizations(merged)
     if (mobile) setShowMenu(false)
   }
@@ -81,7 +84,7 @@ export function Menu () {
     setCard(null)
     setPage('users')
     const newUsers = await fetchedUsers
-    const merged = [...newUsers.filter(el => !users.some(user => user.login === el.login )), ...users]
+    const merged = [...newUsers.filter(el => !users.some((user: Iitem) => user.login === el.login )), ...users]
     setUsers(merged)
     if (mobile) setShowMenu(false)
   }
@@ -89,7 +92,7 @@ export function Menu () {
   // const bindedStyle = cn.bind(S)
 
   return showMenu && (
-    <div className={mobile && S.overlay}>
+    <div className={mobile ? S.overlay : undefined}>
     <aside className={cn(S.menu, mobile && S.mobile)}>
       <ul className={S.content}>
         <li className={S.list__item}>

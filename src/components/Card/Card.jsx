@@ -4,13 +4,13 @@ import { useContext, useEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import { useLocalStorage } from '../../api/useLocalStorage'
 import classNames from 'classnames'
-import { classicNameResolver } from 'typescript'
+import React from 'react'
 
 export function Card() {
   const { card, setCard, users, setUsers, organizations, setOrganizations, page, favorites, setFavorites, mobile } = useContext(AppContext)
-  const favoritesPage = page === 'favorites';
-  const usersPage = page === 'users';
-  const organizationsPage = page === 'organizations';
+  // const favoritesPage = page === 'favorites';
+  // const usersPage = page === 'users';
+  // const organizationsPage = page === 'organizations';
 
   const [localFavorites, setLocalFavorites] = useLocalStorage('favorites', favorites)
   const [localUsers, setLocalUsers] = useLocalStorage('users', users)
