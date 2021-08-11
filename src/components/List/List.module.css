@@ -1,0 +1,54 @@
+.main-favorites span {
+  width: 100%;
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+}
+
+.contentItem {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 50px 5px 5px 50px;
+}
+.contentItem:hover h4, .contentItem:hover p {
+  color: #61597c;
+  color: white;
+}
+
+.contentItem:hover .icon {
+  fill: white;
+
+}
+
+.contentItem:hover {
+  background-color: #61597c1f;
+  background-color: #26252b;
+}
+
+.itemImg img {
+  border-radius: 100px;
+  width: 64px;
+  height: 64px;
+}
+
+.value {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.value h4, .value p {
+  margin: 7px;
+}
+
+.icon {
+  margin: 15px;
+  width: 30px;
+  height: 30px;
+  stroke-width: 100;
+}

@@ -1,2 +1,10 @@
-# todo-courses
-Created with CodeSandbox
+# GROUP 2
+
+## Общие требования Git flow
+На страницах проекта в Jira найдете Style gide GITHUB commits
+
+## Layout
+
+Статический вариант находится в src/layout из него будем разносить стили по компонентам
+
+*Данный раздел будет дополняться (italic)*

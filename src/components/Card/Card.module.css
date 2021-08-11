@@ -1,0 +1,133 @@
+.content__item-img img {
+    border-radius: 100px;
+    width: 64px;
+    height: 64px;
+  }
+  
+  .content__item-value {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .content__item-value h4, p {
+    margin: 0;
+  }
+  
+  .section {
+    display: flex;
+    flex: 1 1 auto;
+    padding: 25px;
+    /* margin: auto; */
+    border: 1px solid rgb(243, 243, 243);
+    background-color: rgb(243, 243, 243);
+    border-radius: 3px;
+    box-shadow: 0 2px 23px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  
+  .container {
+    width: 100%;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    /* justify-items: stretch; */
+    flex-wrap: wrap;
+  }
+  
+  .image img {
+    max-width: 128px;
+    max-height: 128px;
+  }
+  
+  .content__inner {
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 5px;
+  }
+  .content__title {
+    /* /* не работает с флексом...(( */
+
+    white-space: wrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis; 
+  }
+
+  .content__description {
+
+  }
+  
+  .content h1{
+    margin: 0;
+  }
+  .btn__div {
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+  
+  .btn__div button {
+    align-self: flex-start;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    
+    cursor: pointer;
+    transition: all .35s ease;
+  }
+  
+  .btn__div button > .icon {
+    width: 62px;
+    height: 62px;
+  }
+
+  .btn__div button:hover {
+    fill: blueviolet;
+  }
+  .back {
+    border: none;
+    color: blueviolet;
+    font-size: 18px;
+    border-bottom: 2px solid blueviolet;
+    background: transparent;
+  }
+  
+  .red > button {
+    fill: blueviolet;
+    animation: like 0.7s both;  
+  }
+  .black > button {
+    animation: dislike 0.7s both;  
+  }
+
+  @keyframes like {
+    0% {
+      transform: scale(1);
+    }
+    25%{
+      transform: scale(0.9);
+    }
+    50%{
+       transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes dislike {
+    0% {
+      transform: scale(1);
+    }
+    25%{
+      transform: scale(0.9);
+    }
+    50%{
+       transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
