@@ -4,7 +4,6 @@ import logo from '../../styles/img/logo.svg'
 import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { ReactComponent as HamburgerIcon } from '../../styles/img/menu.svg'
-import cn from 'classnames'
 
 export function Header ():JSX.Element {
   const { mobile, showMenu, setShowMenu } = useContext(AppContext)
