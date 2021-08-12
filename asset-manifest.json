@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/todo-courses/static/css/main.b6d6cd12.chunk.css",
-    "main.js": "/todo-courses/static/js/main.e218e6ac.chunk.js",
-    "main.js.map": "/todo-courses/static/js/main.e218e6ac.chunk.js.map",
-    "runtime-main.js": "/todo-courses/static/js/runtime-main.36dbbc04.js",
-    "runtime-main.js.map": "/todo-courses/static/js/runtime-main.36dbbc04.js.map",
-    "static/js/2.903363b1.chunk.js": "/todo-courses/static/js/2.903363b1.chunk.js",
-    "static/js/2.903363b1.chunk.js.map": "/todo-courses/static/js/2.903363b1.chunk.js.map",
-    "index.html": "/todo-courses/index.html",
-    "static/css/main.b6d6cd12.chunk.css.map": "/todo-courses/static/css/main.b6d6cd12.chunk.css.map",
-    "static/js/2.903363b1.chunk.js.LICENSE.txt": "/todo-courses/static/js/2.903363b1.chunk.js.LICENSE.txt",
-    "static/media/favorites.146016ed.svg": "/todo-courses/static/media/favorites.146016ed.svg",
-    "static/media/filter.e1d29bd3.svg": "/todo-courses/static/media/filter.e1d29bd3.svg",
-    "static/media/logo.98fa2318.svg": "/todo-courses/static/media/logo.98fa2318.svg",
-    "static/media/menu.59c2f3b0.svg": "/todo-courses/static/media/menu.59c2f3b0.svg",
-    "static/media/search.28b0ad10.svg": "/todo-courses/static/media/search.28b0ad10.svg"
+    "main.css": "/t1/static/css/main.a7c5a322.chunk.css",
+    "main.js": "/t1/static/js/main.4f650b96.chunk.js",
+    "main.js.map": "/t1/static/js/main.4f650b96.chunk.js.map",
+    "runtime-main.js": "/t1/static/js/runtime-main.7d260708.js",
+    "runtime-main.js.map": "/t1/static/js/runtime-main.7d260708.js.map",
+    "static/js/2.be3cc8bd.chunk.js": "/t1/static/js/2.be3cc8bd.chunk.js",
+    "static/js/2.be3cc8bd.chunk.js.map": "/t1/static/js/2.be3cc8bd.chunk.js.map",
+    "index.html": "/t1/index.html",
+    "static/css/main.a7c5a322.chunk.css.map": "/t1/static/css/main.a7c5a322.chunk.css.map",
+    "static/js/2.be3cc8bd.chunk.js.LICENSE.txt": "/t1/static/js/2.be3cc8bd.chunk.js.LICENSE.txt",
+    "static/media/favorites.146016ed.svg": "/t1/static/media/favorites.146016ed.svg",
+    "static/media/filter.e1d29bd3.svg": "/t1/static/media/filter.e1d29bd3.svg",
+    "static/media/logo.98fa2318.svg": "/t1/static/media/logo.98fa2318.svg",
+    "static/media/menu.59c2f3b0.svg": "/t1/static/media/menu.59c2f3b0.svg",
+    "static/media/search.28b0ad10.svg": "/t1/static/media/search.28b0ad10.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.36dbbc04.js",
-    "static/js/2.903363b1.chunk.js",
-    "static/css/main.b6d6cd12.chunk.css",
-    "static/js/main.e218e6ac.chunk.js"
+    "static/js/runtime-main.7d260708.js",
+    "static/js/2.be3cc8bd.chunk.js",
+    "static/css/main.a7c5a322.chunk.css",
+    "static/js/main.4f650b96.chunk.js"
   ]
 }
