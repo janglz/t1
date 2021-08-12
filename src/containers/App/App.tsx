@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react'
+import React from 'react'
 import { AppContext, useStore } from '../../stores/Store'
 import { Header } from '../../components/Header/Header'
 import { Menu } from '../../components/Menu/Menu'
@@ -7,12 +7,13 @@ import { Card } from '../../components/Card/Card'
 
 import S from './App.module.css'
 
+function App(): JSX.Element {
+  const store = useStore()
 
-function App() {
-  const store = useStore();
-  
   return (
     <AppContext.Provider value={store}>
+      <AppContext.Consumer>{()=>(
+      <div>
       <div className={S.wrapper}>
         <Header />
       </div>
@@ -23,6 +24,8 @@ function App() {
           <Card />
         </main>
       </div>
+      </div>
+      )}</AppContext.Consumer>
     </AppContext.Provider>
   )
 }

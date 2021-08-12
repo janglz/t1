@@ -1,40 +1,46 @@
+import React from 'react'
 import S from './SearchPanel.module.css'
 import filterIcon from '../../styles/img/filter.svg'
 import searchIcon from '../../styles/img/search.svg'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../List/List'
-import cn from 'classnames'
+import { Iitem } from '../../interfaces/interfaces'
 
-export function SearchPanel () {
-  const { page, organizations, users, favorites, mobile, card, showMenu } = useContext(AppContext)
-  let list = [];
+
+export function SearchPanel (): JSX.Element | null  {
+  const { page, organizations, users, favorites, mobile, card } = useContext(AppContext)
+  let list: Iitem[] | null = null;
   const [searchQuery, setSearchQuery] = useState('')
-
-  const selectItems = (page) => {
+  
+  const selectItems = (page: string | null): Iitem[]| null => {
     switch (page) {
       case 'users': 
         return users
       case 'organizations':
         return organizations
       case 'favorites':
-        return searchQuery && favorites ?
-        favorites.filter(el => el?.login?.includes(searchQuery) || el?.description?.includes(searchQuery)) :
+        if (favorites) return searchQuery ?
         favorites
+        .filter((el: Iitem) => 
+          el?.login?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          el?.description?.toLowerCase().includes(searchQuery.toLowerCase())) :
+        favorites
+        return favorites
       default: 
-        return 
+        return null
     }
   }
   list = selectItems(page)
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: string) => {
     setSearchQuery(query)
   }
 
   // const whyrender = (!mobile && page) || (page && mobile && (!card && !showMenu))
   const renderIf = ( !!page && !mobile|| (!card && mobile && page) ) 
 
-  return renderIf && (
+  return renderIf ? (
     <aside className={S.menu}>
       {page === 'favorites' &&
       <div className={S.search}>
@@ -57,11 +63,11 @@ export function SearchPanel () {
         </span>
       </div>}
       <nav className={S.navbar}>
-        <ul className={S.content}>
+        <div className={S.content}>
           {/* <Pagination /> */}
           <List filtered={list} />
-        </ul>
+        </div>
       </nav>
     </aside>
-  )
+  ) : null
 }
