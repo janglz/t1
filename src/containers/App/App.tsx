@@ -9,7 +9,7 @@ import S from './App.module.css'
 
 function App(): JSX.Element {
   const store = useStore()
-  
+
   return (
     <AppContext.Provider value={store}>
       <AppContext.Consumer>{()=>(

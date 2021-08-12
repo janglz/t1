@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import S from './Menu.module.css'
 import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { useContext, useEffect } from 'react'
@@ -11,7 +11,6 @@ import { IContext, Iitem } from '../../interfaces/interfaces';
 
 const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
-
 
 export function Menu (): JSX.Element | null {
   const { 
@@ -29,8 +28,9 @@ export function Menu (): JSX.Element | null {
     setShowMenu,
   } : IContext = useContext(AppContext)
   const [localFavorites, ] = useLocalStorage('favorites', favorites);
-  const [localUsers, ] = useLocalStorage('users', users)
-  const [localOrganizations, ] = useLocalStorage('organizations', organizations)
+  const [localUsers, ] = useLocalStorage('users', users);
+  const [localOrganizations, ] = useLocalStorage('organizations', organizations);
+  const [animation, setAnimation] = useState(false)
 
   /**
    * забираем данные с localStorage
@@ -46,12 +46,31 @@ export function Menu (): JSX.Element | null {
 
   useEffect(()=>{
     // setShowMenu(!mobile)
+    setShowMenu(true)
   },[mobile])
 
+  /**
+   * запуск анимации 
+   * 
+   */
+  useEffect(()=>{
+    // setAnimation(true)
+    window.requestAnimationFrame(()=> setAnimation(!!showMenu))
+  }, [showMenu])
+
   const handleSetFavorites = () => {
-    setCard(null)
-    setPage('favorites')
-    if (mobile) setShowMenu(false)
+    if (mobile) {
+      window.requestAnimationFrame(()=> setAnimation(false))
+      setTimeout(()=>{
+        setShowMenu(false)
+        setCard(null)
+        setPage('favorites')
+      }, 200)
+    } else {
+      setCard(null)
+      setPage('favorites')
+    }
+    
   }
 
   /**
@@ -60,32 +79,63 @@ export function Menu (): JSX.Element | null {
    */
 
   const handleSetOrgs = async () => {
-    setCard(null)
-    setPage('organizations')
     const newOrgs = await fetchedOrgs
     const merged = organizations ? 
     [...newOrgs.filter(el => !organizations?.some((org: Iitem) => org.login === el.login )), ...organizations]:
     newOrgs
-    setOrganizations(merged)
-    if (mobile) setShowMenu(false)
+
+    if (mobile) {
+      window.requestAnimationFrame(()=> setAnimation(false))
+      setTimeout(()=>{
+        setCard(null)
+        setPage('organizations')
+        setOrganizations(merged)
+        setShowMenu(false)
+      }, 200)
+    } else {
+      setCard(null)
+      setPage('organizations')
+      setOrganizations(merged)
+    }
   }
 
   const handleSetUsers = async () => {
-    setCard(null)
-    setPage('users')
     const newUsers = await fetchedUsers
     const merged = users ? 
     [...newUsers.filter(el => !users?.some((user: Iitem) => user.login === el.login )), ...users]:
     newUsers
-    setUsers(merged)
-    if (mobile) setShowMenu(false)
+
+    if (mobile) {
+      window.requestAnimationFrame(()=> setAnimation(false))
+      setTimeout(()=>{
+        setCard(null)
+        setPage('users')
+        setUsers(merged)
+        setShowMenu(false)
+      }, 200)
+    } else {
+      setCard(null)
+      setPage('users')
+      setUsers(merged)
+    }
   }
 
-  // const bindedStyle = cn.bind(S)
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    console.log(e)
+    if (mobile) {
+      setAnimation(false)
+      setTimeout(()=>setShowMenu(false), 200)
+    }
+  }
 
   return showMenu ? (
-    <div className={mobile ? S.overlay : undefined}>
-    <aside className={cn(S.menu, mobile && S.mobile)}>
+    // return (
+    <div 
+      className={mobile ? S.overlay : undefined}
+      onClick={(e) => handleOverlayClick(e)}
+    >
+    <aside className={cn(S.menu, mobile && `${S.mobile} ${animation ? S.opening : S.closing }`)}>
       <ul className={S.content}>
         <li className={S.list__item}>
           <button 

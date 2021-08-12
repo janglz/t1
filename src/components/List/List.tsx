@@ -10,11 +10,10 @@ import { Iitem } from '../../interfaces/interfaces'
  * Убрать проптайп ANY
  */
 
-export function List({ filtered }: { filtered: any | null }): JSX.Element | null {
+export function List({ filtered }: { filtered: Iitem[] | null }): JSX.Element | null {
   const { setCard } = useContext(AppContext)
   // console.log('filtered',filtered)
-
-  return filtered && filtered.length > 0 ? filtered.map((el: Iitem) => (
+  const mapped = filtered === null ? null : filtered.map((el: Iitem):JSX.Element => (
     <li className={S.contentItem} key={el.login} onClick={() => setCard(el)}>
       <div className={S.itemImg}><img src={el.avatarUrl} /></div>
       <div className={S.value}>
@@ -25,5 +24,8 @@ export function List({ filtered }: { filtered: any | null }): JSX.Element | null
         {el.inFavorites && <FavoritesIcon/>}
       </span>
     </li>
-  )) : null
+  ))
+  return <ul>{mapped}</ul>
+  
+  // return filtered && filtered.length > 0 ? mapped : null
 }

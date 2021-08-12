@@ -26,17 +26,25 @@
 }
 
 .menu.mobile {
+  left: -1000px;
   flex-direction: column;
   position: absolute;
   height: 100vh;
   margin: 0 auto;
+  transition: ease 0.6s;
 }
 .menu.mobile .content {
   display: flex;
   width: 80vw;
   margin: auto;
 }
-
+.menu.mobile.opening {
+  left: 0;
+}
+/* .menu.mobile.closing {
+  left: -888px;
+} */
+  
 .menu span {
   width: 100%;
 }

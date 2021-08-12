@@ -63,10 +63,10 @@ export function SearchPanel (): JSX.Element | null  {
         </span>
       </div>}
       <nav className={S.navbar}>
-        <ul className={S.content}>
+        <div className={S.content}>
           {/* <Pagination /> */}
           <List filtered={list} />
-        </ul>
+        </div>
       </nav>
     </aside>
   ) : null
