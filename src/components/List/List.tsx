@@ -4,8 +4,10 @@ import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { Iitem } from '../../interfaces/interfaces'
+import { observer } from 'mobx-react'
 
-export function List({ filtered }: { filtered: Iitem[] | null }): JSX.Element | null {
+export const List = observer((
+  { filtered }: { filtered: Iitem[] | null }): JSX.Element | null => {
   const { setCard } = useContext(AppContext)
   const mapped = filtered === null ? null : filtered.map((el: Iitem):JSX.Element => (
     <li className={S.contentItem} key={el.login} onClick={() => setCard(el)}>
@@ -20,4 +22,4 @@ export function List({ filtered }: { filtered: Iitem[] | null }): JSX.Element | 
     </li>
   ))
   return <ul>{mapped}</ul>
-}
+})

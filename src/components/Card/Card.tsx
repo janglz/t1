@@ -6,8 +6,9 @@ import { useLocalStorage } from '../../api/useLocalStorage'
 import classNames from 'classnames'
 import React from 'react'
 import { IContext, Iitem } from '../../interfaces/interfaces'
+import { observer } from 'mobx-react'
 
-export function Card(): JSX.Element | null {
+export const Card = observer(()=> {
   const { card, setCard, users, setUsers, organizations, setOrganizations, favorites, setFavorites, mobile }: IContext = useContext(AppContext)
 
   const [, setLocalFavorites] = useLocalStorage('favorites', favorites)
@@ -96,4 +97,4 @@ export function Card(): JSX.Element | null {
       </section>
     </div>  
   )
-}
+})

@@ -4,16 +4,11 @@ import { Header } from '../../components/Header/Header'
 import { Menu } from '../../components/Menu/Menu'
 import { SearchPanel } from '../../components/SearchPanel/SearchPanel'
 import { Card } from '../../components/Card/Card'
-import { observer } from 'mobx-react'
 
 import S from './App.module.css'
-// import { IContext } from '../../interfaces/interfaces'
 
-// let store: IContext;
-
-const App = observer(() => {
-  const store = new Store(null, null, null, null, null, true)
-  console.log(store)
+  const App = (): JSX.Element => {
+  const store = new Store(null, null, null, null, null, true, window.innerWidth < 900)
   return (
     <AppContext.Provider value={store}>
       <AppContext.Consumer>{()=>(
@@ -32,6 +27,6 @@ const App = observer(() => {
       )}</AppContext.Consumer>
     </AppContext.Provider>
   )
-});
+}
 
 export default App

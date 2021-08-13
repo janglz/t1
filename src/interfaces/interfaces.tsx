@@ -13,6 +13,7 @@ export interface IContext {
   setPage: (arg: string | null) => void 
   setCard: (arg: Iitem | null) => void 
   setShowMenu: (arg: boolean) => void 
+  fetchData: (query: string, type: string) => any
 }
 
 export interface Iitem {

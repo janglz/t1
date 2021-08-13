@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 import { useWindowSize } from '../api/useWindowSize';
 import { IContext, Iitem } from '../interfaces/interfaces';
 
-import { action, observable, makeObservable, computed, flow } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export class Store {
   users;
@@ -12,41 +12,31 @@ export class Store {
   favorites;
   card;
   showMenu;
+  mobile;
 
-  constructor(
+  constructor
+  (
     users: Iitem[]|null, 
     organizations: Iitem[]|null, 
     favorites: Iitem[]|null, 
     page: string|null, 
     card: Iitem|null, 
-    showMenu: boolean) {
-    makeObservable(this, {
-      page: observable,
-      setPage: action,
-      users: observable,
-      setUsers: action,
-      organizations: observable,
-      setOrganizations: action,
-      favorites: observable,
-      setFavorites: action,
-      card: observable,
-      setCard: action,
-      mobile: computed,
-      showMenu: observable,
-      setShowMenu: action,
-      fetch: flow,
-    })
-    this.users = users
+    showMenu: boolean,
+    mobile: boolean,
+  ) {
+    makeAutoObservable(this, {}, { autoBind: true })
+    this.users = users;
     this.organizations = organizations;
     this.favorites = favorites;
     this.page = page;
     this.card = card;
     this.showMenu = showMenu;
+    this.mobile = mobile;
   }
 
-  get mobile(): boolean {
-    return window.innerWidth < 900
-  }
+  // get mobile(): boolean {
+  //   return window.innerWidth < 900
+  // }
   setShowMenu (bool: boolean): void {
     this.showMenu = bool
   }
@@ -66,14 +56,30 @@ export class Store {
     this.card = card
   }
 
-  *fetch(query: string, type: string): any {
+  *fetchData(query: string, type: string): any {
     const response = yield fetch(`https://api.github.com/${query}`)
       .then(async response => await response.json(),
       (e) => {
         console.log("there is no data available:", e)
       })
-    if (type === 'users') this.users = response;
-    if (type === 'organizations') this.organizations = response
+    
+    const mappedResponse = response.map((el: { [x: string]: any; login: any; description: any; }) =>{
+      return {
+        login: el.login,
+        description: el.description,
+        avatarUrl: el['avatar_url'],
+        inFavorites: false,
+        type: type,
+        orgaznizationsUrl: el['organizations_url'] || undefined,
+      }
+    })
+    let target: Iitem[] | null = null;
+    if (type === 'users') target = this.users;
+    if (type === 'organizations') target = this.organizations;
+    
+    target = target ? 
+    [...mappedResponse.filter((el: { login: string; }) => !target?.some((org: Iitem) => org.login === el.login )), ...target]:
+    mappedResponse
   }
 }
 

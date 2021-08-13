@@ -9,10 +9,9 @@ import { observer } from 'mobx-react'
 export const Header = observer((): JSX.Element | null => {
   const { 
     mobile, 
-    // showMenu, 
-    // setShowMenu 
+    showMenu, 
+    setShowMenu 
   } = useContext(AppContext)
-  let { showMenu } = useContext(AppContext)
 
   return (
     <header className={S.header}>
@@ -22,9 +21,7 @@ export const Header = observer((): JSX.Element | null => {
           <button 
             className={S.hamburger}
             onClick={() => {
-              // setShowMenu(!showMenu)
-              showMenu = !showMenu
-              console.log(showMenu)
+              setShowMenu(!showMenu)
             }} 
             >
             <HamburgerIcon className={S.hamburger__icon}/>

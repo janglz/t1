@@ -14,14 +14,6 @@ const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
 
 export const Menu = observer((): JSX.Element | null => {
-  let {
-    // users, 
-    // organizations, 
-    // favorites, 
-    // showMenu, 
-    // card, 
-    // page 
-  } = useContext(AppContext)
   const { 
     users,
     page, 
@@ -35,14 +27,14 @@ export const Menu = observer((): JSX.Element | null => {
     mobile,
     showMenu, 
     setShowMenu,
+    fetchData
   } : IContext = useContext(AppContext)
-  // console.log(setUsers)
+
   const [localFavorites, ] = useLocalStorage('favorites', favorites);
   const [localUsers, ] = useLocalStorage('users', users);
   const [localOrganizations, ] = useLocalStorage('organizations', organizations);
   const [animation, setAnimation] = useState(false)
 
-  console.log(useContext(AppContext))
   /**
    * забираем данные с localStorage
    */
@@ -51,9 +43,6 @@ export const Menu = observer((): JSX.Element | null => {
     const newUsrs = localUsers || []
     const newOrgs = localOrganizations || []
     const newFavs = localFavorites || []
-    // users = newUsrs
-    // organizations = newOrgs
-    // favorites = newFavs
 
     setUsers(newUsrs)
     setOrganizations(newOrgs)
@@ -61,17 +50,14 @@ export const Menu = observer((): JSX.Element | null => {
   }, [])
 
   useEffect(()=>{
-    // setShowMenu(!mobile)
     setShowMenu(true)
-    // showMenu = true
   },[mobile])
 
   /**
-   * запуск анимации 
+   * запуск анимации в моб версии
    * 
    */
   useEffect(()=>{
-    // setAnimation(true)
     window.requestAnimationFrame(()=> setAnimation(!!showMenu))
   }, [showMenu])
 
@@ -79,9 +65,6 @@ export const Menu = observer((): JSX.Element | null => {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        // showMenu = false;
-        // card = null;
-        // page = 'favorites';
         setShowMenu(false)
         setCard(null)
         setPage('favorites')
@@ -95,76 +78,53 @@ export const Menu = observer((): JSX.Element | null => {
 
   /**
    * TODO: 
-   * перенести мерджинг 
+   * переименовать функцию fetchData и может разнести на несколько
    */
 
   const handleSetOrgs = async () => {
-    const newOrgs = await fetchedOrgs
-    const merged = organizations ? 
-    [...newOrgs.filter(el => !organizations?.some((org: Iitem) => org.login === el.login )), ...organizations]:
-    newOrgs
+    
+    fetchData('organizations', 'organizations')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        // showMenu = false;
-        // organizations = merged;
-        // card = null;
-        // page = 'organizations';
-
-
         setCard(null)
         setPage('organizations')
-        setOrganizations(merged)
         setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
       setPage('organizations')
-      setOrganizations(merged)
     }
-    console.log(merged, page)
   }
 
   const handleSetUsers = async () => {
-    const newUsers = await fetchedUsers
-    const merged = users ? 
-    [...newUsers.filter(el => !users?.some((user: Iitem) => user.login === el.login )), ...users]:
-    newUsers
+    fetchData('users', 'users')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        // card = null;
-        // page = 'users';
-        // users = merged;
-        // showMenu = false;
         setCard(null)
         setPage('users')
-        setUsers(merged)
         setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
       setPage('users')
-      setUsers(merged)
     }
   }
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    // console.log(e)
     if (mobile) {
       setAnimation(false)
       setTimeout(()=>{
-        // showMenu = false
         setShowMenu(false)
       }, 200)
     }
   }
 
   return showMenu ? (
-    // return (
     <div 
       className={mobile ? S.overlay : undefined}
       onClick={(e) => handleOverlayClick(e)}
