@@ -80,6 +80,8 @@ export class Store {
     target = target ? 
     [...mappedResponse.filter((el: { login: string; }) => !target?.some((org: Iitem) => org.login === el.login )), ...target]:
     mappedResponse
+
+    console.log(type)
   }
 }
 
