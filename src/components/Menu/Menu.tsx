@@ -8,45 +8,55 @@ import { getUsers } from '../../api/getUsers'
 import { getOrganizations } from '../../api/getOrganizations'
 import { useLocalStorage } from '../../api/useLocalStorage'
 import { IContext, Iitem } from '../../interfaces/interfaces';
+import { observer } from 'mobx-react'
 
 const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
 
-export function Menu (): JSX.Element | null {
+export const Menu = observer((): JSX.Element | null => {
+  let {users, organizations, favorites, showMenu, card, page } = useContext(AppContext)
   const { 
-    users, 
-    page, 
+    // users,
+    // page, 
     setPage, 
     setUsers, 
     setOrganizations, 
-    organizations, 
+    // organizations, 
     setCard, 
-    favorites, 
+    // favorites, 
     setFavorites, 
     mobile,
-    showMenu, 
+    // showMenu, 
     setShowMenu,
   } : IContext = useContext(AppContext)
+  // console.log(setUsers)
   const [localFavorites, ] = useLocalStorage('favorites', favorites);
   const [localUsers, ] = useLocalStorage('users', users);
   const [localOrganizations, ] = useLocalStorage('organizations', organizations);
   const [animation, setAnimation] = useState(false)
 
+  console.log(useContext(AppContext))
   /**
    * забираем данные с localStorage
    */
+  
   useEffect(()=> {
     const newUsrs = localUsers || []
     const newOrgs = localOrganizations || []
     const newFavs = localFavorites || []
-    setUsers(newUsrs)
-    setOrganizations(newOrgs)
-    setFavorites(newFavs)
+    users = newUsrs
+    organizations = newOrgs
+    favorites = newFavs
+
+    // setUsers(newUsrs)
+    // setOrganizations(newOrgs)
+    // setFavorites(newFavs)
   }, [])
 
   useEffect(()=>{
     // setShowMenu(!mobile)
-    setShowMenu(true)
+    // setShowMenu(true)
+    showMenu = true
   },[mobile])
 
   /**
@@ -62,9 +72,12 @@ export function Menu (): JSX.Element | null {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        setShowMenu(false)
-        setCard(null)
-        setPage('favorites')
+        showMenu = false;
+        card = null;
+        page = 'favorites';
+        // setShowMenu(false)
+        // setCard(null)
+        // setPage('favorites')
       }, 200)
     } else {
       setCard(null)
@@ -75,7 +88,7 @@ export function Menu (): JSX.Element | null {
 
   /**
    * TODO: 
-   * перенести мерджинг в useEffect
+   * перенести мерджинг 
    */
 
   const handleSetOrgs = async () => {
@@ -87,16 +100,23 @@ export function Menu (): JSX.Element | null {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        setCard(null)
-        setPage('organizations')
-        setOrganizations(merged)
-        setShowMenu(false)
+        showMenu = false;
+        organizations = merged;
+        card = null;
+        page = 'organizations';
+
+
+        // setCard(null)
+        // setPage('organizations')
+        // setOrganizations(merged)
+        // setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
       setPage('organizations')
       setOrganizations(merged)
     }
+    console.log(merged, page)
   }
 
   const handleSetUsers = async () => {
@@ -108,10 +128,14 @@ export function Menu (): JSX.Element | null {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        setCard(null)
-        setPage('users')
-        setUsers(merged)
-        setShowMenu(false)
+        card = null;
+        page = 'users';
+        users = merged;
+        showMenu = false;
+        // setCard(null)
+        // setPage('users')
+        // setUsers(merged)
+        // setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
@@ -122,10 +146,13 @@ export function Menu (): JSX.Element | null {
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    console.log(e)
+    // console.log(e)
     if (mobile) {
       setAnimation(false)
-      setTimeout(()=>setShowMenu(false), 200)
+      setTimeout(()=>{
+        showMenu = false
+        // setShowMenu(false)
+      }, 200)
     }
   }
 
@@ -163,4 +190,4 @@ export function Menu (): JSX.Element | null {
     </aside>
     </div>
   ) : null
-}
+})

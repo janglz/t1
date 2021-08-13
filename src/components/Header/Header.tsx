@@ -4,10 +4,15 @@ import logo from '../../styles/img/logo.svg'
 import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { ReactComponent as HamburgerIcon } from '../../styles/img/menu.svg'
-import cn from 'classnames'
+import { observer } from 'mobx-react'
 
-export function Header ():JSX.Element {
-  const { mobile, showMenu, setShowMenu } = useContext(AppContext)
+export const Header = observer((): JSX.Element | null => {
+  const { 
+    mobile, 
+    // showMenu, 
+    // setShowMenu 
+  } = useContext(AppContext)
+  let { showMenu } = useContext(AppContext)
 
   return (
     <header className={S.header}>
@@ -16,7 +21,11 @@ export function Header ():JSX.Element {
           {mobile && 
           <button 
             className={S.hamburger}
-            onClick={() => setShowMenu(!showMenu)} 
+            onClick={() => {
+              // setShowMenu(!showMenu)
+              showMenu = !showMenu
+              console.log(showMenu)
+            }} 
             >
             <HamburgerIcon className={S.hamburger__icon}/>
           </button>}
@@ -27,4 +36,4 @@ export function Header ():JSX.Element {
       </div>
     </header>
   )
-}
+})

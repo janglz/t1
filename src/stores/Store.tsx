@@ -37,6 +37,14 @@ export class Store {
     this.page = page;
     this.card = card;
     this.showMenu = showMenu;
+    // this.setCard
+    // this.setPage
+    // this.setUsers
+    // this.setOrganizations
+    // this.setFavorites
+    // this.fetch
+    // this.setPage = this.setPage
+    // this.setUsers = this.setUsers
   }
 
   get mobile(): boolean {
@@ -74,7 +82,7 @@ export class Store {
 
 export const AppContext = createContext({} as IContext)
 
-export function useStore () {
+export const useStore = ():IContext => {
   return new Store(null, null, null, null, null, true)
 }
 /* Store end */
