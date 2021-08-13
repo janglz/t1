@@ -14,19 +14,26 @@ const fetchedUsers = getUsers()
 const fetchedOrgs = getOrganizations()
 
 export const Menu = observer((): JSX.Element | null => {
-  let {users, organizations, favorites, showMenu, card, page } = useContext(AppContext)
+  let {
+    // users, 
+    // organizations, 
+    // favorites, 
+    // showMenu, 
+    // card, 
+    // page 
+  } = useContext(AppContext)
   const { 
-    // users,
-    // page, 
+    users,
+    page, 
     setPage, 
     setUsers, 
     setOrganizations, 
-    // organizations, 
+    organizations, 
     setCard, 
-    // favorites, 
+    favorites, 
     setFavorites, 
     mobile,
-    // showMenu, 
+    showMenu, 
     setShowMenu,
   } : IContext = useContext(AppContext)
   // console.log(setUsers)
@@ -44,19 +51,19 @@ export const Menu = observer((): JSX.Element | null => {
     const newUsrs = localUsers || []
     const newOrgs = localOrganizations || []
     const newFavs = localFavorites || []
-    users = newUsrs
-    organizations = newOrgs
-    favorites = newFavs
+    // users = newUsrs
+    // organizations = newOrgs
+    // favorites = newFavs
 
-    // setUsers(newUsrs)
-    // setOrganizations(newOrgs)
-    // setFavorites(newFavs)
+    setUsers(newUsrs)
+    setOrganizations(newOrgs)
+    setFavorites(newFavs)
   }, [])
 
   useEffect(()=>{
     // setShowMenu(!mobile)
-    // setShowMenu(true)
-    showMenu = true
+    setShowMenu(true)
+    // showMenu = true
   },[mobile])
 
   /**
@@ -72,12 +79,12 @@ export const Menu = observer((): JSX.Element | null => {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        showMenu = false;
-        card = null;
-        page = 'favorites';
-        // setShowMenu(false)
-        // setCard(null)
-        // setPage('favorites')
+        // showMenu = false;
+        // card = null;
+        // page = 'favorites';
+        setShowMenu(false)
+        setCard(null)
+        setPage('favorites')
       }, 200)
     } else {
       setCard(null)
@@ -100,16 +107,16 @@ export const Menu = observer((): JSX.Element | null => {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        showMenu = false;
-        organizations = merged;
-        card = null;
-        page = 'organizations';
+        // showMenu = false;
+        // organizations = merged;
+        // card = null;
+        // page = 'organizations';
 
 
-        // setCard(null)
-        // setPage('organizations')
-        // setOrganizations(merged)
-        // setShowMenu(false)
+        setCard(null)
+        setPage('organizations')
+        setOrganizations(merged)
+        setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
@@ -128,14 +135,14 @@ export const Menu = observer((): JSX.Element | null => {
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        card = null;
-        page = 'users';
-        users = merged;
-        showMenu = false;
-        // setCard(null)
-        // setPage('users')
-        // setUsers(merged)
-        // setShowMenu(false)
+        // card = null;
+        // page = 'users';
+        // users = merged;
+        // showMenu = false;
+        setCard(null)
+        setPage('users')
+        setUsers(merged)
+        setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
@@ -150,8 +157,8 @@ export const Menu = observer((): JSX.Element | null => {
     if (mobile) {
       setAnimation(false)
       setTimeout(()=>{
-        showMenu = false
-        // setShowMenu(false)
+        // showMenu = false
+        setShowMenu(false)
       }, 200)
     }
   }

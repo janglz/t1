@@ -5,7 +5,6 @@ import { IContext, Iitem } from '../interfaces/interfaces';
 
 import { action, observable, makeObservable, computed, flow } from "mobx";
 
-/* Store start */
 export class Store {
   users;
   organizations;
@@ -14,7 +13,13 @@ export class Store {
   card;
   showMenu;
 
-  constructor(users: Iitem[]|null, organizations: Iitem[]|null, favorites: Iitem[]|null, page: string|null, card: Iitem|null, showMenu: boolean) {
+  constructor(
+    users: Iitem[]|null, 
+    organizations: Iitem[]|null, 
+    favorites: Iitem[]|null, 
+    page: string|null, 
+    card: Iitem|null, 
+    showMenu: boolean) {
     makeObservable(this, {
       page: observable,
       setPage: action,
@@ -37,14 +42,6 @@ export class Store {
     this.page = page;
     this.card = card;
     this.showMenu = showMenu;
-    // this.setCard
-    // this.setPage
-    // this.setUsers
-    // this.setOrganizations
-    // this.setFavorites
-    // this.fetch
-    // this.setPage = this.setPage
-    // this.setUsers = this.setUsers
   }
 
   get mobile(): boolean {
@@ -82,10 +79,10 @@ export class Store {
 
 export const AppContext = createContext({} as IContext)
 
-export const useStore = ():IContext => {
-  return new Store(null, null, null, null, null, true)
-}
-/* Store end */
+
+
+
+
 // export const AppContext = createContext({} as IContext)
 
 // export function useStore():IContext {
