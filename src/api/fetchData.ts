@@ -16,6 +16,7 @@ export async function fetchData(type: string): Promise<[]> {
     return []
   }
   // const url = `https://api.github.com/${query}`
+  // console.log(url)
   return await fetch(url).then(async response => await response.json(), 
   (e)=>{
     console.log("there is no data available:", e)

@@ -4,14 +4,9 @@ import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import cn from 'classnames'
-import { getUsers } from '../../api/getUsers'
-import { getOrganizations } from '../../api/getOrganizations'
 import { useLocalStorage } from '../../api/useLocalStorage'
-import { IContext, Iitem } from '../../interfaces/interfaces';
+import { IContext } from '../../interfaces/interfaces';
 import { observer } from 'mobx-react'
-
-const fetchedUsers = getUsers()
-const fetchedOrgs = getOrganizations()
 
 export const Menu = observer((): JSX.Element | null => {
   const { 
@@ -47,7 +42,6 @@ export const Menu = observer((): JSX.Element | null => {
     const newOrgs = localOrganizations || []
     const newFavs = localFavorites || []
 
-    console.log(newUsrs, newOrgs, newFavs)
     setUsers(newUsrs)
     setOrganizations(newOrgs)
     setFavorites(newFavs)
@@ -78,8 +72,7 @@ export const Menu = observer((): JSX.Element | null => {
     } else {
       setCard(null)
       setPage('favorites')
-    }
-    
+    } 
   }
 
   /**
@@ -88,7 +81,6 @@ export const Menu = observer((): JSX.Element | null => {
    */
 
   const handleSetOrgs = async () => {
-    
     updateData('organizations')
 
     if (mobile) {

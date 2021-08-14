@@ -72,12 +72,16 @@ export class Store {
       }
     })
     let target: Iitem[] | null = null;
-    if (type === 'users') target = this.users;
-    if (type === 'organizations') target = this.organizations;
-    
-    target = target ? 
-    [...mappedResponse.filter((el: { login: string; }) => !target?.some((org: Iitem) => org.login === el.login )), ...target]:
+    if (type === 'users') 
+    target = !!this.users ? 
+    [...mappedResponse.filter((el: { login: string; }) => !this.users?.some((org: Iitem) => org.login === el.login )), ...this.users]:
     mappedResponse
+    this.setUsers(target)
+    if (type === 'organizations') 
+    target = !!this.organizations ? 
+    [...mappedResponse.filter((el: { login: string; }) => !this.organizations?.some((org: Iitem) => org.login === el.login )), ...this.organizations]:
+    mappedResponse
+    this.setOrganizations(target)
   }
 }
 
