@@ -4,17 +4,13 @@ import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import cn from 'classnames'
-import { getUsers } from '../../api/getUsers'
-import { getOrganizations } from '../../api/getOrganizations'
 import { useLocalStorage } from '../../api/useLocalStorage'
-import { IContext, Iitem } from '../../interfaces/interfaces';
+import { IContext } from '../../interfaces/interfaces';
+import { observer } from 'mobx-react'
 
-const fetchedUsers = getUsers()
-const fetchedOrgs = getOrganizations()
-
-export function Menu (): JSX.Element | null {
+export const Menu = observer((): JSX.Element | null => {
   const { 
-    users, 
+    users,
     page, 
     setPage, 
     setUsers, 
@@ -26,7 +22,10 @@ export function Menu (): JSX.Element | null {
     mobile,
     showMenu, 
     setShowMenu,
+    updateData,
+    setMobile
   } : IContext = useContext(AppContext)
+
   const [localFavorites, ] = useLocalStorage('favorites', favorites);
   const [localUsers, ] = useLocalStorage('users', users);
   const [localOrganizations, ] = useLocalStorage('organizations', organizations);
@@ -35,28 +34,32 @@ export function Menu (): JSX.Element | null {
   /**
    * забираем данные с localStorage
    */
+  
   useEffect(()=> {
+    window.addEventListener('resize', resize)
+
     const newUsrs = localUsers || []
     const newOrgs = localOrganizations || []
     const newFavs = localFavorites || []
+
     setUsers(newUsrs)
     setOrganizations(newOrgs)
     setFavorites(newFavs)
   }, [])
 
   useEffect(()=>{
-    // setShowMenu(!mobile)
     setShowMenu(true)
   },[mobile])
 
   /**
-   * запуск анимации 
+   * запуск анимации в моб версии
    * 
    */
   useEffect(()=>{
-    // setAnimation(true)
     window.requestAnimationFrame(()=> setAnimation(!!showMenu))
   }, [showMenu])
+
+  const resize = () => setMobile(window.innerWidth < 900 ? true : false)
 
   const handleSetFavorites = () => {
     if (mobile) {
@@ -69,68 +72,57 @@ export function Menu (): JSX.Element | null {
     } else {
       setCard(null)
       setPage('favorites')
-    }
-    
+    } 
   }
 
   /**
    * TODO: 
-   * перенести мерджинг в useEffect
+   * переименовать функцию updateData и может разнести на несколько
    */
 
   const handleSetOrgs = async () => {
-    const newOrgs = await fetchedOrgs
-    const merged = organizations ? 
-    [...newOrgs.filter(el => !organizations?.some((org: Iitem) => org.login === el.login )), ...organizations]:
-    newOrgs
+    updateData('organizations')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
         setCard(null)
         setPage('organizations')
-        setOrganizations(merged)
         setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
       setPage('organizations')
-      setOrganizations(merged)
     }
   }
 
   const handleSetUsers = async () => {
-    const newUsers = await fetchedUsers
-    const merged = users ? 
-    [...newUsers.filter(el => !users?.some((user: Iitem) => user.login === el.login )), ...users]:
-    newUsers
+    updateData('users')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
         setCard(null)
         setPage('users')
-        setUsers(merged)
         setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
       setPage('users')
-      setUsers(merged)
     }
   }
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    console.log(e)
     if (mobile) {
       setAnimation(false)
-      setTimeout(()=>setShowMenu(false), 200)
+      setTimeout(()=>{
+        setShowMenu(false)
+      }, 200)
     }
   }
 
   return showMenu ? (
-    // return (
     <div 
       className={mobile ? S.overlay : undefined}
       onClick={(e) => handleOverlayClick(e)}
@@ -163,4 +155,4 @@ export function Menu (): JSX.Element | null {
     </aside>
     </div>
   ) : null
-}
+})

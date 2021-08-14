@@ -16,13 +16,13 @@ ReactDOM.render(
 
 window.addEventListener('load', async () => {
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./todo-courses/serviceWorker.js', {scope: './todo-courses/'})
+  navigator.serviceWorker.register('./t1/serviceWorker.js', {scope: './t1/'})
   .then((reg) => {
     // регистрация сработала
-    // console.log('Registration succeeded. Scope is ' + reg.scope);
+    console.log('Registration succeeded. Scope is ' + reg.scope);
   }).catch((error) => {
     // регистрация прошла неудачно
-    // console.log('Registration failed with ' + error);
+    console.log('Registration failed with ' + error);
   });
 }
 })

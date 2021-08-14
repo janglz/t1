@@ -6,9 +6,9 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../List/List'
 import { Iitem } from '../../interfaces/interfaces'
+import { observer } from 'mobx-react'
 
-
-export function SearchPanel (): JSX.Element | null  {
+export const SearchPanel = observer(()=> {
   const { page, organizations, users, favorites, mobile, card } = useContext(AppContext)
   let list: Iitem[] | null = null;
   const [searchQuery, setSearchQuery] = useState('')
@@ -70,4 +70,4 @@ export function SearchPanel (): JSX.Element | null  {
       </nav>
     </aside>
   ) : null
-}
+})

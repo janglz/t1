@@ -4,15 +4,11 @@ import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
 import { Iitem } from '../../interfaces/interfaces'
+import { observer } from 'mobx-react'
 
-/**
- * todo
- * Убрать проптайп ANY
- */
-
-export function List({ filtered }: { filtered: Iitem[] | null }): JSX.Element | null {
+export const List = observer((
+  { filtered }: { filtered: Iitem[] | null }): JSX.Element | null => {
   const { setCard } = useContext(AppContext)
-  // console.log('filtered',filtered)
   const mapped = filtered === null ? null : filtered.map((el: Iitem):JSX.Element => (
     <li className={S.contentItem} key={el.login} onClick={() => setCard(el)}>
       <div className={S.itemImg}><img src={el.avatarUrl} /></div>
@@ -26,6 +22,4 @@ export function List({ filtered }: { filtered: Iitem[] | null }): JSX.Element | 
     </li>
   ))
   return <ul>{mapped}</ul>
-  
-  // return filtered && filtered.length > 0 ? mapped : null
-}
+})
