@@ -1,7 +1,7 @@
 
-import { createContext, useState } from 'react';
-import { useWindowSize } from '../api/useWindowSize';
+import { createContext } from 'react';
 import { IContext, Iitem } from '../interfaces/interfaces';
+import { fetchData } from '../api/fetchData';
 
 import { makeAutoObservable } from "mobx";
 
@@ -13,6 +13,7 @@ export class Store {
   card;
   showMenu;
   mobile;
+  windowSize;
 
   constructor
   (
@@ -22,7 +23,7 @@ export class Store {
     page: string|null, 
     card: Iitem|null, 
     showMenu: boolean,
-    mobile: boolean,
+    mobile: boolean, 
   ) {
     makeAutoObservable(this, {}, { autoBind: true })
     this.users = users;
@@ -32,11 +33,12 @@ export class Store {
     this.card = card;
     this.showMenu = showMenu;
     this.mobile = mobile;
+    this.windowSize = window.innerWidth
   }
 
-  // get mobile(): boolean {
-  //   return window.innerWidth < 900
-  // }
+  setMobile (bool: boolean): void {
+    this.mobile = bool
+  }
   setShowMenu (bool: boolean): void {
     this.showMenu = bool
   }
@@ -56,12 +58,8 @@ export class Store {
     this.card = card
   }
 
-  *fetchData(query: string, type: string): any {
-    const response = yield fetch(`https://api.github.com/${query}`)
-      .then(async response => await response.json(),
-      (e) => {
-        console.log("there is no data available:", e)
-      })
+  *updateData(type: string): any {
+    const response = yield fetchData(type)
     
     const mappedResponse = response.map((el: { [x: string]: any; login: any; description: any; }) =>{
       return {
@@ -80,8 +78,6 @@ export class Store {
     target = target ? 
     [...mappedResponse.filter((el: { login: string; }) => !target?.some((org: Iitem) => org.login === el.login )), ...target]:
     mappedResponse
-
-    console.log(type)
   }
 }
 

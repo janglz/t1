@@ -7,7 +7,7 @@ import { Card } from '../../components/Card/Card'
 
 import S from './App.module.css'
 
-  const App = (): JSX.Element => {
+const App = (): JSX.Element => {
   const store = new Store(null, null, null, null, null, true, window.innerWidth < 900)
   return (
     <AppContext.Provider value={store}>

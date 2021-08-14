@@ -27,7 +27,8 @@ export const Menu = observer((): JSX.Element | null => {
     mobile,
     showMenu, 
     setShowMenu,
-    fetchData
+    updateData,
+    setMobile
   } : IContext = useContext(AppContext)
 
   const [localFavorites, ] = useLocalStorage('favorites', favorites);
@@ -40,10 +41,13 @@ export const Menu = observer((): JSX.Element | null => {
    */
   
   useEffect(()=> {
+    window.addEventListener('resize', resize)
+
     const newUsrs = localUsers || []
     const newOrgs = localOrganizations || []
     const newFavs = localFavorites || []
 
+    console.log(newUsrs, newOrgs, newFavs)
     setUsers(newUsrs)
     setOrganizations(newOrgs)
     setFavorites(newFavs)
@@ -60,6 +64,8 @@ export const Menu = observer((): JSX.Element | null => {
   useEffect(()=>{
     window.requestAnimationFrame(()=> setAnimation(!!showMenu))
   }, [showMenu])
+
+  const resize = () => setMobile(window.innerWidth < 900 ? true : false)
 
   const handleSetFavorites = () => {
     if (mobile) {
@@ -78,12 +84,12 @@ export const Menu = observer((): JSX.Element | null => {
 
   /**
    * TODO: 
-   * переименовать функцию fetchData и может разнести на несколько
+   * переименовать функцию updateData и может разнести на несколько
    */
 
   const handleSetOrgs = async () => {
     
-    fetchData('organizations', 'organizations')
+    updateData('organizations')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
@@ -99,7 +105,7 @@ export const Menu = observer((): JSX.Element | null => {
   }
 
   const handleSetUsers = async () => {
-    fetchData('users', 'users')
+    updateData('users')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))

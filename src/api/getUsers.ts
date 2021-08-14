@@ -5,7 +5,7 @@ import { Iitem } from "../interfaces/interfaces";
  * @returns {Array of Objects} 
  */
 export async function getUsers (page = 1): Promise<Iitem[]> {
-  const response: any[] = await fetchData('users', page);
+  const response: any[] = await fetchData('users');
   const users: Iitem[] = response.map(el =>{
     return {
       login: el.login,
