@@ -1,51 +1,30 @@
 import React, { useState } from 'react'
 import S from './Menu.module.css'
 import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useLayoutEffect } from 'react'
 import { AppContext } from '../../stores/Store'
 import cn from 'classnames'
-import { useLocalStorage } from '../../api/useLocalStorage'
 import { IContext } from '../../interfaces/interfaces';
 import { observer } from 'mobx-react'
 
 export const Menu = observer((): JSX.Element | null => {
   const { 
-    users,
     page, 
     setPage, 
-    setUsers, 
-    setOrganizations, 
-    organizations, 
     setCard, 
-    favorites, 
-    setFavorites, 
     mobile,
     showMenu, 
     setShowMenu,
     updateData,
-    setMobile
+    setMobile,
   } : IContext = useContext(AppContext)
 
-  const [localFavorites, ] = useLocalStorage('favorites', favorites);
-  const [localUsers, ] = useLocalStorage('users', users);
-  const [localOrganizations, ] = useLocalStorage('organizations', organizations);
   const [animation, setAnimation] = useState(false)
 
-  /**
-   * забираем данные с localStorage
-   */
-  
-  useEffect(()=> {
-    window.addEventListener('resize', resize)
-
-    const newUsrs = localUsers || []
-    const newOrgs = localOrganizations || []
-    const newFavs = localFavorites || []
-
-    setUsers(newUsrs)
-    setOrganizations(newOrgs)
-    setFavorites(newFavs)
-  }, [])
+  useLayoutEffect(() => {
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
 
   useEffect(()=>{
     setShowMenu(true)
@@ -81,7 +60,7 @@ export const Menu = observer((): JSX.Element | null => {
    */
 
   const handleSetOrgs = async () => {
-    updateData('organizations')
+    await updateData('organizations')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
@@ -97,7 +76,7 @@ export const Menu = observer((): JSX.Element | null => {
   }
 
   const handleSetUsers = async () => {
-    updateData('users')
+    await updateData('users')
 
     if (mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))

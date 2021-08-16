@@ -37,7 +37,6 @@ export const SearchPanel = observer(()=> {
     setSearchQuery(query)
   }
 
-  // const whyrender = (!mobile && page) || (page && mobile && (!card && !showMenu))
   const renderIf = ( !!page && !mobile|| (!card && mobile && page) ) 
 
   return renderIf ? (
