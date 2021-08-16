@@ -9,14 +9,9 @@ import { observer } from 'mobx-react'
 
 export const Menu = observer((): JSX.Element | null => {
   const { 
-    page, 
-    setPage, 
+    UIStore,
     setCard, 
-    mobile,
-    showMenu, 
-    setShowMenu,
     updateData,
-    setMobile,
   } : IContext = useContext(AppContext)
 
   const [animation, setAnimation] = useState(false)
@@ -27,30 +22,30 @@ export const Menu = observer((): JSX.Element | null => {
   }, []);
 
   useEffect(()=>{
-    setShowMenu(true)
-  },[mobile])
+    UIStore.setShowMenu(true)
+  },[UIStore.mobile])
 
   /**
    * запуск анимации в моб версии
    * 
    */
   useEffect(()=>{
-    window.requestAnimationFrame(()=> setAnimation(!!showMenu))
-  }, [showMenu])
+    window.requestAnimationFrame(()=> setAnimation(!!UIStore.showMenu))
+  }, [UIStore.showMenu])
 
-  const resize = () => setMobile(window.innerWidth < 900 ? true : false)
+  const resize = () => UIStore.setMobile(window.innerWidth < 900 ? true : false)
 
   const handleSetFavorites = () => {
-    if (mobile) {
+    if (UIStore.mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
-        setShowMenu(false)
+        UIStore.setShowMenu(false)
         setCard(null)
-        setPage('favorites')
+        UIStore.setPage('favorites')
       }, 200)
     } else {
       setCard(null)
-      setPage('favorites')
+      UIStore.setPage('favorites')
     } 
   }
 
@@ -62,55 +57,55 @@ export const Menu = observer((): JSX.Element | null => {
   const handleSetOrgs = async () => {
     await updateData('organizations')
 
-    if (mobile) {
+    if (UIStore.mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
         setCard(null)
-        setPage('organizations')
-        setShowMenu(false)
+        UIStore.setPage('organizations')
+        UIStore.setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
-      setPage('organizations')
+      UIStore.setPage('organizations')
     }
   }
 
   const handleSetUsers = async () => {
     await updateData('users')
 
-    if (mobile) {
+    if (UIStore.mobile) {
       window.requestAnimationFrame(()=> setAnimation(false))
       setTimeout(()=>{
         setCard(null)
-        setPage('users')
-        setShowMenu(false)
+        UIStore.setPage('users')
+        UIStore.setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
-      setPage('users')
+      UIStore.setPage('users')
     }
   }
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
-    if (mobile) {
+    if (UIStore.mobile) {
       setAnimation(false)
       setTimeout(()=>{
-        setShowMenu(false)
+        UIStore.setShowMenu(false)
       }, 200)
     }
   }
 
-  return showMenu ? (
+  return UIStore.showMenu ? (
     <div 
-      className={mobile ? S.overlay : undefined}
+      className={UIStore.mobile ? S.overlay : undefined}
       onClick={(e) => handleOverlayClick(e)}
     >
-    <aside className={cn(S.menu, mobile && `${S.mobile} ${animation ? S.opening : S.closing }`)}>
+    <aside className={cn(S.menu, UIStore.mobile && `${S.mobile} ${animation ? S.opening : S.closing }`)}>
       <ul className={S.content}>
         <li className={S.list__item}>
           <button 
-          className={cn(S.btn__transparent, page === 'favorites' && S.selected)} 
+          className={cn(S.btn__transparent, UIStore.page === 'favorites' && S.selected)} 
           onClick={()=>handleSetFavorites()}>
             Избранное
             <FavoritesIcon className={S.icon} />
@@ -118,14 +113,14 @@ export const Menu = observer((): JSX.Element | null => {
         </li>
         <li className={S.list__item}>
           <button 
-          className={cn(S.btn__transparent, page === 'users' && S.selected)} 
+          className={cn(S.btn__transparent, UIStore.page === 'users' && S.selected)} 
           onClick={()=>handleSetUsers()}>
             Пользователи
           </button>
         </li> 
         <li className={S.list__item}>
           <button 
-          className={cn(S.btn__transparent, page === 'organizations' && S.selected)} 
+          className={cn(S.btn__transparent, UIStore.page === 'organizations' && S.selected)} 
           onClick={()=>handleSetOrgs()}>
             Организации
           </button>

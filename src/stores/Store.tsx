@@ -2,6 +2,7 @@
 import { createContext } from 'react';
 import { IContext, Iitem } from '../interfaces/interfaces';
 import { fetchData } from '../api/fetchData';
+import { UIStore } from './UIStore';
 
 import { makeAutoObservable } from "mobx";
 
@@ -23,39 +24,38 @@ export class Store {
   users;
   organizations;
   favorites;
-  page;
   card;
-  showMenu;
-  mobile;
-  windowSize;
-  
+  searchQuery;
+  UIStore: UIStore;
 
   constructor
   (
     users: Iitem[]|null, 
     organizations: Iitem[]|null, 
     favorites: Iitem[]|[], 
-    page: string|null, 
     card: Iitem|null, 
-    showMenu: boolean,
-    mobile: boolean, 
+    searchQuery: string,
   ) {
     makeAutoObservable(this, {}, { autoBind: true })
     this.users = users;
     this.organizations = organizations;
     this.favorites = favorites;
-    this.page = page;
     this.card = card;
-    this.showMenu = showMenu;
-    this.mobile = mobile;
-    this.windowSize = window.innerWidth
+    this.searchQuery = searchQuery;
+    this.UIStore = new UIStore(null,  true, window.innerWidth < 900 );
   }
 
-  setMobile (bool: boolean): void {
-    this.mobile = bool
+
+  get searchFavorites(): Iitem[] {
+    return this.searchQuery ?
+    this.favorites
+    .filter((el: Iitem) => 
+      el?.login?.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+      el?.description?.toLowerCase().includes(this.searchQuery.toLowerCase())) :
+    this.favorites
   }
-  setShowMenu (bool: boolean): void {
-    this.showMenu = bool
+  setSearchQuery (query: string): void {
+    this.searchQuery = query
   }
   setUsers (users: Iitem[] | null): void {
     this.users = users
@@ -63,16 +63,12 @@ export class Store {
   setOrganizations (organizations: Iitem[] | null): void {
     this.organizations = organizations
   }
-  setPage (page: string | null): void {
-    this.page = page || ''
-  }
   setCard (card: Iitem | null): void {
     this.card = card
   }
   initApp (): void {
     this.favorites = getLocal('favorites', null); 
   }
-
   toggleFavorites (card: Iitem | null): void {
     if (!card) return
     const newCard = {...card, inFavorites: !card.inFavorites}

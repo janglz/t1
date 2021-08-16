@@ -9,9 +9,9 @@ import { Iitem } from '../../interfaces/interfaces'
 import { observer } from 'mobx-react'
 
 export const SearchPanel = observer(()=> {
-  const { page, organizations, users, favorites, mobile, card } = useContext(AppContext)
+  const { UIStore, organizations, users, searchFavorites,  card, searchQuery, setSearchQuery } = useContext(AppContext)
   let list: Iitem[] | null = null;
-  const [searchQuery, setSearchQuery] = useState('')
+  // const [searchQuery, setSearchQuery] = useState('')
   
   const selectItems = (page: string | null): Iitem[]| null => {
     switch (page) {
@@ -20,28 +20,22 @@ export const SearchPanel = observer(()=> {
       case 'organizations':
         return organizations
       case 'favorites':
-        if (favorites) return searchQuery ?
-        favorites
-        .filter((el: Iitem) => 
-          el?.login?.toLowerCase().includes(searchQuery.toLowerCase()) || 
-          el?.description?.toLowerCase().includes(searchQuery.toLowerCase())) :
-        favorites
-        return favorites
+        return searchFavorites
       default: 
         return null
     }
   }
-  list = selectItems(page)
+  list = selectItems(UIStore.page)
 
   const handleSearch = (query: string) => {
-    setSearchQuery(query)
+    setSearchQuery(query || '')
   }
 
-  const renderIf = ( !!page && !mobile|| (!card && mobile && page) ) 
+  const renderIf = ( !!UIStore.page && !UIStore.mobile|| (!card && UIStore.mobile && UIStore.page) ) 
 
   return renderIf ? (
     <aside className={S.menu}>
-      {page === 'favorites' &&
+      {UIStore.page === 'favorites' &&
       <div className={S.search}>
         <span className={S.searchIcon}>
           <img src={searchIcon} id="search" className={S.searchIcon}></img>
