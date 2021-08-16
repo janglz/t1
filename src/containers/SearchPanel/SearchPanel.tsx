@@ -4,7 +4,7 @@ import filterIcon from '../../styles/img/filter.svg'
 import searchIcon from '../../styles/img/search.svg'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../stores/Store'
-import { List } from '../List/List'
+import { List } from '../../components/List/List'
 import { Iitem } from '../../interfaces/interfaces'
 import { observer } from 'mobx-react'
 
