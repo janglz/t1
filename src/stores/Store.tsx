@@ -5,21 +5,36 @@ import { fetchData } from '../api/fetchData';
 
 import { makeAutoObservable } from "mobx";
 
+const getLocal = (key: string, obj: any) => {
+  const t = localStorage.getItem(key)
+  if (!t) return obj
+  try {
+    return JSON.parse(t)
+  } catch (e) {
+    return obj
+  }
+}
+
+const setLocal = (key: string, obj: any) => {
+  localStorage.setItem(key, JSON.stringify(obj))
+}
+
 export class Store {
   users;
   organizations;
-  page;
   favorites;
+  page;
   card;
   showMenu;
   mobile;
   windowSize;
+  
 
   constructor
   (
     users: Iitem[]|null, 
     organizations: Iitem[]|null, 
-    favorites: Iitem[]|null, 
+    favorites: Iitem[]|[], 
     page: string|null, 
     card: Iitem|null, 
     showMenu: boolean,
@@ -51,17 +66,33 @@ export class Store {
   setPage (page: string | null): void {
     this.page = page || ''
   }
-  setFavorites (favorites: Iitem[] | null): void {
-    this.favorites = favorites
-  }
   setCard (card: Iitem | null): void {
     this.card = card
   }
+  initApp (): void {
+    this.favorites = getLocal('favorites', null); 
+  }
+
+  toggleFavorites (card: Iitem | null): void {
+    if (!card) return
+    const newCard = {...card, inFavorites: !card.inFavorites}
+
+    this.favorites = this.favorites && this.favorites?.some((el: Iitem) => el.login === card?.login) ?
+      this.favorites.filter((localEl: Iitem) => localEl.login !== card?.login) :
+      [...this.favorites, newCard] 
+
+    const changeElFavorites = (el: Iitem) => el.login === card?.login ? 
+      newCard : el;
+    if (card.type === 'users') this.users = this.users?.map(changeElFavorites) || null
+    if (card.type === 'organizations') this.organizations = this.organizations?.map(changeElFavorites) || null
+    this.setCard(newCard)
+    setLocal('favorites', this.favorites)
+  }
 
   *updateData(type: string): any {
-    const response = yield fetchData(type)
-    
-    const mappedResponse = response.map((el: { [x: string]: any; login: any; description: any; }) =>{
+    const response = yield fetchData(type) 
+
+    const mappedResponse = response.map((el: { [x: string]: string; login: string; description: string; }) =>{
       return {
         login: el.login,
         description: el.description,
@@ -71,50 +102,16 @@ export class Store {
         orgaznizationsUrl: el['organizations_url'] || undefined,
       }
     })
-    let target: Iitem[] | null = null;
-    if (type === 'users') 
-    target = !!this.users ? 
-    [...mappedResponse.filter((el: { login: string; }) => !this.users?.some((org: Iitem) => org.login === el.login )), ...this.users]:
-    mappedResponse
-    this.setUsers(target)
-    if (type === 'organizations') 
-    target = !!this.organizations ? 
-    [...mappedResponse.filter((el: { login: string; }) => !this.organizations?.some((org: Iitem) => org.login === el.login )), ...this.organizations]:
-    mappedResponse
-    this.setOrganizations(target)
+    //ищем в ответе совпадения с уже имеющимся списком, 
+    //и НЕ добавляем, если объект уже присутствовал
+    const result = mappedResponse.map((respEl:Iitem) => this.
+      favorites?.some((favEl: Iitem) => favEl.login === respEl.login) ? 
+        {...respEl, inFavorites: true} :
+        respEl
+      )
+    if (type === 'organizations') this.organizations = result
+    if (type === 'users') this.users = result
   }
 }
 
 export const AppContext = createContext({} as IContext)
-
-
-
-
-
-// export const AppContext = createContext({} as IContext)
-
-// export function useStore():IContext {
-//   const [users, setUsers] = useState<Iitem[]|null>([])
-//   const [organizations, setOrganizations] = useState<Iitem[] | null>(null)
-//   const [favorites, setFavorites] = useState<Iitem[] | null>(null)
-//   const [page, setPage] = useState<string | null>(null)
-//   const [card, setCard] = useState<Iitem | null>(null)
-//   const [showMenu, setShowMenu] = useState(true)
-//   const [width,] = useWindowSize()
-
-//   return {
-//     page, // Вероятно, сюда впоследствии можно будет сохранять ссылку?
-//     setPage,
-//     users,
-//     setUsers,
-//     organizations,
-//     setOrganizations,
-//     favorites,
-//     setFavorites,
-//     card, 
-//     setCard,
-//     mobile: width < 900,
-//     showMenu,
-//     setShowMenu,
-//   }
-// }
