@@ -1,12 +1,12 @@
 
 import { createContext } from 'react';
-import { IContext, Iitem } from '../interfaces/interfaces';
+import { IContext, Iitem, IparsedResponse, responseShape } from '../interfaces/interfaces';
 import { fetchData } from '../api/fetchData';
 import { UIStore } from './UIStore';
 
 import { makeAutoObservable } from "mobx";
 
-const getLocal = (key: string, obj: any) => {
+const getLocal = (key: string, obj: unknown) => {
   const t = localStorage.getItem(key)
   if (!t) return obj
   try {
@@ -16,7 +16,7 @@ const getLocal = (key: string, obj: any) => {
   }
 }
 
-const setLocal = (key: string, obj: any) => {
+const setLocal = (key: string, obj: unknown) => {
   localStorage.setItem(key, JSON.stringify(obj))
 }
 
@@ -44,7 +44,6 @@ export class Store {
     this.searchQuery = searchQuery;
     this.UIStore = new UIStore(null,  true, window.innerWidth < 900 );
   }
-
 
   get searchFavorites(): Iitem[] {
     return this.searchQuery ?
@@ -85,10 +84,11 @@ export class Store {
     setLocal('favorites', this.favorites)
   }
 
-  *updateData(type: string): any {
-    const response = yield fetchData(type) 
+  *updateData(type: string): Generator {
+    const response = yield fetchData(type);
+    const shapedResponse = responseShape.parse(response) 
 
-    const mappedResponse = response.map((el: { [x: string]: string; login: string; description: string; }) =>{
+    const mappedResponse = shapedResponse.map((el: IparsedResponse) =>{
       return {
         login: el.login,
         description: el.description,

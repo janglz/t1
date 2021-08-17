@@ -1,4 +1,4 @@
-export async function fetchData(type: string): Promise<[]> {
+export async function fetchData(type: string): Promise<string[]> {
   let url;
   switch ( type ){
     case 'users':

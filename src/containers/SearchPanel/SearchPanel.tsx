@@ -2,7 +2,7 @@ import React from 'react'
 import S from './SearchPanel.module.css'
 import filterIcon from '../../styles/img/filter.svg'
 import searchIcon from '../../styles/img/search.svg'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '../../stores/Store'
 import { List } from '../../components/List/List'
 import { Iitem } from '../../interfaces/interfaces'
@@ -11,7 +11,6 @@ import { observer } from 'mobx-react'
 export const SearchPanel = observer(()=> {
   const { UIStore, organizations, users, searchFavorites,  card, searchQuery, setSearchQuery } = useContext(AppContext)
   let list: Iitem[] | null = null;
-  // const [searchQuery, setSearchQuery] = useState('')
   
   const selectItems = (page: string | null): Iitem[]| null => {
     switch (page) {
