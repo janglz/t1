@@ -1,11 +1,11 @@
-export async function fetchData(type: string): Promise<string[]> {
+export async function fetchData(type: string, page = ''): Promise<string[]> {
   let url;
   switch ( type ){
     case 'users':
-      url = `https://api.github.com/users`;
+      url = `https://api.github.com/users${page}`;
       break
     case 'organizations':
-      url = `https://api.github.com/organizations`
+      url = `https://api.github.com/organizations${page}`
       break
     default: 
     console.log(new Error('Fetch type error'))

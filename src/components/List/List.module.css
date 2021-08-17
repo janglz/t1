@@ -14,16 +14,16 @@
   width: 100%;
   margin-top: 10px;
   cursor: pointer;
-  border-radius: 50px 5px 5px 50px;
+  border-radius: 50px;
 }
-.contentItem:hover h4, .contentItem:hover p {
+.contentItem:hover h4,
+.contentItem:hover p {
   color: #61597c;
   color: white;
 }
 
 .contentItem:hover .icon {
   fill: white;
-
 }
 
 .contentItem:hover {
@@ -42,8 +42,9 @@
   flex-direction: column;
   flex-grow: 1;
 }
-.value h4, .value p {
-  margin: 7px;
+.value h4,
+.value p {
+  margin: 6px;
 }
 
 .icon {

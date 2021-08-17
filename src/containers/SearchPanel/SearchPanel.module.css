@@ -1,67 +1,65 @@
 .menu {
-    width: 250px;
-    margin-right: 15px;
-    padding: 25px;
-    border: 1px solid rgb(214, 178, 248);
-    background-color: rgb(214, 178, 248);
-    border-radius: 3px;
-    box-shadow: 0 2px 23px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  }
-  
+  width: 250px;
+  margin-right: 15px;
+  padding: 25px;
+  border: 2px solid rgb(176, 183, 190);
+  background-color: rgb(241, 243, 245);
+  border-radius: 3px;
+  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.123),
+    0 1px 10px rgba(0, 0, 0, 0.151);
+}
 
-  .search {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
 
-  .searchIcon {
-    width: 16px;
-    height: 16px;
-  }
+.searchIcon {
+  width: 16px;
+  height: 16px;
+}
 
-  .form input {
-    font-size: 14px;
-    border-radius: 3px;
-    margin: 0 5px 0 5px;
-    background: rgb(214, 178, 248);
-    border: 2px solid #fff;
-    color: #fff;
-    padding: 10px;
-    outline: #fff;
-  }
-  
-  .form input::-webkit-input-placeholder {
-    color: #fff;
-  }
-  .form input:-moz-placeholder {
-    color: #fff;
-  }
-  
-  .form input:active,
-  .form input:hover,
-  .form input:focus {
-    font-size: 14px;
-    color: #fff;
-  }
-  
-  .filterIcon {
-    width: 16px;
-    height: 16px;
-  }
+.form input {
+  font-size: 14px;
+  border-radius: 3px;
+  margin: 0 5px 0 5px;
+  background: rgb(245, 245, 248);
+  border: 2px solid #fff;
+  color: black;
+  padding: 10px;
+  outline: #fff;
+}
 
-  .navbar {
-    margin-top: 15px;
-    display: inline-flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
+.form input::-webkit-input-placeholder {
+  color: rgb(170, 172, 179);
+}
+.form input:-moz-placeholder {
+  color: rgb(170, 172, 179);
+}
 
-  .content {
-    max-height: 75vh;
-    width: 250px;
-    overflow-x: auto;
-  }
+.form input:active,
+.form input:hover,
+.form input:focus {
+  font-size: 14px;
+  color: black;
+}
 
-  
+.filterIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.navbar {
+  margin-top: 15px;
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.content {
+  max-height: 75vh;
+  width: 250px;
+  overflow-x: auto;
+}

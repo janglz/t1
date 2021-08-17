@@ -1,127 +1,131 @@
 .section {
-    display: flex;
-    flex-direction: row;
-    flex: 1 1 auto;
-    padding: 25px;
-    margin: auto;
-    border: 1px solid rgb(243, 243, 243);
-    background-color: rgb(243, 243, 243);
-    border-radius: 3px;
-    box-shadow: 0 2px 23px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  }
-  /* отвечает за то, чтобы не уползало за границы экрана */
-  .container {
-    width: 100%; 
-  }
-  .wrapper {
-    width: 100%;
-  }
-  .content {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .image img {
-    max-width: 128px;
-    max-height: 128px;
-  }
-  
-  .inner {
-    flex-direction: column;
-    flex-wrap: wrap;
-    padding: 5px;
-    max-width: 100%;
-    margin: 0;
-  }
-  .title {
-    margin: 0;
-    margin-left: 10px;
-    word-wrap:break-word;
-    white-space: wrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis; 
-  }
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+  padding: 25px;
+  margin: auto;
+  border: 2px solid rgb(176, 183, 190);
+  background-color: rgb(241, 243, 245);
+  border-radius: 3px;
+  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.123),
+    0 1px 10px rgba(0, 0, 0, 0.151);
+}
+/* отвечает за то, чтобы не уползало за границы экрана */
+.container {
+  width: 100%;
+}
+.wrapper {
+  width: 100%;
+}
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .description {
-    margin-left: 10px;
-    white-space: wrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis; 
-    word-wrap:break-word;
-  }
-  
-  .btn__div {
-    display: flex;
-    flex-direction: row-reverse;
-    flex: 1 1 auto;
-    max-width: 100%;
-  }
-  
-  .btn__div button {
-    align-self: flex-start;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    
-    cursor: pointer;
-    transition: all .35s ease;
-  }
-  
-  .btn__div button > .icon {
-    width: 62px;
-    height: 62px;
-  }
+.image img {
+  max-width: 128px;
+  max-height: 128px;
+}
 
-  .btn__div button:hover {
-    fill: blueviolet;
-  }
-  .back {
-    border: none;
-    color: blueviolet;
-    font-size: 18px;
-    border-bottom: 2px solid blueviolet;
-    background: transparent;
-    cursor: pointer;
-  }
-  .back:hover{
-    color: rgb(104, 60, 145);
-    border-color: rgb(104, 60, 145);
-  }
-  
-  .active > button {
-    fill: blueviolet;
-    animation: like 0.7s both;  
-  }
-  .inactive > button {
-    animation: dislike 0.7s both;  
-  }
+.inner {
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 5px;
+  max-width: 100%;
+  margin: 0;
+}
+.title {
+  margin: 0;
+  margin-left: 10px;
+  word-wrap: break-word;
+  white-space: wrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
 
-  @keyframes like {
-    0% {
-      transform: scale(1);
-    }
-    25%{
-      transform: scale(0.9);
-    }
-    50%{
-       transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+.description {
+  margin-left: 10px;
+  white-space: wrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
 
-  @keyframes dislike {
-    0% {
-      transform: scale(1);
-    }
-    25%{
-      transform: scale(0.9);
-    }
-    50%{
-       transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
-    }
+.btn__div {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 1 1 auto;
+  max-width: 100%;
+}
+
+.btn__div button {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.btn__div button > .icon {
+  width: 62px;
+  height: 62px;
+}
+
+.btn__div button:hover {
+  fill: rgb(111, 116, 126);
+}
+.btn__div button {
+  fill: rgb(165, 177, 199);
+}
+.back {
+  border: none;
+  color: rgb(106, 150, 231);
+  font-size: 18px;
+  border-bottom: 2px solid rgb(106, 150, 231);
+  background: transparent;
+  cursor: pointer;
+}
+.back:hover {
+  color: rgb(111, 116, 126);
+  border-color: rgb(111, 116, 126);
+}
+
+.active > button {
+  fill: rgb(106, 150, 231);
+  animation: like 0.7s both;
+}
+.inactive > button {
+  animation: dislike 0.7s both;
+}
+
+@keyframes like {
+  0% {
+    transform: scale(1);
   }
+  25% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dislike {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

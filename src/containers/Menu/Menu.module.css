@@ -1,15 +1,14 @@
-
-
 .menu {
   display: inline-flex;
   min-width: 170px;
   flex-direction: column;
   margin-right: 15px;
   padding: 15px;
-  background-color: rgb(243, 243, 243);
-  border: 1px solid rgb(243, 243, 243);
+  border: 2px solid rgb(176, 183, 190);
+  background-color: rgb(241, 243, 245);
   border-radius: 3px;
-  box-shadow: 0 2px 23px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.123),
+    0 1px 10px rgba(0, 0, 0, 0.151);
 }
 
 .overlay {
@@ -44,7 +43,7 @@
 /* .menu.mobile.closing {
   left: -888px;
 } */
-  
+
 .menu span {
   width: 100%;
 }
@@ -89,12 +88,12 @@
   background: #26252b;
   border-radius: 5px;
   color: white;
-} 
-.selected>.icon {
-  fill:rgb(243, 243, 243)
+}
+.selected > .icon {
+  fill: rgb(243, 243, 243);
 }
 
-.btn__transparent.selected:hover{ 
-  color:rgb(243, 243, 243);
+.btn__transparent.selected:hover {
+  color: rgb(243, 243, 243);
   background: #26252bde;
 }
