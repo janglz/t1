@@ -6,9 +6,9 @@
   padding: 15px;
   border: 2px solid rgb(176, 183, 190);
   background-color: rgb(241, 243, 245);
-  border-radius: 3px;
-  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.123),
-    0 1px 10px rgba(0, 0, 0, 0.151);
+  border-radius: 5px;
+  /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.123),
+    0 1px 5px rgba(0, 0, 0, 0.151); */
 }
 
 .overlay {
@@ -59,6 +59,10 @@
   list-style: none;
   font-size: 18px;
   margin: 0 auto;
+  margin-bottom: 10px;
+}
+.list__item:nth-last-child(1) {
+  margin-bottom: 0;
 }
 
 .icon {
@@ -69,13 +73,11 @@
 
 .btn__transparent {
   text-align: left;
-  margin: 0 auto;
   font-size: 18px;
   border: none;
   background: transparent;
   padding: 10px;
   width: 170px;
-  margin-bottom: 10px;
 }
 
 .btn__transparent:hover {

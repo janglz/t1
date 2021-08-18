@@ -4,9 +4,9 @@
   padding: 25px;
   border: 2px solid rgb(176, 183, 190);
   background-color: rgb(241, 243, 245);
-  border-radius: 3px;
-  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.123),
-    0 1px 10px rgba(0, 0, 0, 0.151);
+  border-radius: 5px;
+  /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.123),
+    0 1px 5px rgba(0, 0, 0, 0.151); */
 }
 
 .search {
@@ -26,10 +26,10 @@
   border-radius: 3px;
   margin: 0 5px 0 5px;
   background: rgb(245, 245, 248);
-  border: 2px solid #fff;
+  border: 2px solid rgb(176, 183, 190);
   color: black;
   padding: 10px;
-  outline: #fff;
+  outline: black;
 }
 
 .form input::-webkit-input-placeholder {

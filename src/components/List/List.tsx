@@ -34,9 +34,11 @@ export const List = observer(
                     {el.type}
                   </p>
                 </div>
-                <span className={S.icon}>
-                  {el.inFavorites && <FavoritesIcon />}
-                </span>
+                {UIStore.page !== 'favorites' && (
+                  <span className={S.icon}>
+                    {el.inFavorites && <FavoritesIcon />}
+                  </span>
+                )}
               </li>
             ),
           )

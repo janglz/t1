@@ -6,9 +6,9 @@
   margin: auto;
   border: 2px solid rgb(176, 183, 190);
   background-color: rgb(241, 243, 245);
-  border-radius: 3px;
-  box-shadow: 0 1px 13px rgba(0, 0, 0, 0.123),
-    0 1px 10px rgba(0, 0, 0, 0.151);
+  border-radius: 5px;
+  /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.123),
+    0 1px 5px rgba(0, 0, 0, 0.151); */
 }
 /* отвечает за то, чтобы не уползало за границы экрана */
 .container {
@@ -95,6 +95,9 @@
 .active > button {
   fill: rgb(106, 150, 231);
   animation: like 0.7s both;
+}
+.active > button:hover {
+  fill: rgb(57, 90, 151);
 }
 .inactive > button {
   animation: dislike 0.7s both;
