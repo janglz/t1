@@ -58,10 +58,11 @@
   width: 60px;
   height: 50px;
   margin: 5px;
+  fill: rgb(241, 243, 245);
 }
 .hamburger__icon:hover {
   cursor: pointer;
-  fill: white;
+  fill: rgb(194, 203, 212);
 }
 
 .navbar {

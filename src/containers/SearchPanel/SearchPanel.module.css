@@ -34,6 +34,8 @@
 
 .form input::-webkit-input-placeholder {
   color: rgb(170, 172, 179);
+  /* border: 2px solid rgb(176, 183, 190); */
+  /* outline: black; */
 }
 .form input:-moz-placeholder {
   color: rgb(170, 172, 179);

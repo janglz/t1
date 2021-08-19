@@ -9,7 +9,7 @@ import {
 import {IparsedResponse} from '../interfaces/types'
 import {fetchData} from '../api/fetchData'
 import {UIStore} from './UIStore'
-
+import _ from 'lodash'
 import {makeAutoObservable} from 'mobx'
 
 const getLocal = (key: string, obj: unknown) => {
@@ -32,14 +32,18 @@ export class Store {
   favorites
   card
   searchQuery
+  apiQuery
+  error
   UIStore: UIStore
 
   constructor(
-    users: Iitem[] | null,
-    organizations: Iitem[] | null,
+    users: Iitem[] | [],
+    organizations: Iitem[] | [],
     favorites: Iitem[] | [],
     card: Iitem | null,
     searchQuery: string,
+    error: string | null,
+    apiQuery: string,
   ) {
     makeAutoObservable(this, {}, {autoBind: true})
     this.users = users
@@ -47,12 +51,30 @@ export class Store {
     this.favorites = favorites
     this.card = card
     this.searchQuery = searchQuery
+    this.apiQuery = apiQuery
+    this.error = error
     this.UIStore = new UIStore(
       null,
       true,
       window.innerWidth < 900,
       false,
     )
+  }
+
+  setApiQuery(category: string): void {
+    let lastId
+    switch (category) {
+      case 'users':
+        lastId = _.last(this.users)?.id || ''
+        break
+      case 'organizations':
+        lastId = _.last(this.organizations)?.id || ''
+        break
+      default:
+        return
+    }
+    if (lastId) this.apiQuery = `?since=${lastId}`
+    console.log(this.apiQuery)
   }
 
   get searchFavorites(): Iitem[] {
@@ -71,10 +93,10 @@ export class Store {
   setSearchQuery(query: string): void {
     this.searchQuery = query
   }
-  setUsers(users: Iitem[] | null): void {
+  setUsers(users: Iitem[] | []): void {
     this.users = users
   }
-  setOrganizations(organizations: Iitem[] | null): void {
+  setOrganizations(organizations: Iitem[] | []): void {
     this.organizations = organizations
   }
   setCard(card: Iitem | null): void {
@@ -89,10 +111,10 @@ export class Store {
       ...card,
       inFavorites: !card.inFavorites,
     }
-
-    this.favorites =
-      this.favorites &&
-      this.favorites?.some(
+    if (this.favorites === null) {
+      this.favorites = [newCard]
+    } else {
+      this.favorites = this.favorites.some(
         (el: Iitem) => el.login === card?.login,
       )
         ? this.favorites.filter(
@@ -100,6 +122,7 @@ export class Store {
               localEl.login !== card?.login,
           )
         : [...this.favorites, newCard]
+    }
 
     const changeElFavorites = (el: Iitem) =>
       el.login === card?.login ? newCard : el
@@ -114,14 +137,16 @@ export class Store {
   }
 
   *updateData(type: string, page: string): Generator {
+    if (type === null) return
     this.UIStore.setLoading(true)
     const response = yield fetchData(type, page)
 
     const shapedResponse = responseShape.parse(response)
-
+    console.log(shapedResponse)
     const mappedResponse = shapedResponse.map(
       (el: IparsedObj) => {
         return {
+          id: String(el.id),
           login: el.login,
           description: el.description,
           avatarUrl: el['avatar_url'],
@@ -134,18 +159,26 @@ export class Store {
     )
     //ищем в ответе совпадения с уже имеющимся списком,
     //и НЕ добавляем, если объект уже присутствовал
-    const result = mappedResponse.map((respEl: Iitem) =>
-      this.favorites?.some(
-        (favEl: Iitem) => favEl.login === respEl.login,
-      )
-        ? {...respEl, inFavorites: true}
-        : respEl,
-    )
+    // console.log(this.favorites)
+    const result = this.favorites
+      ? mappedResponse.map((respEl: Iitem) =>
+          this.favorites.some(
+            (favEl: Iitem) => favEl.login === respEl.login,
+          )
+            ? {...respEl, inFavorites: true}
+            : respEl,
+        )
+      : mappedResponse
     if (type === 'organizations')
-      this.organizations = result
-    if (type === 'users') this.users = result
+      this.organizations = _.unionBy(
+        this.organizations,
+        result,
+        'id',
+      )
+    if (type === 'users')
+      this.users = _.unionBy(this.users, result, 'id')
 
-    setTimeout(() => this.UIStore.setLoading(false), 2000)
+    this.UIStore.setLoading(false)
   }
 }
 

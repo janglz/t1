@@ -11,6 +11,8 @@ export const Menu = observer((): JSX.Element | null => {
   const {UIStore, setCard, updateData}: IContext =
     useContext(AppContext)
 
+  //todo
+  //перенести состояние анимации в UIstore чтобы можно было выключать анимацию из хедера или  прописатьт в юзэффект ..
   const [animation, setAnimation] = useState(false)
 
   useLayoutEffect(() => {
@@ -60,7 +62,7 @@ export const Menu = observer((): JSX.Element | null => {
    */
 
   const handleSetOrgs = async () => {
-    await updateData('organizations', '')
+    // await updateData('organizations', '')
 
     if (UIStore.mobile) {
       window.requestAnimationFrame(() =>
@@ -78,7 +80,7 @@ export const Menu = observer((): JSX.Element | null => {
   }
 
   const handleSetUsers = async () => {
-    await updateData('users', '')
+    // await updateData('users', '')
 
     if (UIStore.mobile) {
       window.requestAnimationFrame(() =>
