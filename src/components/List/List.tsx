@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import S from './List.module.css'
 import {useContext} from 'react'
 import {AppContext} from '../../stores/Store'
