@@ -1,18 +1,15 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect} from 'react'
 import S from './List.module.css'
 import {useContext} from 'react'
 import {AppContext} from '../../stores/Store'
 import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
 import {Iitem} from '../../interfaces/interfaces'
-import {observer} from 'mobx-react'
-import {Spinner} from '../Spinner/Spinner'
-import {observable} from 'mobx'
+import {Loader} from '../Loader/Loader'
 
-// eslint-disable-next-line react/display-name
 export function List({
   filtered,
 }: {
-  filtered: any
+  filtered: Array<Iitem> | null
 }): JSX.Element | null {
   const {setCard, UIStore} = useContext(AppContext)
 
@@ -48,7 +45,7 @@ export function List({
     <>
       <ul className={S.list}>
         {mapped}
-        {UIStore.loading ? <Spinner /> : null}
+        {UIStore.loading ? <Loader /> : null}
       </ul>
     </>
   )

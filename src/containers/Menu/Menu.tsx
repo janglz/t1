@@ -8,7 +8,7 @@ import {IContext} from '../../interfaces/interfaces'
 import {observer} from 'mobx-react'
 
 export const Menu = observer((): JSX.Element | null => {
-  const {UIStore, setCard, updateData}: IContext =
+  const {UIStore, setCard}: IContext =
     useContext(AppContext)
 
   //todo
@@ -56,14 +56,7 @@ export const Menu = observer((): JSX.Element | null => {
     }
   }
 
-  /**
-   * TODO:
-   * переименовать функцию updateData и может разнести на несколько
-   */
-
   const handleSetOrgs = async () => {
-    // await updateData('organizations', '')
-
     if (UIStore.mobile) {
       window.requestAnimationFrame(() =>
         setAnimation(false),
@@ -80,8 +73,6 @@ export const Menu = observer((): JSX.Element | null => {
   }
 
   const handleSetUsers = async () => {
-    // await updateData('users', '')
-
     if (UIStore.mobile) {
       window.requestAnimationFrame(() =>
         setAnimation(false),

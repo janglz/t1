@@ -4,9 +4,7 @@ import {
   Iitem,
   IparsedObj,
   responseShape,
-  responseType,
 } from '../interfaces/interfaces'
-import {IparsedResponse} from '../interfaces/types'
 import {fetchData} from '../api/fetchData'
 import {UIStore} from './UIStore'
 import _ from 'lodash'
@@ -74,7 +72,6 @@ export class Store {
         return
     }
     if (lastId) this.apiQuery = `?since=${lastId}`
-    console.log(this.apiQuery)
   }
 
   get searchFavorites(): Iitem[] {
@@ -139,10 +136,11 @@ export class Store {
   *updateData(type: string, page: string): Generator {
     if (type === null) return
     this.UIStore.setLoading(true)
+
     const response = yield fetchData(type, page)
 
     const shapedResponse = responseShape.parse(response)
-    console.log(shapedResponse)
+
     const mappedResponse = shapedResponse.map(
       (el: IparsedObj) => {
         return {
@@ -159,7 +157,6 @@ export class Store {
     )
     //ищем в ответе совпадения с уже имеющимся списком,
     //и НЕ добавляем, если объект уже присутствовал
-    // console.log(this.favorites)
     const result = this.favorites
       ? mappedResponse.map((respEl: Iitem) =>
           this.favorites.some(
@@ -178,7 +175,7 @@ export class Store {
     if (type === 'users')
       this.users = _.unionBy(this.users, result, 'id')
 
-    this.UIStore.setLoading(false)
+    setTimeout(() => this.UIStore.setLoading(false), 500)
   }
 }
 

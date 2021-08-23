@@ -29,13 +29,13 @@ export const SearchPanel = observer(() => {
     isIntersecting,
     setisIntersecting,
   } = useIntersectionObserver(scrollRef)
+
   const scrollObserver = createScrollObserver()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (scrollRef?.current) {
       scrollObserver.observe(scrollRef.current)
     }
-    // console.log(scrollRef)
   }, [UIStore.page])
 
   useEffect(() => {
@@ -45,6 +45,7 @@ export const SearchPanel = observer(() => {
       UIStore.page !== 'favorites'
     )
       setApiQuery(UIStore.page)
+
     setisIntersecting(false)
     if (UIStore.page) updateData(UIStore.page, apiQuery)
   }, [isIntersecting])
@@ -108,7 +109,7 @@ export const SearchPanel = observer(() => {
         <div className={S.content}>
           <List filtered={list} />
           {UIStore.page !== 'favorites' && (
-            <div ref={scrollRef}></div>
+            <div ref={scrollRef} className={S.trigger} />
           )}
         </div>
       </nav>
