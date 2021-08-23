@@ -8,7 +8,7 @@ import { IContext } from '../../interfaces/interfaces'
 import { observer } from 'mobx-react'
 
 export const Card = observer(()=> {
-  const { card, setCard, toggleFavorites, mobile }: IContext = useContext(AppContext)
+  const { card, setCard, toggleFavorites, UIStore }: IContext = useContext(AppContext)
 
   const handleAddToFavorites = () => {
     toggleFavorites(card)
@@ -29,7 +29,7 @@ export const Card = observer(()=> {
               <img src={card.avatarUrl} />
             </div>
             <div className={S.inner}>
-              {mobile && <button className={S.back} onClick={() => setCard(null)}>
+              {UIStore.mobile && <button className={S.back} onClick={() => setCard(null)}>
                 &#8592;Вернуться
               </button>}
               <h1 className={S.title}>{card.login}</h1>

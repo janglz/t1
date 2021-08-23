@@ -1,137 +1,152 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import S from './Menu.module.css'
-import { ReactComponent as FavoritesIcon } from '../../styles/img/favorites.svg'
-import { useContext, useEffect, useLayoutEffect } from 'react'
-import { AppContext } from '../../stores/Store'
+import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
+import {useContext, useEffect, useLayoutEffect} from 'react'
+import {AppContext} from '../../stores/Store'
 import cn from 'classnames'
-import { IContext } from '../../interfaces/interfaces';
-import { observer } from 'mobx-react'
+import {IContext} from '../../interfaces/interfaces'
+import {observer} from 'mobx-react'
 
 export const Menu = observer((): JSX.Element | null => {
-  const { 
-    page, 
-    setPage, 
-    setCard, 
-    mobile,
-    showMenu, 
-    setShowMenu,
-    updateData,
-    setMobile,
-  } : IContext = useContext(AppContext)
+  const {UIStore, setCard}: IContext =
+    useContext(AppContext)
 
+  //todo
+  //перенести состояние анимации в UIstore чтобы можно было выключать анимацию из хедера или  прописатьт в юзэффект ..
   const [animation, setAnimation] = useState(false)
 
   useLayoutEffect(() => {
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
+    window.addEventListener('resize', resize)
+    return () =>
+      window.removeEventListener('resize', resize)
+  }, [])
 
-  useEffect(()=>{
-    setShowMenu(true)
-  },[mobile])
+  useEffect(() => {
+    UIStore.setShowMenu(true)
+  }, [UIStore.mobile])
 
   /**
    * запуск анимации в моб версии
-   * 
+   *
    */
-  useEffect(()=>{
-    window.requestAnimationFrame(()=> setAnimation(!!showMenu))
-  }, [showMenu])
+  useEffect(() => {
+    window.requestAnimationFrame(() =>
+      setAnimation(!!UIStore.showMenu),
+    )
+  }, [UIStore.showMenu])
 
-  const resize = () => setMobile(window.innerWidth < 900 ? true : false)
+  const resize = () =>
+    UIStore.setMobile(
+      window.innerWidth < 900 ? true : false,
+    )
 
   const handleSetFavorites = () => {
-    if (mobile) {
-      window.requestAnimationFrame(()=> setAnimation(false))
-      setTimeout(()=>{
-        setShowMenu(false)
+    if (UIStore.mobile) {
+      window.requestAnimationFrame(() =>
+        setAnimation(false),
+      )
+      setTimeout(() => {
+        UIStore.setShowMenu(false)
         setCard(null)
-        setPage('favorites')
+        UIStore.setPage('favorites')
       }, 200)
     } else {
       setCard(null)
-      setPage('favorites')
-    } 
+      UIStore.setPage('favorites')
+    }
   }
 
-  /**
-   * TODO: 
-   * переименовать функцию updateData и может разнести на несколько
-   */
-
   const handleSetOrgs = async () => {
-    await updateData('organizations')
-
-    if (mobile) {
-      window.requestAnimationFrame(()=> setAnimation(false))
-      setTimeout(()=>{
+    if (UIStore.mobile) {
+      window.requestAnimationFrame(() =>
+        setAnimation(false),
+      )
+      setTimeout(() => {
         setCard(null)
-        setPage('organizations')
-        setShowMenu(false)
+        UIStore.setPage('organizations')
+        UIStore.setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
-      setPage('organizations')
+      UIStore.setPage('organizations')
     }
   }
 
   const handleSetUsers = async () => {
-    await updateData('users')
-
-    if (mobile) {
-      window.requestAnimationFrame(()=> setAnimation(false))
-      setTimeout(()=>{
+    if (UIStore.mobile) {
+      window.requestAnimationFrame(() =>
+        setAnimation(false),
+      )
+      setTimeout(() => {
         setCard(null)
-        setPage('users')
-        setShowMenu(false)
+        UIStore.setPage('users')
+        UIStore.setShowMenu(false)
       }, 200)
     } else {
       setCard(null)
-      setPage('users')
+      UIStore.setPage('users')
     }
   }
 
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-    if (mobile) {
+  const handleOverlayClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    e.stopPropagation()
+    if (UIStore.mobile) {
       setAnimation(false)
-      setTimeout(()=>{
-        setShowMenu(false)
+      setTimeout(() => {
+        UIStore.setShowMenu(false)
       }, 200)
     }
   }
 
-  return showMenu ? (
-    <div 
-      className={mobile ? S.overlay : undefined}
-      onClick={(e) => handleOverlayClick(e)}
-    >
-    <aside className={cn(S.menu, mobile && `${S.mobile} ${animation ? S.opening : S.closing }`)}>
-      <ul className={S.content}>
-        <li className={S.list__item}>
-          <button 
-          className={cn(S.btn__transparent, page === 'favorites' && S.selected)} 
-          onClick={()=>handleSetFavorites()}>
-            Избранное
-            <FavoritesIcon className={S.icon} />
-          </button> 
-        </li>
-        <li className={S.list__item}>
-          <button 
-          className={cn(S.btn__transparent, page === 'users' && S.selected)} 
-          onClick={()=>handleSetUsers()}>
-            Пользователи
-          </button>
-        </li> 
-        <li className={S.list__item}>
-          <button 
-          className={cn(S.btn__transparent, page === 'organizations' && S.selected)} 
-          onClick={()=>handleSetOrgs()}>
-            Организации
-          </button>
-        </li> 
-      </ul>
-    </aside>
+  return UIStore.showMenu ? (
+    <div
+      className={UIStore.mobile ? S.overlay : undefined}
+      onClick={(e) => handleOverlayClick(e)}>
+      <aside
+        className={cn(
+          S.menu,
+          UIStore.mobile &&
+            `${S.mobile} ${
+              animation ? S.opening : S.closing
+            }`,
+        )}>
+        <ul className={S.content}>
+          <li className={S.list__item}>
+            <button
+              className={cn(
+                S.btn__transparent,
+                UIStore.page === 'favorites' && S.selected,
+              )}
+              onClick={() => handleSetFavorites()}>
+              Избранное
+              <FavoritesIcon className={S.icon} />
+            </button>
+          </li>
+          <li className={S.list__item}>
+            <button
+              className={cn(
+                S.btn__transparent,
+                UIStore.page === 'users' && S.selected,
+              )}
+              onClick={() => handleSetUsers()}>
+              Пользователи
+            </button>
+          </li>
+          <li className={S.list__item}>
+            <button
+              className={cn(
+                S.btn__transparent,
+                UIStore.page === 'organizations' &&
+                  S.selected,
+              )}
+              onClick={() => handleSetOrgs()}>
+              Организации
+            </button>
+          </li>
+        </ul>
+      </aside>
     </div>
   ) : null
 })

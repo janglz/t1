@@ -11,7 +11,7 @@ export const Header = observer((): JSX.Element | null => {
     mobile, 
     showMenu, 
     setShowMenu 
-  } = useContext(AppContext)
+  } = useContext(AppContext).UIStore
 
   return (
     <header className={S.header}>
