@@ -5,17 +5,20 @@ export class UIStore {
   showMenu
   mobile
   loading
+  animation
   constructor(
     page: string | null,
     showMenu: boolean,
     mobile: boolean,
     loading: boolean,
+    animation: boolean,
   ) {
     makeAutoObservable(this, {}, {autoBind: true})
     this.page = page
     this.showMenu = showMenu
     this.mobile = mobile
     this.loading = loading
+    this.animation = animation
   }
 
   setLoading(bool: boolean): void {
@@ -27,7 +30,20 @@ export class UIStore {
   setShowMenu(bool: boolean): void {
     this.showMenu = bool
   }
+  setAnimation(bool: boolean): void {
+    this.animation = bool
+  }
   setPage(page: string | null): void {
-    this.page = page || ''
+    if (this.mobile) {
+      window.requestAnimationFrame(() =>
+        this.setAnimation(false),
+      )
+      this.page = page
+      setTimeout(() => {
+        this.setShowMenu(false)
+      }, 200)
+    } else {
+      this.page = page
+    }
   }
 }

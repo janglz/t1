@@ -35,10 +35,12 @@ export interface IUIStore {
   mobile: boolean | null
   showMenu: boolean | null
   loading: boolean
+  animation: boolean
   setMobile: (arg: boolean) => void
   setPage: (arg: string | null) => void
   setShowMenu: (arg: boolean) => void
   setLoading: (arg: boolean) => void
+  setAnimation: (arg: boolean) => void
 }
 
 export interface IparsedObj {

@@ -3,6 +3,7 @@ import {
   IContext,
   Iitem,
   IparsedObj,
+  // IUIStore,
   responseShape,
 } from '../interfaces/interfaces'
 import {fetchData} from '../api/fetchData'
@@ -56,7 +57,9 @@ export class Store {
       true,
       window.innerWidth < 900,
       false,
+      true,
     )
+    this.initApp()
   }
 
   setApiQuery(category: string): void {
