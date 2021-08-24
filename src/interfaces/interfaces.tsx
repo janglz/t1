@@ -1,5 +1,3 @@
-import {z} from 'zod'
-
 export interface IContext {
   users: Iitem[] | []
   organizations: Iitem[] | []
@@ -54,30 +52,3 @@ export interface IparsedObj {
   avatar_url: string
   organizations_url?: string
 }
-
-const objShape: z.ZodSchema<IparsedObj> = z.object({
-  id: z.string().or(z.number()),
-  login: z.string(),
-  description: z.string().or(z.null()).or(z.undefined()),
-  avatar_url: z.string(),
-  organizations_url: z.string().or(z.undefined()),
-})
-
-// export const favoritesShape: z.ZodSchema<Array<Iitem>> = z
-//   .object({
-//     id: z.string().or(z.number()),
-//     login: z.string(),
-//     description: z.string().or(z.undefined()).or(z.null()),
-//     avatarUrl: z.string(),
-//     inFavorites: z.boolean().or(z.undefined()),
-//     orgaznizationsUrl: z.string().or(z.undefined()),
-//     type: z.string(),
-//   })
-//   .array()
-
-type objectsArrayType = Array<IparsedObj>
-
-export const responseShape: z.ZodSchema<objectsArrayType> =
-  z.array(objShape)
-
-export const responseType = typeof responseShape

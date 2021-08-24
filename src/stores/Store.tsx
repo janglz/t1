@@ -3,9 +3,8 @@ import {
   IContext,
   Iitem,
   IparsedObj,
-  // IUIStore,
-  responseShape,
 } from '../interfaces/interfaces'
+import {responseShape} from '../interfaces/types'
 import {fetchData} from '../api/fetchData'
 import {UIStore} from './UIStore'
 import _ from 'lodash'

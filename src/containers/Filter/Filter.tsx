@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React from 'react'
 import S from './Filter.module.css'
 import {useContext} from 'react'
 import {AppContext} from '../../stores/Store'
@@ -6,14 +6,7 @@ import {observer} from 'mobx-react'
 import cn from 'classnames'
 
 export const Filter = observer(() => {
-  const {setFilteredBy, filteredBy, UIStore} =
-    useContext(AppContext)
-
-  // useEffect(() => {
-  //   window.requestAnimationFrame(() =>
-  //     UIStore.setAnimation(!UIStore.animation),
-  //   )
-  // }, [UIStore.filter])
+  const {setFilteredBy, filteredBy} = useContext(AppContext)
 
   return (
     <div className={cn(`${S.container} ${S.opening}`)}>
