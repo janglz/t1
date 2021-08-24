@@ -6,6 +6,9 @@ import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
 import {Iitem} from '../../interfaces/interfaces'
 import {Loader} from '../Loader/Loader'
 
+//TODO
+// Исправить ширину списка при слишком длинном имени или описании
+
 export function List({
   filtered,
 }: {

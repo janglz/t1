@@ -8,7 +8,16 @@ import {Card} from '../Card/Card'
 import S from './App.module.css'
 
 const App = (): JSX.Element => {
-  const store = new Store([], [], [], null, '', null, '')
+  const store = new Store(
+    [],
+    [],
+    [],
+    null,
+    '',
+    '',
+    null,
+    '',
+  )
   return (
     <AppContext.Provider value={store}>
       <div>

@@ -6,12 +6,14 @@ export class UIStore {
   mobile
   loading
   animation
+  filter
   constructor(
     page: string | null,
     showMenu: boolean,
     mobile: boolean,
     loading: boolean,
     animation: boolean,
+    filter: boolean,
   ) {
     makeAutoObservable(this, {}, {autoBind: true})
     this.page = page
@@ -19,8 +21,11 @@ export class UIStore {
     this.mobile = mobile
     this.loading = loading
     this.animation = animation
+    this.filter = filter
   }
-
+  setFilter(bool: boolean): void {
+    this.filter = bool
+  }
   setLoading(bool: boolean): void {
     this.loading = bool
   }

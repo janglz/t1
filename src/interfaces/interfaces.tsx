@@ -6,6 +6,7 @@ export interface IContext {
   favorites: Iitem[] | []
   card: Iitem | null
   searchQuery: string
+  filteredBy: string
   apiQuery: string
   error: string | null
   setUsers: (arg: Iitem[] | []) => void
@@ -16,6 +17,7 @@ export interface IContext {
   setSearchQuery: (query: string) => void
   searchFavorites: Iitem[]
   initApp(): void
+  setFilteredBy: (string: string) => void
   setApiQuery(category: string): void
   UIStore: IUIStore
 }
@@ -36,11 +38,13 @@ export interface IUIStore {
   showMenu: boolean | null
   loading: boolean
   animation: boolean
+  filter: boolean
   setMobile: (arg: boolean) => void
   setPage: (arg: string | null) => void
   setShowMenu: (arg: boolean) => void
   setLoading: (arg: boolean) => void
   setAnimation: (arg: boolean) => void
+  setFilter: (arg: boolean) => void
 }
 
 export interface IparsedObj {

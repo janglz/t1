@@ -32,6 +32,7 @@ export class Store {
   card
   searchQuery
   apiQuery
+  filteredBy
   error
   UIStore: UIStore
 
@@ -41,6 +42,7 @@ export class Store {
     favorites: Iitem[] | [],
     card: Iitem | null,
     searchQuery: string,
+    filteredBy: string,
     error: string | null,
     apiQuery: string,
   ) {
@@ -51,6 +53,7 @@ export class Store {
     this.card = card
     this.searchQuery = searchQuery
     this.apiQuery = apiQuery
+    this.filteredBy = filteredBy
     this.error = error
     this.UIStore = new UIStore(
       null,
@@ -58,8 +61,12 @@ export class Store {
       window.innerWidth < 900,
       false,
       true,
+      false,
     )
     this.initApp()
+  }
+  setFilteredBy(filteredBy: string): void {
+    this.filteredBy = filteredBy
   }
 
   setApiQuery(category: string): void {
@@ -78,8 +85,24 @@ export class Store {
   }
 
   get searchFavorites(): Iitem[] {
+    let filtered
+    switch (this.filteredBy) {
+      case 'users':
+        filtered = this.favorites.filter(
+          (el) => el.type === 'users',
+        )
+        break
+      case 'organizations':
+        filtered = this.favorites.filter(
+          (el) => el.type === 'organizations',
+        )
+        break
+      default:
+        filtered = this.favorites
+    }
+
     return this.searchQuery
-      ? this.favorites.filter(
+      ? filtered.filter(
           (el: Iitem) =>
             el?.login
               ?.toLowerCase()
@@ -88,7 +111,7 @@ export class Store {
               ?.toLowerCase()
               .includes(this.searchQuery.toLowerCase()),
         )
-      : this.favorites
+      : filtered
   }
   setSearchQuery(query: string): void {
     this.searchQuery = query

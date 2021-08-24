@@ -8,6 +8,7 @@ import {List} from '../../components/List/List'
 import {Iitem} from '../../interfaces/interfaces'
 import {observer} from 'mobx-react'
 import {useIntersectionObserver} from '../../api/useIntersectionObserver'
+import {Filter} from '../Filter/Filter'
 
 export const SearchPanel = observer(() => {
   const {
@@ -77,32 +78,41 @@ export const SearchPanel = observer(() => {
   return renderIf ? (
     <aside className={S.menu}>
       {UIStore.page === 'favorites' && (
-        <div className={S.search}>
-          <span className={S.searchIcon}>
-            <img
-              src={searchIcon}
-              id="search"
-              className={S.searchIcon}></img>
-          </span>
-          <form
-            className={S.form}
-            onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              id="search"
-              placeholder="Найти..."
-              value={searchQuery}
-              onChange={(e) => handleSearch(e.target.value)}
-              autoFocus
-              autoComplete="off"
-            />
-          </form>
-          <span className={S.filter}>
-            <img
-              src={filterIcon}
-              id="filter"
-              className={S.filterIcon}></img>
-          </span>
+        <div>
+          <div className={S.search}>
+            <span className={S.searchIcon}>
+              <img
+                src={searchIcon}
+                id="search"
+                className={S.searchIcon}></img>
+            </span>
+            <form
+              className={S.form}
+              onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                id="search"
+                placeholder="Найти..."
+                value={searchQuery}
+                onChange={(e) =>
+                  handleSearch(e.target.value)
+                }
+                autoFocus
+                autoComplete="off"
+              />
+            </form>
+            <span
+              className={S.filter}
+              onClick={() =>
+                UIStore.setFilter(!UIStore.filter)
+              }>
+              <img
+                src={filterIcon}
+                id="filter"
+                className={S.filterIcon}></img>
+            </span>
+          </div>
+          {UIStore.filter ? <Filter /> : null}
         </div>
       )}
       <nav className={S.navbar}>
