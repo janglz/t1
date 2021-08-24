@@ -14,7 +14,7 @@ export function List({
 }: {
   filtered: Array<Iitem> | null
 }): JSX.Element | null {
-  const {setCard, UIStore} = useContext(AppContext)
+  const {updateCard, UIStore} = useContext(AppContext)
 
   const mapped =
     filtered === null
@@ -24,7 +24,7 @@ export function List({
             <li
               className={S.contentItem}
               key={el.login}
-              onClick={() => setCard(el)}>
+              onClick={() => updateCard(el)}>
               <div className={S.itemImg}>
                 <img src={el.avatarUrl} />
               </div>

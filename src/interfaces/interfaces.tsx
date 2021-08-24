@@ -11,6 +11,7 @@ export interface IContext {
   setOrganizations: (arg: Iitem[] | []) => void
   toggleFavorites: (arg: Iitem | null) => void
   setCard: (arg: Iitem | null) => void
+  updateCard: (arg: Iitem | null) => Promise<any>
   updateData: (type: string, page: string) => void
   setSearchQuery: (query: string) => void
   searchFavorites: Iitem[]
@@ -28,6 +29,27 @@ export interface Iitem {
   inFavorites?: boolean | undefined
   orgaznizationsUrl?: string | undefined
   type: string
+  additionalData?: null | IparsedAdditionalData
+}
+
+export interface IadditionalData {
+  name?: string | null
+  blog?: string | null
+  location?: string | null
+  followers?: string | number
+  following?: string | number
+  public_repos?: string | number
+  html_url?: string | null
+}
+
+export interface IparsedAdditionalData {
+  name?: string | null
+  blog?: string | null
+  location?: string | null
+  followers?: string | number
+  following?: string | number
+  publicRepos?: string | number
+  htmlUrl?: string | null
 }
 
 export interface IUIStore {

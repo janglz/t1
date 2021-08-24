@@ -1,10 +1,14 @@
 import {createContext} from 'react'
 import {
+  IadditionalData,
   IContext,
   Iitem,
   IparsedObj,
 } from '../interfaces/interfaces'
-import {responseShape} from '../interfaces/types'
+import {
+  responseShape,
+  additionalShape,
+} from '../interfaces/types'
 import {fetchData} from '../api/fetchData'
 import {UIStore} from './UIStore'
 import _ from 'lodash'
@@ -121,8 +125,38 @@ export class Store {
   setOrganizations(organizations: Iitem[] | []): void {
     this.organizations = organizations
   }
+
   setCard(card: Iitem | null): void {
     this.card = card
+  }
+
+  async updateCard(
+    card: Iitem | null,
+  ): Promise<IadditionalData | void> {
+    if (card === null) {
+      this.card = null
+      return
+    }
+    const newCard = card
+    const currentEl = await fetchData(
+      card.type,
+      `/${card.login}`,
+    )
+
+    const shapedResponse = additionalShape.parse(currentEl)
+
+    const additionalData = {
+      name: shapedResponse.name,
+      blog: shapedResponse.blog,
+      location: shapedResponse.location,
+      followers: shapedResponse.followers,
+      following: shapedResponse.following,
+      publicRepos: shapedResponse.public_repos,
+      htmlUrl: shapedResponse.html_url,
+    }
+    newCard.additionalData = await additionalData
+
+    this.setCard(newCard)
   }
   initApp(): void {
     this.favorites = getLocal('favorites', null)
@@ -177,6 +211,7 @@ export class Store {
           type: type,
           orgaznizationsUrl:
             el['organizations_url'] || undefined,
+          additionalData: null,
         }
       },
     )

@@ -18,6 +18,9 @@
   opacity: 0;
   animation: stepper 0.3s 1 0.2s forwards;
 }
+.container > label:hover {
+  cursor: pointer;
+}
 h5 {
   margin: 0;
 }

@@ -6,7 +6,8 @@ import {observer} from 'mobx-react'
 import cn from 'classnames'
 
 export const Filter = observer(() => {
-  const {setFilteredBy, filteredBy} = useContext(AppContext)
+  const {setFilteredBy, filteredBy, UIStore} =
+    useContext(AppContext)
 
   return (
     <div className={cn(`${S.container} ${S.opening}`)}>
@@ -14,7 +15,10 @@ export const Filter = observer(() => {
       <label>
         <input
           type="radio"
-          onChange={() => setFilteredBy('users')}
+          onChange={() => {
+            UIStore.setFilter(false)
+            setFilteredBy('users')
+          }}
           checked={filteredBy === 'users'}
         />
         пользователи
@@ -22,7 +26,10 @@ export const Filter = observer(() => {
       <label>
         <input
           type="radio"
-          onChange={() => setFilteredBy('organizations')}
+          onChange={() => {
+            UIStore.setFilter(false)
+            setFilteredBy('organizations')
+          }}
           checked={filteredBy === 'organizations'}
         />
         организации
@@ -30,7 +37,10 @@ export const Filter = observer(() => {
       <label>
         <input
           type="radio"
-          onChange={() => setFilteredBy('')}
+          onChange={() => {
+            UIStore.setFilter(false)
+            setFilteredBy('')
+          }}
           checked={filteredBy === ''}
         />
         все
