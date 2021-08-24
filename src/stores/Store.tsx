@@ -137,9 +137,11 @@ export class Store {
       this.card = null
       return
     }
+    const type =
+      card.type === 'users' ? 'users' : 'currentOrg'
     const newCard = card
     const currentEl = await fetchData(
-      card.type,
+      type,
       `/${card.login}`,
     )
 

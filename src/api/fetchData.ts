@@ -9,6 +9,9 @@ export async function fetchData(type: string, page = ''): Promise<string[] | Iad
     case 'organizations':
       url = `https://api.github.com/organizations${page}`
       break
+      case 'currentOrg':
+        url = `https://api.github.com/orgs${page}`
+        break
     default: 
     console.log(new Error('Fetch type error'))
     return []

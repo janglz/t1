@@ -49,48 +49,50 @@ export const Card = observer(() => {
                 <p className={S.description}>
                   {card.description}
                 </p>
-                {card.additionalData?.name && (
+                {!!card.additionalData?.name && (
                   <p className={S.description}>
                     Имя: {card.additionalData.name}
                   </p>
                 )}
-                {card.additionalData?.htmlUrl && (
+                {!!card.additionalData?.htmlUrl && (
                   <p className={S.description}>
                     <a
+                      target="blank"
                       className={S.back}
                       href={card.additionalData.htmlUrl}>
                       Страница на github
                     </a>
                   </p>
                 )}
-                {card.additionalData?.blog && (
+                {!!card.additionalData?.blog && (
                   <p className={S.description}>
                     <a
+                      target="blank"
                       className={S.back}
                       href={card.additionalData.blog}>
                       Блог
                     </a>
                   </p>
                 )}
-                {card.additionalData?.followers && (
+                {!!card.additionalData?.followers && (
                   <p className={S.description}>
                     Подписчиков:{' '}
                     {card.additionalData.followers}
                   </p>
                 )}
-                {card.additionalData?.following && (
+                {!!card.additionalData?.following && (
                   <p className={S.description}>
                     Подписан:{' '}
                     {card.additionalData.following}
                   </p>
                 )}
-                {card.additionalData?.location && (
+                {!!card.additionalData?.location && (
                   <p className={S.description}>
                     Расположение:{' '}
                     {card.additionalData.location}
                   </p>
                 )}
-                {card.additionalData?.publicRepos && (
+                {!!card.additionalData?.publicRepos && (
                   <p className={S.description}>
                     Публичных репозиториев:{' '}
                     {card.additionalData.publicRepos}
