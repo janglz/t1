@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import S from './Menu.module.css'
 import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
 import {useContext, useEffect, useLayoutEffect} from 'react'
@@ -10,10 +10,6 @@ import {observer} from 'mobx-react'
 export const Menu = observer((): JSX.Element | null => {
   const {UIStore, setCard}: IContext =
     useContext(AppContext)
-
-  //todo
-  //перенести состояние анимации в UIstore чтобы можно было выключать анимацию из хедера или  прописатьт в юзэффект ..
-  const [animation, setAnimation] = useState(false)
 
   useLayoutEffect(() => {
     window.addEventListener('resize', resize)
@@ -31,7 +27,7 @@ export const Menu = observer((): JSX.Element | null => {
    */
   useEffect(() => {
     window.requestAnimationFrame(() =>
-      setAnimation(!!UIStore.showMenu),
+      UIStore.setAnimation(!!UIStore.showMenu),
     )
   }, [UIStore.showMenu])
 
@@ -41,51 +37,18 @@ export const Menu = observer((): JSX.Element | null => {
     )
 
   const handleSetFavorites = () => {
-    if (UIStore.mobile) {
-      window.requestAnimationFrame(() =>
-        setAnimation(false),
-      )
-      setTimeout(() => {
-        UIStore.setShowMenu(false)
-        setCard(null)
-        UIStore.setPage('favorites')
-      }, 200)
-    } else {
-      setCard(null)
-      UIStore.setPage('favorites')
-    }
+    setCard(null)
+    UIStore.setPage('favorites')
   }
 
   const handleSetOrgs = async () => {
-    if (UIStore.mobile) {
-      window.requestAnimationFrame(() =>
-        setAnimation(false),
-      )
-      setTimeout(() => {
-        setCard(null)
-        UIStore.setPage('organizations')
-        UIStore.setShowMenu(false)
-      }, 200)
-    } else {
-      setCard(null)
-      UIStore.setPage('organizations')
-    }
+    setCard(null)
+    UIStore.setPage('organizations')
   }
 
   const handleSetUsers = async () => {
-    if (UIStore.mobile) {
-      window.requestAnimationFrame(() =>
-        setAnimation(false),
-      )
-      setTimeout(() => {
-        setCard(null)
-        UIStore.setPage('users')
-        UIStore.setShowMenu(false)
-      }, 200)
-    } else {
-      setCard(null)
-      UIStore.setPage('users')
-    }
+    setCard(null)
+    UIStore.setPage('users')
   }
 
   const handleOverlayClick = (
@@ -93,7 +56,7 @@ export const Menu = observer((): JSX.Element | null => {
   ) => {
     e.stopPropagation()
     if (UIStore.mobile) {
-      setAnimation(false)
+      UIStore.setAnimation(false)
       setTimeout(() => {
         UIStore.setShowMenu(false)
       }, 200)
@@ -109,7 +72,7 @@ export const Menu = observer((): JSX.Element | null => {
           S.menu,
           UIStore.mobile &&
             `${S.mobile} ${
-              animation ? S.opening : S.closing
+              UIStore.animation ? S.opening : S.closing
             }`,
         )}>
         <ul className={S.content}>

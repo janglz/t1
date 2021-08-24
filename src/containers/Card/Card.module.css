@@ -16,10 +16,13 @@
 }
 .wrapper {
   width: 100%;
+  max-height: 100%;
 }
 .content {
   display: flex;
   flex-wrap: wrap;
+  max-height: 65vh;
+  overflow-x: auto;
 }
 
 .image img {
@@ -31,7 +34,9 @@
   flex-direction: column;
   flex-wrap: wrap;
   padding: 5px;
+  max-height: 65vh;
   max-width: 100%;
+
   margin: 0;
 }
 .title {
@@ -57,7 +62,9 @@
   flex: 1 1 auto;
   max-width: 100%;
 }
-
+a.back {
+  border: none;
+}
 .btn__div button {
   align-self: flex-start;
   padding: 0;

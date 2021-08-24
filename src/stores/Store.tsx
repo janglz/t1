@@ -1,10 +1,14 @@
 import {createContext} from 'react'
 import {
+  IadditionalData,
   IContext,
   Iitem,
   IparsedObj,
-  responseShape,
 } from '../interfaces/interfaces'
+import {
+  responseShape,
+  additionalShape,
+} from '../interfaces/types'
 import {fetchData} from '../api/fetchData'
 import {UIStore} from './UIStore'
 import _ from 'lodash'
@@ -31,6 +35,7 @@ export class Store {
   card
   searchQuery
   apiQuery
+  filteredBy
   error
   UIStore: UIStore
 
@@ -40,6 +45,7 @@ export class Store {
     favorites: Iitem[] | [],
     card: Iitem | null,
     searchQuery: string,
+    filteredBy: string,
     error: string | null,
     apiQuery: string,
   ) {
@@ -50,13 +56,20 @@ export class Store {
     this.card = card
     this.searchQuery = searchQuery
     this.apiQuery = apiQuery
+    this.filteredBy = filteredBy
     this.error = error
     this.UIStore = new UIStore(
       null,
       true,
       window.innerWidth < 900,
       false,
+      true,
+      false,
     )
+    this.initApp()
+  }
+  setFilteredBy(filteredBy: string): void {
+    this.filteredBy = filteredBy
   }
 
   setApiQuery(category: string): void {
@@ -75,8 +88,24 @@ export class Store {
   }
 
   get searchFavorites(): Iitem[] {
+    let filtered
+    switch (this.filteredBy) {
+      case 'users':
+        filtered = this.favorites.filter(
+          (el) => el.type === 'users',
+        )
+        break
+      case 'organizations':
+        filtered = this.favorites.filter(
+          (el) => el.type === 'organizations',
+        )
+        break
+      default:
+        filtered = this.favorites
+    }
+
     return this.searchQuery
-      ? this.favorites.filter(
+      ? filtered.filter(
           (el: Iitem) =>
             el?.login
               ?.toLowerCase()
@@ -85,7 +114,7 @@ export class Store {
               ?.toLowerCase()
               .includes(this.searchQuery.toLowerCase()),
         )
-      : this.favorites
+      : filtered
   }
   setSearchQuery(query: string): void {
     this.searchQuery = query
@@ -96,8 +125,40 @@ export class Store {
   setOrganizations(organizations: Iitem[] | []): void {
     this.organizations = organizations
   }
+
   setCard(card: Iitem | null): void {
     this.card = card
+  }
+
+  async updateCard(
+    card: Iitem | null,
+  ): Promise<IadditionalData | void> {
+    if (card === null) {
+      this.card = null
+      return
+    }
+    const type =
+      card.type === 'users' ? 'users' : 'currentOrg'
+    const newCard = card
+    const currentEl = await fetchData(
+      type,
+      `/${card.login}`,
+    )
+
+    const shapedResponse = additionalShape.parse(currentEl)
+
+    const additionalData = {
+      name: shapedResponse.name,
+      blog: shapedResponse.blog,
+      location: shapedResponse.location,
+      followers: shapedResponse.followers,
+      following: shapedResponse.following,
+      publicRepos: shapedResponse.public_repos,
+      htmlUrl: shapedResponse.html_url,
+    }
+    newCard.additionalData = await additionalData
+
+    this.setCard(newCard)
   }
   initApp(): void {
     this.favorites = getLocal('favorites', null)
@@ -152,6 +213,7 @@ export class Store {
           type: type,
           orgaznizationsUrl:
             el['organizations_url'] || undefined,
+          additionalData: null,
         }
       },
     )

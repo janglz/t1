@@ -17,8 +17,12 @@
 }
 
 .searchIcon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+}
+
+.filter:hover {
+  cursor: pointer;
 }
 
 .form input {
@@ -49,8 +53,8 @@
 }
 
 .filterIcon {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
 }
 
 .navbar {
@@ -61,7 +65,8 @@
 }
 
 .content {
-  max-height: 75vh;
+  max-height: 65vh;
+  /* max-height: 80%; */
   width: 250px;
   overflow-x: auto;
 }
