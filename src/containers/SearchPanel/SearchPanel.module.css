@@ -66,10 +66,52 @@
 
 .content {
   max-height: 65vh;
-  /* max-height: 80%; */
   width: 250px;
   overflow-x: auto;
+  padding: 5px 0;
 }
+
+.content::-webkit-scrollbar {
+  width: 6px;
+  background-color: #61597c1f;
+}
+
+.content::-webkit-scrollbar-track {
+  background-color: #61597c1f;
+}
+.content::-webkit-scrollbar-thumb {
+  background-color: #26252b;
+  border-radius: 5px;
+  width: 5px;
+}
+
+.navbar::before {
+  display: block;
+  content: '';
+  width: 250px;
+  height: 5px;
+  position: absolute;
+  background: linear-gradient(
+    180deg,
+    rgba(241, 243, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+.navbar::after {
+  /* border: 2px solid red; */
+  display: block;
+  content: '';
+  width: 250px;
+  height: 5px;
+  margin-top: -5px;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(241, 243, 255, 1) 100%
+  );
+}
+
 .trigger {
   content: '';
   display: block;
