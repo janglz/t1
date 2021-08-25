@@ -1,21 +1,6 @@
 .list {
-  /* border: 2px solid red; */
   box-sizing: border-box;
   overflow-y: auto;
-  /* max-height: 80%; */
-  /* box-shadow: inset -5px 10px 7px #5753669a; */
-}
-.list::-webkit-scrollbar {
-  width: 6px;
-  background-color: #26252b;
-}
-
-.list::-webkit-scrollbar-track {
-  background-color: #61597c1f;
-}
-.list::-webkit-scrollbar-thumb {
-  background-color: #26252b;
-  width: 5px;
 }
 
 .main-favorites span {
@@ -30,7 +15,6 @@
 
 .contentItem {
   display: flex;
-  justify-content: space-between;
   width: 100%;
   margin-top: 10px;
   cursor: pointer;

@@ -30,7 +30,9 @@ export function List({
               </div>
               <div className={S.value}>
                 <h4 className="main-cotent__item-title">
-                  {el.login}
+                  {el.login.length > 13
+                    ? `${el.login.slice(0, 13)}...`
+                    : el.login}
                 </h4>
                 <p className="main-cotent__item-text">
                   {el.type}

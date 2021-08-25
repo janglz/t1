@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import App from './containers/App/App'
-import { $el } from './constants/api'
+import {$el} from './constants/api'
 
 // import styles from './styles/index.css'
 
@@ -13,16 +12,19 @@ ReactDOM.render(
   $el,
 )
 
-
 window.addEventListener('load', async () => {
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./t1/serviceWorker.js', {scope: './t1/'})
-  .then((reg) => {
-    // регистрация сработала
-    console.log('Registration succeeded. Scope is ' + reg.scope);
-  }).catch((error) => {
-    // регистрация прошла неудачно
-    console.log('Registration failed with ' + error);
-  });
-}
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('./t1/serviceWorker.js', {scope: './t1/'})
+      .then((reg) => {
+        // регистрация сработала
+        console.log(
+          'Registration succeeded. Scope is ' + reg.scope,
+        )
+      })
+      .catch((error) => {
+        // регистрация прошла неудачно
+        console.log('Registration failed with ' + error)
+      })
+  }
 })

@@ -28,20 +28,18 @@
 .image img {
   max-width: 128px;
   max-height: 128px;
+  margin: 0 20px 10px 0;
 }
 
 .inner {
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 5px;
   max-height: 65vh;
   max-width: 100%;
-
   margin: 0;
 }
 .title {
   margin: 0;
-  margin-left: 10px;
   word-wrap: break-word;
   white-space: wrap;
   overflow-x: hidden;
@@ -49,7 +47,6 @@
 }
 
 .description {
-  margin-left: 10px;
   white-space: wrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -68,6 +65,7 @@ a.back {
 .btn__div button {
   align-self: flex-start;
   padding: 0;
+  margin: 5px;
   border: none;
   background-color: transparent;
 
