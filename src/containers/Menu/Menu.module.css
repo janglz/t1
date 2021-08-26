@@ -7,12 +7,13 @@
   border: 2px solid rgb(176, 183, 190);
   background-color: rgb(241, 243, 245);
   border-radius: 5px;
+  z-index: 4;
   /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.123),
     0 1px 5px rgba(0, 0, 0, 0.151); */
 }
 
 .overlay {
-  z-index: 1;
+  z-index: 3;
   left: 0;
   top: 60px;
   background: rgba(58, 56, 66, 0.801);
