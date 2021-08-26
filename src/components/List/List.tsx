@@ -6,9 +6,6 @@ import {ReactComponent as FavoritesIcon} from '../../styles/img/favorites.svg'
 import {Iitem} from '../../interfaces/interfaces'
 import {Loader} from '../Loader/Loader'
 
-//TODO
-// Исправить ширину элемента списка при слишком длинном имени или описании
-
 export function List({
   filtered,
 }: {
@@ -31,7 +28,7 @@ export function List({
               <div className={S.value}>
                 <h4 className="main-cotent__item-title">
                   {el.login.length > 13
-                    ? `${el.login.slice(0, 13)}...`
+                    ? `${el.login.slice(0, 12)}...`
                     : el.login}
                 </h4>
                 <p className="main-cotent__item-text">
