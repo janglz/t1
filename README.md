@@ -1,4 +1,5 @@
 # GITHUB ACCOUNTS VIEWER
+[Демо](https://janglz.github.io/t1/)
 
 ## Функционал
 Доступен поиск аккаунтов пользователей и организаций, сохранение избранного в localStorage
